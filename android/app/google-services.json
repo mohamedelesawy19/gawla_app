@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "869222114879",
+    "project_id": "gawla-19",
+    "storage_bucket": "gawla-19.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869222114879:android:25cc6465124c2dcf36ba8a",
+        "android_client_info": {
+          "package_name": "com.elesawy.gawla_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869222114879-982215uhsa4q89gg3ssvd8qctlu8g93o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elesawy.gawla_app",
+            "certificate_hash": "7e018f8fa8ce1a27f3eff66fc1b46b0bc3d55625"
+          }
+        },
+        {
+          "client_id": "869222114879-17mg2kptjtofnpncvarsq8afng67oeht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCSNI8iEzKZUu48ExXVaJJREa-mTeJ_Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869222114879-17mg2kptjtofnpncvarsq8afng67oeht.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "869222114879-p1gvs8kqjn72i13secn0s2sj2256as3o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elesawy.gawlaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,68 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+
+  errors:
+    todo: ignore
+
+linter:
+  rules:
+    # ── Style ──────────────────────────────────────────────────────────────────
+
+    - annotate_overrides
+    - cascade_invocations
+    - curly_braces_in_flow_control_structures
+    - directives_ordering
+    - file_names
+    - lines_longer_than_80_chars
+    - non_constant_identifier_names
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_if_elements_to_conditional_expressions
+    - prefer_interpolation_to_compose_strings
+    - prefer_single_quotes
+    - type_annotate_public_apis
+    - no_leading_underscores_for_local_identifiers
+
+    # ── Safety ─────────────────────────────────────────────────────────────────
+
+    - always_declare_return_types
+    - avoid_catches_without_on_clauses
+    - avoid_empty_else
+    - avoid_print
+    - avoid_unnecessary_containers
+    - avoid_unused_constructor_parameters
+    - avoid_web_libraries_in_flutter
+    - cancel_subscriptions
+    - depend_on_referenced_packages
+    - hash_and_equals
+    - only_throw_errors
+    - parameter_assignments
+    - secure_pubspec_urls
+    - unawaited_futures
+    - use_rethrow_when_possible
+    - library_private_types_in_public_api
+
+    # ── Flutter ─────────────────────────────────────────────────────────────────
+
+    - sized_box_for_whitespace
+    - sort_child_properties_last
+    - use_full_hex_values_for_flutter_colors
+    - use_key_in_widget_constructors
+
+    # ── Dart ────────────────────────────────────────────────────────────────────
+
+    - avoid_init_to_null
+    - avoid_private_typedef_functions
+    - avoid_redundant_argument_values
+    - unnecessary_const
+    - unnecessary_new
+    - unnecessary_string_interpolations
+    - unnecessary_this
+    - use_super_parameters
