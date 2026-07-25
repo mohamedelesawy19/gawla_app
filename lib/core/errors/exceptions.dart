@@ -14,6 +14,10 @@ class ServerException extends BaseException {
   const ServerException({required super.message, super.code});
 }
 
+class AuthException extends BaseException {
+  const AuthException({required super.message, super.code});
+}
+
 class ParsingException extends BaseException {
   const ParsingException({required super.message, super.code});
 }
