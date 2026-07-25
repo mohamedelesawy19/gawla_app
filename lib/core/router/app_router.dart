@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 // Core imports:
 import '/core/router/app_routes.dart';
+import '/core/router/routes/auth_routes.dart';
 import '/core/router/routes/main_routes.dart';
 
 class AppRouter {
@@ -10,7 +11,7 @@ class AppRouter {
 
   static final GoRouter _router = GoRouter(
     initialLocation: AppRoutes.splash,
-    routes: [...MainRoutes.routes],
+    routes: [...MainRoutes.routes, ...AuthRoutes.routes],
   );
 
   static GoRouter get router => _router;

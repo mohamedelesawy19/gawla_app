@@ -4,4 +4,8 @@ class AppRoutes {
   // ── Main Routes ──────────────────────────────────────────────────────
 
   static const splash = '/';
+
+  // ── Auth Routes ──────────────────────────────────────────────────────
+
+  static const login = '/login';
 }

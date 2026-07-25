@@ -10,4 +10,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appName => 'جولة';
+
+  @override
+  String get tagline => 'العب بذكاء... وكن آخر من يصمد.';
+
+  @override
+  String get continueWithGoogle => 'متابعة مع جوجل';
+
+  @override
+  String get playAsGuest => 'العب كضيف';
 }

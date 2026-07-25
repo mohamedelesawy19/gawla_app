@@ -103,6 +103,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gawla'**
   String get appName;
+
+  /// No description provided for @tagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outplay. Outlast. Win.'**
+  String get tagline;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @playAsGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Play as Guest'**
+  String get playAsGuest;
 }
 
 class _AppLocalizationsDelegate

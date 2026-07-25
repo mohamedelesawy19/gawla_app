@@ -10,4 +10,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Gawla';
+
+  @override
+  String get tagline => 'Outplay. Outlast. Win.';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get playAsGuest => 'Play as Guest';
 }

@@ -1,5 +1,8 @@
 {
   "@@locale": "ar",
 
-  "appName": "جولة"
+  "appName": "جولة",
+  "tagline": "العب بذكاء... وكن آخر من يصمد.",
+  "continueWithGoogle": "متابعة مع جوجل",
+  "playAsGuest": "العب كضيف"
 }
