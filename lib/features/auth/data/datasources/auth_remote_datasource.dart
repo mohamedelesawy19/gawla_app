@@ -9,8 +9,8 @@ import '/core/errors/exceptions.dart';
 import '/features/auth/data/models/auth_user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<AuthUserModel> signInWithGoogle();
-  Future<AuthUserModel> signInAnonymously();
+  Future<void> signInWithGoogle();
+  Future<void> signInAnonymously();
   Future<void> signOut();
   Future<AuthUserModel> getCurrentUser();
   Stream<AuthUserModel?> watchAuthState();
@@ -28,7 +28,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   // ── Google ─────────────────────────────────────────────────────────────────
 
   @override
-  Future<AuthUserModel> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     try {
       await _googleSignIn.initialize();
 
@@ -48,23 +48,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (user == null) {
         throw const AuthException(message: 'Failed to retrieve user');
       }
-
-      // Refresh user profile data from Firebase
-      await user.reload();
-
-      final refreshedUser = _firebaseAuth.currentUser;
-
-      if (refreshedUser == null) {
-        throw const AuthException(message: 'Failed to refresh user data');
-      }
-
-      return AuthUserModel(
-        uid: refreshedUser.uid,
-        email: refreshedUser.email,
-        displayName: refreshedUser.displayName ?? googleUser.displayName,
-        photoUrl: refreshedUser.photoURL,
-        isAnonymous: refreshedUser.isAnonymous,
-      );
     } on AuthException {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -77,15 +60,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   // ── Anonymous ──────────────────────────────────────────────────────────────
 
   @override
-  Future<AuthUserModel> signInAnonymously() async {
+  Future<void> signInAnonymously() async {
     try {
       final result = await _firebaseAuth.signInAnonymously();
 
       if (result.user == null) {
         throw const AuthException(message: 'Failed to sign in anonymously');
       }
-
-      return AuthUserModel.fromFirebaseUser(result.user!);
     } on FirebaseAuthException catch (e) {
       throw AuthException(
         message: e.message ?? 'Firebase authentication error',

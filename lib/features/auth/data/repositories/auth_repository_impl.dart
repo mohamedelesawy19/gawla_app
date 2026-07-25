@@ -16,10 +16,10 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remote;
 
   @override
-  Future<Either<Failure, AuthUserEntity>> signInWithGoogle() async {
+  Future<Either<Failure, void>> signInWithGoogle() async {
     try {
-      final model = await _remote.signInWithGoogle();
-      return Right(model.toEntity());
+      await _remote.signInWithGoogle();
+      return const Right(null);
     } on AuthException catch (e) {
       return Left(AuthFailure(message: e.message));
     } on Exception catch (e) {
@@ -28,10 +28,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthUserEntity>> signInAnonymously() async {
+  Future<Either<Failure, void>> signInAnonymously() async {
     try {
-      final model = await _remote.signInAnonymously();
-      return Right(model.toEntity());
+      await _remote.signInAnonymously();
+      return const Right(null);
     } on AuthException catch (e) {
       return Left(AuthFailure(message: e.message));
     } on Exception catch (e) {
