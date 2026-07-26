@@ -12,12 +12,13 @@ import '/features/auth/domain/repositories/auth_repository.dart';
 import '/features/auth/domain/usecases/sign_in_anonymously_usecase.dart';
 import '/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import '/features/auth/domain/usecases/sign_out_usecase.dart';
+import '/features/auth/domain/usecases/watch_auth_state_usecase.dart';
 import '/features/auth/presentation/bloc/auth_bloc.dart';
 
 class AuthModule {
   AuthModule._();
 
-  static Future<void> register() async {
+  static void register() {
     // Data Sources
     ServiceLocator.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(
@@ -44,9 +45,13 @@ class AuthModule {
       () => SignOutUseCase(ServiceLocator.get<AuthRepository>()),
     );
 
+    ServiceLocator.registerFactory<WatchAuthStateUseCase>(
+      () => WatchAuthStateUseCase(ServiceLocator.get<AuthRepository>()),
+    );
+
     // Presentation BLoCs
-    ServiceLocator.registerSingleton<AuthBloc>(
-      AuthBloc(
+    ServiceLocator.registerFactory<AuthBloc>(
+      () => AuthBloc(
         signInWithGoogle: ServiceLocator.get<SignInWithGoogleUseCase>(),
         signInAnonymously: ServiceLocator.get<SignInAnonymouslyUseCase>(),
         signOut: ServiceLocator.get<SignOutUseCase>(),
