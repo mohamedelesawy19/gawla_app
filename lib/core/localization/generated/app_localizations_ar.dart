@@ -37,4 +37,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get joinRoom => 'انضم إلى بطولة';
+
+  @override
+  String get punchIn => 'ابدأ المنافسة';
+
+  @override
+  String get todaysTournament => 'بطولة اليوم';
+
+  @override
+  String get tournamentSlogan => 'تحدَّ · اصمد · انتصر';
+
+  @override
+  String numPlayers(Object count) {
+    return '$count لاعب';
+  }
+
+  @override
+  String numRounds(Object count) {
+    return '$count جولات';
+  }
+
+  @override
+  String get tapToFindMatch => 'اضغط للعثور على مباراة';
 }

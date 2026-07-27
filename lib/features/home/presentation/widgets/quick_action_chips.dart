@@ -8,14 +8,14 @@ import '/core/widgets/design_system/borders.dart';
 import '/core/widgets/design_system/spacing.dart';
 
 class QuickActionChips extends StatelessWidget {
-  final VoidCallback onCreateRoom;
-  final VoidCallback onJoinRoom;
-
   const QuickActionChips({
     super.key,
     required this.onCreateRoom,
     required this.onJoinRoom,
   });
+
+  final VoidCallback onCreateRoom;
+  final VoidCallback onJoinRoom;
 
   @override
   Widget build(BuildContext context) {

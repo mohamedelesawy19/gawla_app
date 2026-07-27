@@ -10,5 +10,11 @@
   "profile": "حسابي",
   "moreWaysToPlay": "اكتشف ألعابًا جديدة",
   "createRoom": "أنشئ بطولة",
-  "joinRoom": "انضم إلى بطولة"
+  "joinRoom": "انضم إلى بطولة",
+  "punchIn": "ابدأ المنافسة",
+  "todaysTournament": "بطولة اليوم",
+  "tournamentSlogan": "تحدَّ · اصمد · انتصر",
+  "numPlayers": "{count} لاعب",
+  "numRounds": "{count} جولات",
+  "tapToFindMatch": "اضغط للعثور على مباراة"
 }

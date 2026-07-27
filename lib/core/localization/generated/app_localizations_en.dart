@@ -37,4 +37,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get joinRoom => 'Join Room';
+
+  @override
+  String get punchIn => 'PUNCH IN';
+
+  @override
+  String get todaysTournament => 'TODAY\'S TOURNAMENT';
+
+  @override
+  String get tournamentSlogan => 'CHALLENGE · SURVIVE · WIN';
+
+  @override
+  String numPlayers(Object count) {
+    return '$count players';
+  }
+
+  @override
+  String numRounds(Object count) {
+    return '$count rounds';
+  }
+
+  @override
+  String get tapToFindMatch => 'Tap to find a match';
 }

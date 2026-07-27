@@ -157,6 +157,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Join Room'**
   String get joinRoom;
+
+  /// No description provided for @punchIn.
+  ///
+  /// In en, this message translates to:
+  /// **'PUNCH IN'**
+  String get punchIn;
+
+  /// No description provided for @todaysTournament.
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY\'S TOURNAMENT'**
+  String get todaysTournament;
+
+  /// No description provided for @tournamentSlogan.
+  ///
+  /// In en, this message translates to:
+  /// **'CHALLENGE · SURVIVE · WIN'**
+  String get tournamentSlogan;
+
+  /// No description provided for @numPlayers.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} players'**
+  String numPlayers(Object count);
+
+  /// No description provided for @numRounds.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rounds'**
+  String numRounds(Object count);
+
+  /// No description provided for @tapToFindMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to find a match'**
+  String get tapToFindMatch;
 }
 
 class _AppLocalizationsDelegate
