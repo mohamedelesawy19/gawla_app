@@ -31,4 +31,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get moreWaysToPlay => 'Discover More Games';
+
+  @override
+  String get createRoom => 'Create Room';
+
+  @override
+  String get joinRoom => 'Join Room';
 }

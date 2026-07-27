@@ -31,4 +31,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get moreWaysToPlay => 'اكتشف ألعابًا جديدة';
+
+  @override
+  String get createRoom => 'أنشئ بطولة';
+
+  @override
+  String get joinRoom => 'انضم إلى بطولة';
 }

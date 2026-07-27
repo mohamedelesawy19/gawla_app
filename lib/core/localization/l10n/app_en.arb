@@ -8,5 +8,7 @@
   "home": "Home",
   "ranks": "Ranks",
   "profile": "Profile",
-  "moreWaysToPlay": "Discover More Games"
+  "moreWaysToPlay": "Discover More Games",
+  "createRoom": "Create Room",
+  "joinRoom": "Join Room"
 }
