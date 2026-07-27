@@ -23,7 +23,7 @@ class TournamentTicketCard extends StatelessWidget {
 
   final int playerCount;
   final int roundCount;
-  final List<MiniGamePreview> rotation;
+  final List<MiniGamePreviewEntity> rotation;
   final VoidCallback onPunchIn;
 
   @override
@@ -164,7 +164,7 @@ class _InfoPill extends StatelessWidget {
 class _RotationRow extends StatelessWidget {
   const _RotationRow({required this.rotation});
 
-  final List<MiniGamePreview> rotation;
+  final List<MiniGamePreviewEntity> rotation;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +191,7 @@ class _StopIcon extends StatelessWidget {
   const _StopIcon({required this.order, required this.game});
 
   final int order;
-  final MiniGamePreview game;
+  final MiniGamePreviewEntity game;
 
   @override
   Widget build(BuildContext context) {

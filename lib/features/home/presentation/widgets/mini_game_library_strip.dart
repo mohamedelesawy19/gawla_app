@@ -13,8 +13,8 @@ import '/features/home/domain/entities/mini_game_preview_entity.dart';
 class MiniGameLibraryStrip extends StatelessWidget {
   const MiniGameLibraryStrip({super.key, required this.games, this.onTapGame});
 
-  final List<MiniGamePreview> games;
-  final ValueChanged<MiniGamePreview>? onTapGame;
+  final List<MiniGamePreviewEntity> games;
+  final ValueChanged<MiniGamePreviewEntity>? onTapGame;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class MiniGameLibraryStrip extends StatelessWidget {
 }
 
 class _GameCard extends StatelessWidget {
-  final MiniGamePreview game;
+  final MiniGamePreviewEntity game;
   final VoidCallback? onTap;
   const _GameCard({required this.game, this.onTap});
 

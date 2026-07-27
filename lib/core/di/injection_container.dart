@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 // Core imports:
 import '/core/di/di_modules/auth_module.dart';
 import '/core/di/di_modules/core_module.dart';
+import '/core/di/di_modules/home_module.dart';
 import '/core/di/di_modules/profile_module.dart';
 import '/core/di/di_modules/session_module.dart';
 import '/core/di/service_locator.dart';
@@ -49,6 +50,8 @@ class InjectionContainer {
       ProfileModule.register();
 
       SessionModule.register();
+
+      HomeModule.register();
 
       await ServiceLocator.allReady(timeout: const Duration(seconds: 30));
 
