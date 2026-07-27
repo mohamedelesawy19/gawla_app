@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
+  const AppColors._();
+
   // ── Brand ────────────────────────────────────────────────────────────────
 
   /// Primary: Neon Magenta — Action & Challenges Color
@@ -55,4 +57,44 @@ abstract final class AppColors {
   static const onWarning = Color(0xFF2B1600);
   static const warningContainer = Color(0xFF663900);
   static const onWarningContainer = Color(0xFFFFE3C0);
+
+  // ── Gradients ──────────────────────────────────────────────────────────────
+
+  static const LinearGradient goldGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFD166), Color(0xFFFFB627), Color(0xFFE8960B)],
+  );
+
+  // ── Color Scheme ───────────────────────────────────────────────────────────
+
+  static const ColorScheme colorScheme = ColorScheme(
+    brightness: Brightness.dark,
+    primary: primary,
+    onPrimary: onPrimary,
+    primaryContainer: primaryContainer,
+    onPrimaryContainer: onPrimaryContainer,
+    secondary: secondary,
+    onSecondary: onSecondary,
+    secondaryContainer: secondaryContainer,
+    onSecondaryContainer: onSecondaryContainer,
+    tertiary: tertiary,
+    onTertiary: onTertiary,
+    tertiaryContainer: tertiaryContainer,
+    onTertiaryContainer: onTertiaryContainer,
+    error: error,
+    onError: onError,
+    errorContainer: errorContainer,
+    onErrorContainer: onErrorContainer,
+    surface: surface,
+    onSurface: onSurface,
+    surfaceContainerHighest: surfaceVariant,
+    onSurfaceVariant: onSurfaceVariant,
+    outline: outline,
+    outlineVariant: outlineVariant,
+    shadow: Colors.black,
+    scrim: Colors.black,
+    inverseSurface: onBackground,
+    onInverseSurface: background,
+  );
 }

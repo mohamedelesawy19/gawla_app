@@ -1,4 +1,8 @@
+// Package imports:
 import 'package:flutter/material.dart';
+
+// Core imports:
+import '/core/widgets/design_system/spacing.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({
@@ -18,13 +22,13 @@ class EmptyStateWidget extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: AppSpacing.paddingXxl,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 40, color: Theme.of(context).colorScheme.error),
 
-            const SizedBox(height: 16),
+            AppSpacing.verticalSpaceMd,
 
             Text(
               title,
@@ -33,7 +37,8 @@ class EmptyStateWidget extends StatelessWidget {
             ),
 
             if (subtitle != null) ...[
-              const SizedBox(height: 16),
+              AppSpacing.verticalSpaceMd,
+
               Text(
                 subtitle!,
                 style: theme.textTheme.bodyLarge?.copyWith(

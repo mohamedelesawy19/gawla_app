@@ -1,4 +1,8 @@
+// Package imports:
 import 'package:flutter/material.dart';
+
+// Core imports:
+import '/core/widgets/design_system/spacing.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   const ErrorStateWidget({super.key, this.message, required this.onRetry});
@@ -10,7 +14,7 @@ class ErrorStateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: AppSpacing.paddingXxl,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -19,12 +23,12 @@ class ErrorStateWidget extends StatelessWidget {
               size: 40,
               color: Theme.of(context).colorScheme.error,
             ),
-            const SizedBox(height: 12),
+            AppSpacing.verticalSpaceSm,
             Text(
               message ?? 'Something went wrong',
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.verticalSpaceMd,
             ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
           ],
         ),

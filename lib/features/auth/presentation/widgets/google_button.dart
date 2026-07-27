@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Core imports:
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
+import '/core/widgets/design_system/borders.dart';
+import '/core/widgets/design_system/spacing.dart';
 
 class GoogleButton extends StatelessWidget {
   const GoogleButton({super.key, required this.onPressed});
@@ -19,13 +21,15 @@ class GoogleButton extends StatelessWidget {
         foregroundColor: context.colorScheme.surface,
         elevation: 0,
         padding: const EdgeInsets.symmetric(vertical: 17),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AppBorders.borderRadiusXxl,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const _GoogleIcon(size: 21),
-          const SizedBox(width: 12),
+          AppSpacing.horizontalSpaceMd,
           Text(
             context.l10n.continueWithGoogle,
             style: TextStyle(

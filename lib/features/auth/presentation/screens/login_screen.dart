@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Core imports:
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
+import '/core/widgets/design_system/spacing.dart';
 
 // Feature imports:
 import '/features/auth/presentation/bloc/auth_bloc.dart';
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 32),
+              AppSpacing.verticalSpaceXl,
 
               // Title + tagline
               Text(
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                   height: 1,
                 ),
               ),
-              const SizedBox(height: 8),
+              AppSpacing.verticalSpaceSm,
               Text(
                 context.l10n.tagline,
                 style: TextStyle(
@@ -78,14 +79,14 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () =>
                     context.read<AuthBloc>().add(const SignInWithGoogleEvent()),
               ),
-              const SizedBox(height: 14),
+              AppSpacing.verticalSpaceMd,
               GuestButton(
                 onPressed: () => context.read<AuthBloc>().add(
                   const SignInAnonymouslyEvent(),
                 ),
               ),
 
-              const SizedBox(height: 40),
+              AppSpacing.verticalSpaceXxl,
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
+import '/core/widgets/design_system/spacing.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 import '/core/widgets/feedback/snackbar.dart';
@@ -106,7 +107,7 @@ class _ProfileFormState extends State<_ProfileForm> {
     final profile = widget.profile;
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: AppSpacing.paddingLg,
       children: [
         CircleAvatar(
           radius: 40,
@@ -122,7 +123,7 @@ class _ProfileFormState extends State<_ProfileForm> {
                 )
               : null,
         ),
-        const SizedBox(height: 24),
+        AppSpacing.verticalSpaceXxl,
         TextField(
           controller: _nameController,
           decoration: const InputDecoration(
@@ -130,7 +131,7 @@ class _ProfileFormState extends State<_ProfileForm> {
             border: OutlineInputBorder(),
           ),
         ),
-        const SizedBox(height: 12),
+        AppSpacing.verticalSpaceMd,
         FilledButton(
           onPressed: widget.isUpdating
               ? null

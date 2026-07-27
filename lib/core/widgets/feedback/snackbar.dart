@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
-import '/core/theme/app_colors.dart';
+import '/core/theme/theme_extensions.dart';
+import '/core/widgets/design_system/borders.dart';
+import '/core/widgets/design_system/spacing.dart';
 
 enum SnackType { info, success, warning, error }
 
 class CustomSnackbar {
-  CustomSnackbar._();
+  const CustomSnackbar._();
 
   static void show(
     BuildContext context, {
@@ -17,7 +19,7 @@ class CustomSnackbar {
     String? actionLabel,
     VoidCallback? onAction,
   }) {
-    final style = _styleFor(type);
+    final style = _styleFor(type, context);
 
     final snackBar = SnackBar(
       duration: duration,
@@ -26,13 +28,13 @@ class CustomSnackbar {
       elevation: 6,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: AppBorders.borderRadiusXl,
         side: BorderSide(color: style.border, width: 3),
       ),
       content: Row(
         children: [
           Icon(style.icon, color: style.border, size: 22),
-          const SizedBox(width: 10),
+          AppSpacing.horizontalSpaceSm,
           Expanded(
             child: Text(
               message,
@@ -75,34 +77,35 @@ class CustomSnackbar {
     duration: const Duration(seconds: 4),
   );
 
-  static _SnackStyle _styleFor(SnackType type) {
+  static _SnackStyle _styleFor(SnackType type, BuildContext context) {
+    final colorScheme = context.colorScheme;
     switch (type) {
       case SnackType.success:
-        return const _SnackStyle(
-          color: AppColors.successContainer,
-          border: AppColors.success,
-          onColor: AppColors.onSuccessContainer,
+        return _SnackStyle(
+          color: context.successContainer,
+          border: context.successColor,
+          onColor: context.onSuccessContainer,
           icon: Icons.emoji_events_rounded,
         );
       case SnackType.warning:
-        return const _SnackStyle(
-          color: AppColors.warningContainer,
-          border: AppColors.warning,
-          onColor: AppColors.onWarningContainer,
+        return _SnackStyle(
+          color: context.warningContainer,
+          border: context.warningColor,
+          onColor: context.onWarningContainer,
           icon: Icons.bolt_rounded,
         );
       case SnackType.error:
-        return const _SnackStyle(
-          color: AppColors.errorContainer,
-          border: AppColors.error,
-          onColor: AppColors.onErrorContainer,
+        return _SnackStyle(
+          color: colorScheme.errorContainer,
+          border: colorScheme.error,
+          onColor: colorScheme.onErrorContainer,
           icon: Icons.heart_broken_rounded,
         );
       case SnackType.info:
-        return const _SnackStyle(
-          color: AppColors.tertiaryContainer,
-          border: AppColors.tertiary,
-          onColor: AppColors.onTertiaryContainer,
+        return _SnackStyle(
+          color: colorScheme.tertiaryContainer,
+          border: colorScheme.tertiary,
+          onColor: colorScheme.onTertiaryContainer,
           icon: Icons.shield_rounded,
         );
     }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Core imports:
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
+import '/core/widgets/design_system/borders.dart';
+import '/core/widgets/design_system/spacing.dart';
 
 class GuestButton extends StatelessWidget {
   const GuestButton({super.key, required this.onPressed});
@@ -18,7 +20,9 @@ class GuestButton extends StatelessWidget {
         foregroundColor: context.colorScheme.onSurfaceVariant,
         side: BorderSide(color: context.colorScheme.outline, width: 1.5),
         padding: const EdgeInsets.symmetric(vertical: 17),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AppBorders.borderRadiusXxl,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +32,7 @@ class GuestButton extends StatelessWidget {
             size: 21,
             color: context.colorScheme.onSurfaceVariant,
           ),
-          const SizedBox(width: 12),
+          AppSpacing.horizontalSpaceMd,
           Text(
             context.l10n.playAsGuest,
             style: TextStyle(
