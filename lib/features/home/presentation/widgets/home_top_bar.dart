@@ -27,30 +27,33 @@ class HomeTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
 
-    return Row(
-      children: [
-        _LevelRingAvatar(
-          emoji: player.avatarUrl,
-          progress: player.levelProgress,
-          level: player.level,
-          onTap: onAvatarTap,
-        ),
-        AppSpacing.horizontalSpaceMd,
-        const Spacer(),
-        _CurrencyChip(
-          icon: '🪙',
-          value: player.coins,
-          color: colorScheme.secondary,
-          onTap: onWalletTap,
-        ),
-        AppSpacing.horizontalSpaceSm,
-        _CurrencyChip(
-          icon: '💎',
-          value: player.gems,
-          color: colorScheme.tertiary,
-          onTap: onWalletTap,
-        ),
-      ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Row(
+        children: [
+          _LevelRingAvatar(
+            emoji: player.avatarUrl,
+            progress: player.levelProgress,
+            level: player.level,
+            onTap: onAvatarTap,
+          ),
+          AppSpacing.horizontalSpaceMd,
+          const Spacer(),
+          _CurrencyChip(
+            icon: '🪙',
+            value: player.coins,
+            color: colorScheme.secondary,
+            onTap: onWalletTap,
+          ),
+          AppSpacing.horizontalSpaceSm,
+          _CurrencyChip(
+            icon: '💎',
+            value: player.gems,
+            color: colorScheme.tertiary,
+            onTap: onWalletTap,
+          ),
+        ],
+      ),
     );
   }
 }

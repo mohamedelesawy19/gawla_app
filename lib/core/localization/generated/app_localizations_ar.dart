@@ -27,5 +27,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ranks => 'التصنيف';
 
   @override
-  String get profile => 'الملف الشخصي';
+  String get profile => 'حسابي';
+
+  @override
+  String get moreWaysToPlay => 'اكتشف ألعابًا جديدة';
 }

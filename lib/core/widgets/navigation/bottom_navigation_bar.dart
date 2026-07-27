@@ -86,10 +86,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
                 clipBehavior: Clip.none,
                 children: [
                   // Indicator
-                  AnimatedPositioned(
+                  AnimatedPositionedDirectional(
                     duration: const Duration(milliseconds: 220),
                     curve: Curves.easeOutCubic,
-                    left: widget.selectedIndex * itemW + (itemW - pillW) / 2,
+                    start: widget.selectedIndex * itemW + (itemW - pillW) / 2,
                     top: (h - pillH) / 2,
                     child: Container(
                       width: pillW,

@@ -139,6 +139,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @moreWaysToPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover More Games'**
+  String get moreWaysToPlay;
 }
 
 class _AppLocalizationsDelegate
