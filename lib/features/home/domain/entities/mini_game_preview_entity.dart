@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class MiniGamePreview extends Equatable {
-  const MiniGamePreview({
+class MiniGamePreviewEntity extends Equatable {
+  const MiniGamePreviewEntity({
     required this.id,
     required this.name,
     required this.emoji,
