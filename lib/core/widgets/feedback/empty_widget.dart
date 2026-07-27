@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
-import '/core/widgets/design_system/spacing.dart';
+import '/core/design_system/spacing.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({

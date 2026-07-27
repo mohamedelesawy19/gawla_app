@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
-import '/core/widgets/design_system/colors.dart';
-import '/core/widgets/design_system/typography.dart';
+import '/core/design_system/colors.dart';
+import '/core/design_system/typography.dart';
 
 abstract final class AppTheme {
   static ThemeData get theme => ThemeData(

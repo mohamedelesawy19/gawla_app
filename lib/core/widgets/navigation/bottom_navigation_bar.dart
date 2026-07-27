@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Core imports
+import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/theme/theme_extensions.dart';
-import '/core/widgets/design_system/borders.dart';
-import '/core/widgets/design_system/colors.dart';
 
 // ─── Model ───────────────────────────────────────────────────────────────────
 
@@ -35,12 +35,12 @@ class CustomNavigationBar extends StatefulWidget {
     required this.items,
     required this.selectedIndex,
     required this.onItemSelected,
-    this.backgroundColor = AppColors.surfaceVariant,
+    this.backgroundColor = const Color(0xFF140E1E),
     this.activeColor = AppColors.secondary,
     this.inactiveColor = AppColors.onSurfaceVariant,
     this.indicatorColor = const Color(0x18FFC700),
     this.height,
-    this.margin = const EdgeInsets.fromLTRB(20, 0, 20, 20),
+    this.margin = const EdgeInsets.fromLTRB(8, 0, 8, 8),
     this.showLabels = true,
     this.enableHaptics = true,
     this.enableBlur = true,

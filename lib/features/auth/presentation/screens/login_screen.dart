@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
+import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
-import '/core/widgets/design_system/spacing.dart';
 
 // Feature imports:
 import '/features/auth/presentation/bloc/auth_bloc.dart';

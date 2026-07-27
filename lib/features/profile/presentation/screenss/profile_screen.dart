@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
-import '/core/widgets/design_system/spacing.dart';
+import '/core/design_system/spacing.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 import '/core/widgets/feedback/snackbar.dart';

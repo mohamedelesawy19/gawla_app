@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
-import '/core/widgets/design_system/spacing.dart';
+import '/core/design_system/spacing.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   const ErrorStateWidget({super.key, this.message, required this.onRetry});

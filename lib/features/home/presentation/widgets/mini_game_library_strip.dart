@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
+import '/core/design_system/borders.dart';
+import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
-import '/core/widgets/design_system/borders.dart';
-import '/core/widgets/design_system/spacing.dart';
 
 // Feature imports:
 import '/features/home/domain/entities/mini_game_preview_entity.dart';

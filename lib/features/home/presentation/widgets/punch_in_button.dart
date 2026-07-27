@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
+import '/core/design_system/colors.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
-import '/core/widgets/design_system/colors.dart';
 
 class PunchInButton extends StatefulWidget {
   const PunchInButton({super.key, required this.onTap});

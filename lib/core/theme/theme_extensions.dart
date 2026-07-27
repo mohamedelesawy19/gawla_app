@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Core imports:
-import '/core/widgets/design_system/colors.dart';
+import '/core/design_system/colors.dart';
 
 extension ThemeContextExtensions on BuildContext {
   /// Gets the current theme
