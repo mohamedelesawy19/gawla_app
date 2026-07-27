@@ -4,5 +4,8 @@
   "appName": "Gawla",
   "tagline": "Outplay. Outlast. Win.",
   "continueWithGoogle": "Continue with Google",
-  "playAsGuest": "Play as Guest"
+  "playAsGuest": "Play as Guest",
+  "home": "Home",
+  "ranks": "Ranks",
+  "profile": "Profile"
 }

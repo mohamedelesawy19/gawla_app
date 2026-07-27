@@ -4,5 +4,8 @@
   "appName": "جولة",
   "tagline": "العب بذكاء... وكن آخر من يصمد.",
   "continueWithGoogle": "متابعة مع جوجل",
-  "playAsGuest": "العب كضيف"
+  "playAsGuest": "العب كضيف",
+  "home": "الرئيسية",
+  "ranks": "التصنيف",
+  "profile": "الملف الشخصي"
 }

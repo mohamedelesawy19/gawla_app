@@ -121,6 +121,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Play as Guest'**
   String get playAsGuest;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @ranks.
+  ///
+  /// In en, this message translates to:
+  /// **'Ranks'**
+  String get ranks;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate

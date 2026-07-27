@@ -19,4 +19,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get playAsGuest => 'العب كضيف';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get ranks => 'التصنيف';
+
+  @override
+  String get profile => 'الملف الشخصي';
 }
