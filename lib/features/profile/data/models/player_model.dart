@@ -11,6 +11,7 @@ class PlayerModel extends Equatable {
     required this.displayName,
     this.avatarUrl,
     required this.level,
+    required this.xp,
     required this.coins,
     required this.gems,
     this.createdAt,
@@ -21,6 +22,7 @@ class PlayerModel extends Equatable {
   final String displayName;
   final String? avatarUrl;
   final int level;
+  final int xp;
   final int coins;
   final int gems;
   final DateTime? createdAt;
@@ -38,6 +40,7 @@ class PlayerModel extends Equatable {
       displayName: data['displayName'] as String? ?? 'Player',
       avatarUrl: data['avatarUrl'] as String?,
       level: (data['level'] as num?)?.toInt() ?? 1,
+      xp: (data['xp'] as num?)?.toInt() ?? 0,
       coins: (data['coins'] as num?)?.toInt() ?? 0,
       gems: (data['gems'] as num?)?.toInt() ?? 0,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
@@ -50,6 +53,7 @@ class PlayerModel extends Equatable {
       'displayName': displayName,
       'avatarUrl': avatarUrl,
       'level': level,
+      'xp': xp,
       'coins': coins,
       'gems': gems,
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
@@ -65,6 +69,7 @@ class PlayerModel extends Equatable {
       displayName: json['displayName'] as String,
       avatarUrl: json['avatarUrl'] as String?,
       level: json['level'] as int? ?? 1,
+      xp: json['xp'] as int? ?? 0,
       coins: json['coins'] as int? ?? 0,
       gems: json['gems'] as int? ?? 0,
       createdAt: json['createdAt'] == null
@@ -82,6 +87,7 @@ class PlayerModel extends Equatable {
       'displayName': displayName,
       'avatarUrl': avatarUrl,
       'level': level,
+      'xp': xp,
       'coins': coins,
       'gems': gems,
       'createdAt': createdAt?.toIso8601String(),
@@ -97,6 +103,7 @@ class PlayerModel extends Equatable {
       displayName: entity.displayName,
       avatarUrl: entity.avatarUrl,
       level: entity.level,
+      xp: entity.xp,
       coins: entity.coins,
       gems: entity.gems,
       createdAt: entity.createdAt,
@@ -110,6 +117,7 @@ class PlayerModel extends Equatable {
       displayName: displayName,
       avatarUrl: avatarUrl,
       level: level,
+      xp: xp,
       coins: coins,
       gems: gems,
       createdAt: createdAt,
@@ -123,6 +131,7 @@ class PlayerModel extends Equatable {
     displayName,
     avatarUrl,
     level,
+    xp,
     coins,
     gems,
     createdAt,

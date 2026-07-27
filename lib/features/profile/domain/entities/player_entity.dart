@@ -6,6 +6,7 @@ class PlayerEntity extends Equatable {
     required this.displayName,
     this.avatarUrl,
     required this.level,
+    required this.xp,
     required this.coins,
     required this.gems,
     this.createdAt,
@@ -16,6 +17,7 @@ class PlayerEntity extends Equatable {
   final String displayName;
   final String? avatarUrl;
   final int level;
+  final int xp;
   final int coins;
   final int gems;
   final DateTime? createdAt;
@@ -25,6 +27,7 @@ class PlayerEntity extends Equatable {
     String? displayName,
     String? avatarUrl,
     int? level,
+    int? xp,
     int? coins,
     int? gems,
     DateTime? updatedAt,
@@ -34,6 +37,7 @@ class PlayerEntity extends Equatable {
       displayName: displayName ?? this.displayName,
       avatarUrl: avatarUrl ?? this.avatarUrl,
       level: level ?? this.level,
+      xp: xp ?? this.xp,
       coins: coins ?? this.coins,
       gems: gems ?? this.gems,
       createdAt: createdAt,
@@ -47,6 +51,7 @@ class PlayerEntity extends Equatable {
     displayName,
     avatarUrl,
     level,
+    xp,
     coins,
     gems,
     createdAt,

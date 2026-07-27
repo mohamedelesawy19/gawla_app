@@ -13,6 +13,7 @@ export const onUserCreated = functionsV1
       displayName: user.displayName ?? `Player${user.uid.substring(0, 6)}`,
       avatarUrl: user.photoURL ?? null,
       level: 1,
+      xp: 0,
       coins: 100,
       gems: 10,
       createdAt: FieldValue.serverTimestamp(),
