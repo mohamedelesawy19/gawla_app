@@ -9,6 +9,8 @@ abstract final class AppTheme {
   static ThemeData get theme => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
+    fontFamily: AppTypography.bodyFontFamily,
+    fontFamilyFallback: const [AppTypography.headingFontFamily],
     textTheme: AppTypography.defaultTextTheme,
     colorScheme: AppColors.colorScheme,
     appBarTheme: const AppBarTheme(centerTitle: true),

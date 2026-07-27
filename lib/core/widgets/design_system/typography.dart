@@ -5,9 +5,11 @@ abstract final class AppTypography {
 
   // ── FONT FAMILIES ──────────────────────────────────────────────────────────
 
-  static const String primaryFontFamily = 'Inter';
+  /// For headings, display text, and buttons — energy and fun
+  static const String headingFontFamily = 'BalooBhaijaan2';
 
-  static const String secondaryFontFamily = 'Roboto';
+  /// For body text, labels, and data — clarity in reading
+  static const String bodyFontFamily = 'Cairo';
 
   static const String monoFontFamily = 'RobotoMono';
 
@@ -23,10 +25,10 @@ abstract final class AppTypography {
   static const FontWeight extraBold = FontWeight.w800;
   static const FontWeight black = FontWeight.w900;
 
-  // ── DISPLAY STYLES ─────────────────────────────────────────────────────────
+  // ── DISPLAY STYLES (Baloo) ────────────────────────────────────────────────
 
   static const TextStyle displayLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 57,
     fontWeight: regular,
     height: 1.12,
@@ -34,7 +36,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle displayMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 45,
     fontWeight: regular,
     height: 1.16,
@@ -42,17 +44,17 @@ abstract final class AppTypography {
   );
 
   static const TextStyle displaySmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 36,
     fontWeight: regular,
     height: 1.22,
     letterSpacing: 0,
   );
 
-  // ── HEADLINE STYLES ────────────────────────────────────────────────────────
+  // ── HEADLINE STYLES (Baloo) ────────────────────────────────────────────────
 
   static const TextStyle headlineLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 32,
     fontWeight: regular,
     height: 1.25,
@@ -60,7 +62,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle headlineMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 28,
     fontWeight: regular,
     height: 1.29,
@@ -68,17 +70,17 @@ abstract final class AppTypography {
   );
 
   static const TextStyle headlineSmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 24,
     fontWeight: regular,
     height: 1.33,
     letterSpacing: 0,
   );
 
-  // ── TITLE STYLES ───────────────────────────────────────────────────────────
+  // ── TITLE STYLES (Baloo) ───────────────────────────────────────────────────
 
   static const TextStyle titleLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 22,
     fontWeight: regular,
     height: 1.27,
@@ -86,7 +88,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle titleMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 16,
     fontWeight: medium,
     height: 1.50,
@@ -94,17 +96,17 @@ abstract final class AppTypography {
   );
 
   static const TextStyle titleSmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 14,
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,
   );
 
-  // ── LABEL STYLES ───────────────────────────────────────────────────────────
+  // ── LABEL STYLES (Cairo) ───────────────────────────────────────────────────
 
   static const TextStyle labelLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 14,
     fontWeight: medium,
     height: 1.43,
@@ -112,7 +114,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle labelMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 12,
     fontWeight: medium,
     height: 1.33,
@@ -120,17 +122,17 @@ abstract final class AppTypography {
   );
 
   static const TextStyle labelSmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 11,
     fontWeight: medium,
     height: 1.45,
     letterSpacing: 0.50,
   );
 
-  // ── BODY STYLES ────────────────────────────────────────────────────────────
+  // ── BODY STYLES (Cairo) ────────────────────────────────────────────────────
 
   static const TextStyle bodyLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 16,
     fontWeight: regular,
     height: 1.50,
@@ -138,7 +140,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle bodyMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 14,
     fontWeight: regular,
     height: 1.43,
@@ -146,7 +148,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle bodySmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 12,
     fontWeight: regular,
     height: 1.33,
@@ -166,7 +168,7 @@ abstract final class AppTypography {
 
   /// Caption style for image captions and metadata
   static const TextStyle caption = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 12,
     fontWeight: regular,
     height: 1.33,
@@ -175,17 +177,17 @@ abstract final class AppTypography {
 
   /// Overline style for category labels and tags
   static const TextStyle overline = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: bodyFontFamily,
     fontSize: 10,
     fontWeight: medium,
     height: 1.60,
     letterSpacing: 1.50,
   );
 
-  // ── BUTTON STYLES ──────────────────────────────────────────────────────────
+  // ── BUTTON STYLES (Baloo) ──────────────────────────────────────────────────
 
   static const TextStyle buttonPrimary = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 14,
     fontWeight: medium,
     height: 1.43,
@@ -193,7 +195,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle buttonSecondary = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 14,
     fontWeight: medium,
     height: 1.43,
@@ -201,7 +203,7 @@ abstract final class AppTypography {
   );
 
   static const TextStyle buttonSmall = TextStyle(
-    fontFamily: primaryFontFamily,
+    fontFamily: headingFontFamily,
     fontSize: 12,
     fontWeight: medium,
     height: 1.33,
