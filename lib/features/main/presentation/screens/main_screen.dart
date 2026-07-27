@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Core imports:
 import '/core/localization/localization_helpers.dart';
 import '/core/widgets/navigation/bottom_navigation_bar.dart';
+import '/features/home/presentation/screens/home_screen.dart';
 
 // Feature imports:
 import '/features/main/presentation/bloc/navigation_cubit.dart';
@@ -32,7 +33,7 @@ class MainScreen extends StatelessWidget {
     ];
   }
 
-  static const List<Widget> _pages = [Scaffold(), Scaffold(), Scaffold()];
+  static const List<Widget> _pages = [HomeScreen(), Scaffold(), Scaffold()];
 
   @override
   Widget build(BuildContext context) {

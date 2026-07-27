@@ -44,7 +44,7 @@ class AppRouter {
       case SessionStatus.authenticated:
         final onPreAuthScreen =
             location == AppRoutes.splash || location == AppRoutes.login;
-        return onPreAuthScreen ? AppRoutes.home : null;
+        return onPreAuthScreen ? AppRoutes.main : null;
 
       case SessionStatus.inRoom:
         final target = '${AppRoutes.room}/${session.roomId}';
