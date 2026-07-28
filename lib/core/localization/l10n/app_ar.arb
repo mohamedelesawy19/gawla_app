@@ -16,5 +16,15 @@
   "tournamentSlogan": "تحدَّ · اصمد · انتصر",
   "numPlayers": "{count} لاعب",
   "numRounds": "{count} جولات",
-  "tapToFindMatch": "اضغط للعثور على مباراة"
+  "tapToFindMatch": "اضغط للعثور على مباراة",
+
+  "milestones": "الإنجازات",
+  "milestoneUnlockTooltip": "صل إلى المستوى {level} لفتحها",
+  "levelShort": "م {level}",
+  "milestoneRookie": "مبتدئ",
+  "milestoneContender": "منافس",
+  "milestoneRisingStar": "نجم صاعد",
+  "milestoneChampion": "بطل",
+  "milestoneElite": "نخبة",
+  "milestoneLegend": "أسطورة"
 }

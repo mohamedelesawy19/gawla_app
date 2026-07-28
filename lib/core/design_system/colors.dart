@@ -75,6 +75,24 @@ class AppColors {
   /// timers, matchmaking search state, and connection indicators.
   static const Color brandAccentCyan = Color(0xFF22E8D8);
 
+  /// A warm, energetic blaze accent used for progression-driven moments:
+  /// level-ups, XP streaks, milestone celebrations, and "on fire" effects.
+  /// Unlike [brandAccentGold], which represents prestige and rewards,
+  /// Blaze communicates momentum, growth, and excitement.
+  static const Color brandAccentBlazeStart = Color(0xFFFF3D7F);
+
+  /// End color of the Blaze accent gradient. Pair with
+  /// [brandAccentBlazeStart] to create the signature progression glow.
+  static const Color brandAccentBlazeEnd = Color(0xFFFF9F43);
+
+  /// Signature gradient used for progression-focused UI such as XP,
+  /// milestone highlights, streaks, and level-up celebrations.
+  static const LinearGradient brandAccentBlazeGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [brandAccentBlazeStart, brandAccentBlazeEnd],
+  );
+
   // ═════════════════════════════════════════════════════════════════════
   // BACKGROUNDS
   // The "night arena" backdrop the whole game sits on. Deliberately dark

@@ -193,6 +193,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tap to find a match'**
   String get tapToFindMatch;
+
+  /// No description provided for @milestones.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get milestones;
+
+  /// No description provided for @milestoneUnlockTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach level {level} to unlock'**
+  String milestoneUnlockTooltip(Object level);
+
+  /// No description provided for @levelShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Lv {level}'**
+  String levelShort(Object level);
+
+  /// No description provided for @milestoneRookie.
+  ///
+  /// In en, this message translates to:
+  /// **'Rookie'**
+  String get milestoneRookie;
+
+  /// No description provided for @milestoneContender.
+  ///
+  /// In en, this message translates to:
+  /// **'Contender'**
+  String get milestoneContender;
+
+  /// No description provided for @milestoneRisingStar.
+  ///
+  /// In en, this message translates to:
+  /// **'Rising Star'**
+  String get milestoneRisingStar;
+
+  /// No description provided for @milestoneChampion.
+  ///
+  /// In en, this message translates to:
+  /// **'Champion'**
+  String get milestoneChampion;
+
+  /// No description provided for @milestoneElite.
+  ///
+  /// In en, this message translates to:
+  /// **'Elite'**
+  String get milestoneElite;
+
+  /// No description provided for @milestoneLegend.
+  ///
+  /// In en, this message translates to:
+  /// **'Legend'**
+  String get milestoneLegend;
 }
 
 class _AppLocalizationsDelegate

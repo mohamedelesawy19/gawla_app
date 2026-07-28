@@ -59,4 +59,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tapToFindMatch => 'اضغط للعثور على مباراة';
+
+  @override
+  String get milestones => 'الإنجازات';
+
+  @override
+  String milestoneUnlockTooltip(Object level) {
+    return 'صل إلى المستوى $level لفتحها';
+  }
+
+  @override
+  String levelShort(Object level) {
+    return 'م $level';
+  }
+
+  @override
+  String get milestoneRookie => 'مبتدئ';
+
+  @override
+  String get milestoneContender => 'منافس';
+
+  @override
+  String get milestoneRisingStar => 'نجم صاعد';
+
+  @override
+  String get milestoneChampion => 'بطل';
+
+  @override
+  String get milestoneElite => 'نخبة';
+
+  @override
+  String get milestoneLegend => 'أسطورة';
 }

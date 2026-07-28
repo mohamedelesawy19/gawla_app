@@ -16,5 +16,15 @@
   "tournamentSlogan": "CHALLENGE · SURVIVE · WIN",
   "numPlayers": "{count} players",
   "numRounds": "{count} rounds",
-  "tapToFindMatch": "Tap to find a match"
+  "tapToFindMatch": "Tap to find a match",
+
+  "milestones": "Milestones",
+  "milestoneUnlockTooltip": "Reach level {level} to unlock",
+  "levelShort": "Lv {level}",
+  "milestoneRookie": "Rookie",
+  "milestoneContender": "Contender",
+  "milestoneRisingStar": "Rising Star",
+  "milestoneChampion": "Champion",
+  "milestoneElite": "Elite",
+  "milestoneLegend": "Legend"
 }

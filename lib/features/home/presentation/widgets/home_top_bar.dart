@@ -112,7 +112,7 @@ class _LevelRingAvatar extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                 decoration: BoxDecoration(
-                  color: AppColors.brandSecondaryLight,
+                  gradient: AppColors.brandAccentBlazeGradient,
                   borderRadius: AppBorders.borderRadiusFull,
                   border: Border.all(
                     color: AppColors.backgroundPrimary,

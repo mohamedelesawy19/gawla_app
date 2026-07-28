@@ -20,6 +20,7 @@ abstract final class AppTypography {
   // ── COLORS ─────────────────────────────────────────────────────────────────
   static const primary = AppColors.textPrimary;
   static const secondary = AppColors.textSecondary;
+  static const tertiary = AppColors.textTertiary;
 
   // ── FONT WEIGHTS ───────────────────────────────────────────────────────────
 
@@ -120,6 +121,15 @@ abstract final class AppTypography {
     color: primary,
   );
 
+  static const TextStyle sectionTitle = TextStyle(
+    fontFamily: headingFontFamily,
+    fontSize: 15,
+    fontWeight: bold,
+    height: 1.3,
+    letterSpacing: 0.1,
+    color: primary,
+  );
+
   // ── LABEL STYLES (Cairo) ───────────────────────────────────────────────────
 
   static const TextStyle labelLarge = TextStyle(
@@ -194,10 +204,9 @@ abstract final class AppTypography {
   static const TextStyle caption = TextStyle(
     fontFamily: bodyFontFamily,
     fontSize: 12,
-    fontWeight: regular,
-    height: 1.33,
-    letterSpacing: 0.40,
-    color: secondary,
+    fontWeight: medium,
+    height: 1.3,
+    color: tertiary,
   );
 
   /// Overline style for category labels and tags

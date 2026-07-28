@@ -59,4 +59,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tapToFindMatch => 'Tap to find a match';
+
+  @override
+  String get milestones => 'Milestones';
+
+  @override
+  String milestoneUnlockTooltip(Object level) {
+    return 'Reach level $level to unlock';
+  }
+
+  @override
+  String levelShort(Object level) {
+    return 'Lv $level';
+  }
+
+  @override
+  String get milestoneRookie => 'Rookie';
+
+  @override
+  String get milestoneContender => 'Contender';
+
+  @override
+  String get milestoneRisingStar => 'Rising Star';
+
+  @override
+  String get milestoneChampion => 'Champion';
+
+  @override
+  String get milestoneElite => 'Elite';
+
+  @override
+  String get milestoneLegend => 'Legend';
 }
