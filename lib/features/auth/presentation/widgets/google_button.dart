@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
-import '/core/theme/theme_extensions.dart';
 
 class GoogleButton extends StatelessWidget {
   const GoogleButton({super.key, required this.onPressed});
@@ -17,8 +17,8 @@ class GoogleButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: context.colorScheme.onSurface,
-        foregroundColor: context.colorScheme.surface,
+        backgroundColor: AppColors.textOnBrand,
+        foregroundColor: AppColors.textInverse,
         elevation: 0,
         padding: const EdgeInsets.symmetric(vertical: 17),
         shape: const RoundedRectangleBorder(
@@ -32,10 +32,10 @@ class GoogleButton extends StatelessWidget {
           AppSpacing.horizontalSpaceMd,
           Text(
             context.l10n.continueWithGoogle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: context.colorScheme.surface,
+              color: AppColors.textInverse,
             ),
           ),
         ],

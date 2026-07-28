@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
-import '/core/theme/theme_extensions.dart';
 
 // Feature imports:
 import '/features/auth/presentation/bloc/auth_bloc.dart';
@@ -25,26 +25,24 @@ class LoginScreen extends StatelessWidget {
             children: [
               const Spacer(flex: 7),
 
-              // Pin
+              // Gawla logo
               Container(
                 width: 84,
                 height: 84,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.primary,
+                decoration: const BoxDecoration(
+                  color: AppColors.brandPrimary,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: context.colorScheme.primary.withValues(
-                        alpha: 0.45,
-                      ),
+                      color: AppColors.shadowBrandGlow,
                       blurRadius: 32,
                       spreadRadius: 6,
                     ),
                   ],
                 ),
-                child: Icon(
-                  Icons.location_pin,
-                  color: context.colorScheme.surface,
+                child: const Icon(
+                  Icons.emoji_events_rounded,
+                  color: AppColors.iconOnBrand,
                   size: 46,
                 ),
               ),
@@ -54,9 +52,9 @@ class LoginScreen extends StatelessWidget {
               // Title + tagline
               Text(
                 context.l10n.appName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 54,
-                  color: context.colorScheme.onSurface,
+                  color: AppColors.textPrimary,
                   letterSpacing: 2,
                   height: 1,
                 ),
@@ -64,9 +62,9 @@ class LoginScreen extends StatelessWidget {
               AppSpacing.verticalSpaceSm,
               Text(
                 context.l10n.tagline,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
-                  color: context.colorScheme.primary.withValues(alpha: 0.80),
+                  color: AppColors.brandAccentCyan,
                   letterSpacing: 3.5,
                   fontWeight: FontWeight.w600,
                 ),
