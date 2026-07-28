@@ -18,6 +18,9 @@
   "numRounds": "{count} جولات",
   "tapToFindMatch": "اضغط للعثور على مباراة",
 
+  "coins": "العملات",
+  "gems": "الجواهر",
+
   "milestones": "الإنجازات",
   "milestoneUnlockTooltip": "صل إلى المستوى {level} لفتحها",
   "levelShort": "م {level}",

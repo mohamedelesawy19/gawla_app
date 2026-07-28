@@ -61,6 +61,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tapToFindMatch => 'اضغط للعثور على مباراة';
 
   @override
+  String get coins => 'العملات';
+
+  @override
+  String get gems => 'الجواهر';
+
+  @override
   String get milestones => 'الإنجازات';
 
   @override

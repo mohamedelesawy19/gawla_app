@@ -61,6 +61,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tapToFindMatch => 'Tap to find a match';
 
   @override
+  String get coins => 'Coins';
+
+  @override
+  String get gems => 'Gems';
+
+  @override
   String get milestones => 'Milestones';
 
   @override

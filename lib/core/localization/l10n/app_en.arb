@@ -18,6 +18,9 @@
   "numRounds": "{count} rounds",
   "tapToFindMatch": "Tap to find a match",
 
+  "coins": "Coins",
+  "gems": "Gems",
+
   "milestones": "Milestones",
   "milestoneUnlockTooltip": "Reach level {level} to unlock",
   "levelShort": "Lv {level}",

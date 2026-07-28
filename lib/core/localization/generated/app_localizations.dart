@@ -194,6 +194,18 @@ abstract class AppLocalizations {
   /// **'Tap to find a match'**
   String get tapToFindMatch;
 
+  /// No description provided for @coins.
+  ///
+  /// In en, this message translates to:
+  /// **'Coins'**
+  String get coins;
+
+  /// No description provided for @gems.
+  ///
+  /// In en, this message translates to:
+  /// **'Gems'**
+  String get gems;
+
   /// No description provided for @milestones.
   ///
   /// In en, this message translates to:
