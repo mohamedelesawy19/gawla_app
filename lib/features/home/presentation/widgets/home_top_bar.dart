@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/theme/theme_extensions.dart';
 import '/core/widgets/common/image_widget.dart';
@@ -25,8 +26,6 @@ class HomeTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = context.colorScheme;
-
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Row(
@@ -42,14 +41,14 @@ class HomeTopBar extends StatelessWidget {
           _CurrencyChip(
             icon: '🪙',
             value: player.coins,
-            color: colorScheme.secondary,
+            color: AppColors.currencyCoin,
             onTap: onWalletTap,
           ),
           AppSpacing.horizontalSpaceSm,
           _CurrencyChip(
             icon: '💎',
             value: player.gems,
-            color: colorScheme.tertiary,
+            color: AppColors.currencyGem,
             onTap: onWalletTap,
           ),
         ],
@@ -74,7 +73,6 @@ class _LevelRingAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return GestureDetector(
       onTap: onTap,
@@ -90,15 +88,17 @@ class _LevelRingAvatar extends StatelessWidget {
               child: CircularProgressIndicator(
                 value: progress,
                 strokeWidth: 3,
-                backgroundColor: colorScheme.outlineVariant,
-                valueColor: AlwaysStoppedAnimation(colorScheme.secondary),
+                backgroundColor: AppColors.progressTrackBackground,
+                valueColor: const AlwaysStoppedAnimation(
+                  AppColors.brandPrimary,
+                ),
               ),
             ),
             Container(
               width: 48,
               height: 48,
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest,
+              decoration: const BoxDecoration(
+                color: AppColors.surfaceSunken,
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
@@ -112,14 +112,17 @@ class _LevelRingAvatar extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                 decoration: BoxDecoration(
-                  color: colorScheme.secondary,
+                  color: AppColors.brandSecondaryLight,
                   borderRadius: AppBorders.borderRadiusFull,
-                  border: Border.all(color: colorScheme.surface, width: 1.5),
+                  border: Border.all(
+                    color: AppColors.backgroundPrimary,
+                    width: 1.5,
+                  ),
                 ),
                 child: Text(
                   '$level',
                   style: textTheme.labelSmall!.copyWith(
-                    color: colorScheme.surface,
+                    color: AppColors.textOnBrand,
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
                   ),
@@ -149,14 +152,13 @@ class _CurrencyChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHighest,
+          color: AppColors.cardDefault,
           borderRadius: AppBorders.borderRadiusFull,
           border: Border.all(color: color.withValues(alpha: 0.35)),
         ),
@@ -168,7 +170,7 @@ class _CurrencyChip extends StatelessWidget {
             Text(
               '$value',
               style: textTheme.labelMedium!.copyWith(
-                color: colorScheme.onSurfaceVariant,
+                color: AppColors.textPrimary,
                 fontWeight: FontWeight.w600,
               ),
             ),

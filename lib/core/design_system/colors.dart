@@ -735,27 +735,79 @@ class AppColors {
   // TICKET UI
   // Tournament "entry ticket" visual metaphor used on the home screen
   // and room-join flow (a literal ticket-shaped card representing a
-  // tournament entry, in keeping with the live-event framing).
+  // tournament entry, in keeping with the live-event framing). Modeled
+  // on warm, physical ticket-stub paper rather than the app's usual
+  // dark surfaces — like a golden ticket, it's meant to read as a
+  // special, tangible object sitting on the night-arena backdrop, not
+  // as another dark panel. Because the fill is light, its text/icon
+  // tokens are tuned for a light surface (dark ink, warm accents)
+  // instead of being reused from the dark-surface system, but the
+  // gold accent and cyan "live" glow still tie back to the same brand
+  // hues used everywhere else so the ticket still feels like Gawla.
   // ═════════════════════════════════════════════════════════════════════
 
-  /// Background fill for the tournament entry ticket card.
-  static const Color ticketBackground = Color(0xFF1F1238);
+  /// Background fill for the tournament entry ticket card. Warm cream
+  /// stands in for physical ticket paper — a deliberate break from the
+  /// dark [backgroundPrimary]/[surfaceDefault] family so the ticket
+  /// pops off the arena backdrop as a special object worth noticing.
+  static const Color ticketBackground = Color(0xFFFFE3C0);
 
-  /// Border/edge color for the ticket, using reward-gold to reinforce
-  /// that entering a tournament is the gateway to earning rewards.
-  static const Color ticketBorder = Color(0xFFFFB627);
+  /// A step deeper than [ticketBackground], used for shapes printed on
+  /// the ticket — the player/round count pills, the mini-game stop
+  /// circles — so they read as their own chip without leaving the
+  /// ticket's paper hue.
+  static const Color ticketSurface = Color(0xFFF7D19D);
+
+  /// The ticket's one recurring gold accent — the kicker label, pill
+  /// icons, and the mini-game stop rings. A deeper amber than the old
+  /// dark-surface value so it still has real contrast against the new
+  /// light fill, while staying in the same reward-gold hue family as
+  /// [brandAccentGold]: entering a tournament is still the gateway to
+  /// earning rewards, gold still says so.
+  static const Color ticketBorder = Color(0xFFA65D1A);
 
   /// Color of the dashed perforation line separating the ticket's main
-  /// body from its tear-off stub.
-  static const Color ticketPerforationLine = Color(0xFF3A2A5C);
+  /// body from its tear-off stub, and of the connector lines linking
+  /// the mini-game rotation stops. A muted tan pulled from the same
+  /// paper hue as [ticketBackground], so both read as creases/print on
+  /// the ticket itself rather than a generic dark-UI divider bleeding
+  /// in from the rest of the app.
+  static const Color ticketPerforationLine = Color(0xFFCB9C66);
+
+  /// Primary text/icon color for content printed directly on the
+  /// ticket (the tournament slogan, pill labels). Reuses [textInverse]
+  /// — the app's existing "dark ink on a light/gold surface" token —
+  /// so the ticket's typography still follows the one rule the rest of
+  /// the system already has for light fills, instead of inventing a
+  /// second one.
+  static const Color ticketTextPrimary = textInverse;
+
+  /// Secondary/muted text color for lower-emphasis copy on the ticket
+  /// — the stop-order numbers, the "tap to find match" caption. Plays
+  /// the same "recede" role [textSecondary] plays on dark surfaces,
+  /// but as a warm brown so it stays legible on the light ticket fill.
+  static const Color ticketTextSecondary = Color(0xFF7A5B3A);
 
   /// Overlay/stamp color applied across a ticket that has already been
-  /// used (entered) to mark it as spent.
-  static const Color ticketStampUsed = Color(0xFF4A4066);
+  /// used (entered) to mark it as spent. A dark, neutral stamped-ink
+  /// brown so the "used" mark reads the same regardless of what the
+  /// ticket fill happens to be.
+  static const Color ticketStampUsed = Color(0xFF4A3018);
 
   /// Glow color applied to a ticket for a tournament that's live right
-  /// now and ready to jump into.
+  /// now and ready to jump into. Kept as the app's "alive / active"
+  /// cyan ([brandAccentCyan]) rather than a warm tone — the live
+  /// signal needs to stay the one color players learn to recognize
+  /// everywhere else, and cyan reads even more clearly against the
+  /// warm ticket fill than it did against the old dark one.
   static const Color ticketGlowActive = Color(0xFF22E8D8);
+
+  /// Gradient used for the "golden ticket" effect on the tournament
+  static const LinearGradient goldGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFD166), Color(0xFFFFB627), Color(0xFFE8960B)],
+  );
 
   // ═════════════════════════════════════════════════════════════════════
   // OVERLAY

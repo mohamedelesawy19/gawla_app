@@ -50,7 +50,6 @@ class _HomeViewState extends State<_HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: SafeArea(
         bottom: false,
         child: BlocBuilder<HomeCubit, HomeState>(
@@ -148,57 +147,60 @@ class _LoadedContentState extends State<_LoadedContent>
       opacity: _fade,
       child: SlideTransition(
         position: _slide,
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.xl,
-                AppSpacing.sm,
-                AppSpacing.xl,
-                AppSpacing.lg,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: _ProfileTopBar(
-                  onAvatarTap: widget.onAvatarTap,
-                  onWalletTap: widget.onWalletTap,
+        child: RefreshIndicator(
+          onRefresh: () => context.read<HomeCubit>().refresh(),
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.xl,
+                  AppSpacing.sm,
+                  AppSpacing.xl,
+                  AppSpacing.lg,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: _ProfileTopBar(
+                    onAvatarTap: widget.onAvatarTap,
+                    onWalletTap: widget.onWalletTap,
+                  ),
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.xl,
-                AppSpacing.xxl,
-                AppSpacing.xl,
-                AppSpacing.lg,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: TournamentTicketCard(
-                  playerCount: state.tournamentPlayerCount,
-                  roundCount: state.tournamentRoundCount,
-                  rotation: state.todaysRotation,
-                  onPunchIn: widget.onPunchIn,
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.xl,
+                  AppSpacing.xxl,
+                  AppSpacing.xl,
+                  AppSpacing.lg,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: TournamentTicketCard(
+                    playerCount: state.tournamentPlayerCount,
+                    roundCount: state.tournamentRoundCount,
+                    rotation: state.todaysRotation,
+                    onPunchIn: widget.onPunchIn,
+                  ),
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-              sliver: SliverToBoxAdapter(
-                child: QuickActionChips(
-                  onCreateRoom: widget.onCreateRoom,
-                  onJoinRoom: widget.onJoinRoom,
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+                sliver: SliverToBoxAdapter(
+                  child: QuickActionChips(
+                    onCreateRoom: widget.onCreateRoom,
+                    onJoinRoom: widget.onJoinRoom,
+                  ),
                 ),
               ),
-            ),
-            const SliverToBoxAdapter(child: AppSpacing.verticalSpaceXxl),
-            SliverToBoxAdapter(
-              child: MiniGameLibraryStrip(
-                games: state.gameLibrary,
-                onTapGame: widget.onGameTap,
+              const SliverToBoxAdapter(child: AppSpacing.verticalSpaceXxl),
+              SliverToBoxAdapter(
+                child: MiniGameLibraryStrip(
+                  games: state.gameLibrary,
+                  onTapGame: widget.onGameTap,
+                ),
               ),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 120)),
-          ],
+              const SliverToBoxAdapter(child: SizedBox(height: 160)),
+            ],
+          ),
         ),
       ),
     );

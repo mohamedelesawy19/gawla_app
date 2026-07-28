@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
@@ -19,7 +20,6 @@ class MiniGameLibraryStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class MiniGameLibraryStrip extends StatelessWidget {
             style: textTheme.labelSmall!.copyWith(
               fontWeight: FontWeight.w700,
               letterSpacing: 1.1,
-              color: colorScheme.onSurfaceVariant,
+              color: AppColors.textSecondary,
             ),
           ),
         ),
@@ -65,7 +65,6 @@ class _GameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Material(
       color: Colors.transparent,
@@ -76,9 +75,9 @@ class _GameCard extends StatelessWidget {
           width: 108,
           padding: AppSpacing.paddingMd,
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
+            color: AppColors.cardDefault,
             borderRadius: AppBorders.borderRadiusXl,
-            border: Border.all(color: colorScheme.outlineVariant),
+            border: Border.all(color: AppColors.borderDefault),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +93,7 @@ class _GameCard extends StatelessWidget {
                 style: textTheme.bodySmall!.copyWith(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: colorScheme.onSurface,
+                  color: AppColors.textPrimary,
                 ),
               ),
 
@@ -102,15 +101,15 @@ class _GameCard extends StatelessWidget {
 
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: colorScheme.tertiary.withValues(alpha: 0.15),
+                decoration: const BoxDecoration(
+                  color: AppColors.surfaceSunken,
                   borderRadius: AppBorders.borderRadiusFull,
                 ),
                 child: Text(
                   game.skillTag,
                   style: textTheme.labelSmall!.copyWith(
                     fontSize: 9.5,
-                    color: colorScheme.tertiary,
+                    color: AppColors.textSecondary,
                   ),
                 ),
               ),

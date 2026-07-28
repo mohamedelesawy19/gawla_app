@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/theme/theme_extensions.dart';
@@ -19,15 +20,13 @@ class QuickActionChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = context.colorScheme;
-
     return Row(
       children: [
         Expanded(
           child: _StubButton(
             icon: Icons.add_circle_outline_rounded,
             label: context.l10n.createRoom,
-            accent: colorScheme.primary,
+            accent: AppColors.brandPrimary,
             onTap: onCreateRoom,
           ),
         ),
@@ -36,7 +35,7 @@ class QuickActionChips extends StatelessWidget {
           child: _StubButton(
             icon: Icons.confirmation_number_outlined,
             label: context.l10n.joinRoom,
-            accent: colorScheme.tertiary,
+            accent: AppColors.brandAccentCyan,
             onTap: onJoinRoom,
           ),
         ),
@@ -61,7 +60,6 @@ class _StubButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Material(
       color: Colors.transparent,
@@ -74,7 +72,10 @@ class _StubButton extends StatelessWidget {
             horizontal: AppSpacing.lg,
           ),
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
+            color: Color.alphaBlend(
+              accent.withValues(alpha: 0.14),
+              AppColors.cardDefault,
+            ),
             borderRadius: AppBorders.borderRadiusXl,
             border: Border.all(color: accent.withValues(alpha: 0.4)),
           ),

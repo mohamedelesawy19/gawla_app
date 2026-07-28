@@ -29,7 +29,6 @@ class TournamentTicketCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -38,7 +37,7 @@ class TournamentTicketCard extends StatelessWidget {
           clipper: const _TicketEdgeClipper(notchOnBottom: true),
           child: Container(
             width: double.infinity,
-            color: context.onWarningContainer,
+            color: AppColors.ticketBackground,
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.xl,
               AppSpacing.xl,
@@ -51,7 +50,7 @@ class TournamentTicketCard extends StatelessWidget {
                 Text(
                   context.l10n.todaysTournament,
                   style: textTheme.labelSmall!.copyWith(
-                    color: colorScheme.outline,
+                    color: AppColors.ticketBorder,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 2.2,
                   ),
@@ -60,7 +59,7 @@ class TournamentTicketCard extends StatelessWidget {
                 Text(
                   context.l10n.tournamentSlogan,
                   style: textTheme.titleLarge!.copyWith(
-                    color: colorScheme.surface,
+                    color: AppColors.ticketTextPrimary,
                     fontSize: 22,
                   ),
                 ),
@@ -96,7 +95,7 @@ class TournamentTicketCard extends StatelessWidget {
           clipper: const _TicketEdgeClipper(notchOnBottom: false),
           child: Container(
             width: double.infinity,
-            color: context.onWarningContainer,
+            color: AppColors.ticketBackground,
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.xl,
               AppSpacing.xxl,
@@ -113,7 +112,7 @@ class TournamentTicketCard extends StatelessWidget {
                 Text(
                   context.l10n.tapToFindMatch,
                   style: textTheme.bodySmall!.copyWith(
-                    color: colorScheme.outline,
+                    color: AppColors.ticketTextSecondary,
                   ),
                 ),
               ],
@@ -134,23 +133,22 @@ class _InfoPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: colorScheme.onSurfaceVariant,
+      decoration: const BoxDecoration(
+        color: AppColors.ticketSurface,
         borderRadius: AppBorders.borderRadiusFull,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 13, color: colorScheme.outline),
+          Icon(icon, size: 13, color: AppColors.ticketBorder),
           AppSpacing.horizontalSpaceXs,
           Text(
             label,
             style: textTheme.bodySmall!.copyWith(
-              color: colorScheme.outline,
+              color: AppColors.ticketTextPrimary,
               fontWeight: FontWeight.w700,
               fontSize: 12,
             ),
@@ -177,7 +175,7 @@ class _RotationRow extends StatelessWidget {
             child: Container(
               height: 1.5,
               margin: const EdgeInsets.only(bottom: 14),
-              color: context.colorScheme.outline.withValues(alpha: 0.25),
+              color: AppColors.ticketPerforationLine,
             ),
           ),
         );
@@ -196,7 +194,6 @@ class _StopIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -206,11 +203,9 @@ class _StopIcon extends StatelessWidget {
           height: 34,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: colorScheme.onSurfaceVariant,
+            color: AppColors.ticketSurface,
             shape: BoxShape.circle,
-            border: Border.all(
-              color: colorScheme.outline.withValues(alpha: 0.2),
-            ),
+            border: Border.all(color: AppColors.ticketBorder, width: 1.5),
           ),
           child: Text(
             game.emoji,
@@ -221,7 +216,7 @@ class _StopIcon extends StatelessWidget {
         Text(
           '$order',
           style: textTheme.labelSmall!.copyWith(
-            color: colorScheme.outline,
+            color: AppColors.ticketTextSecondary,
             fontSize: 10,
             fontWeight: FontWeight.w800,
           ),
@@ -235,7 +230,7 @@ class _DashedLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.onSurfaceVariant.withValues(alpha: 0.45)
+      ..color = AppColors.ticketPerforationLine
       ..strokeWidth = 1.5;
     const dashWidth = 6.0;
     const gap = 5.0;

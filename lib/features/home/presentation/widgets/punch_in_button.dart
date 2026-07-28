@@ -38,7 +38,6 @@ class _PunchInButtonState extends State<PunchInButton>
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorScheme = context.colorScheme;
 
     return GestureDetector(
       onTapDown: (_) => _press.forward(),
@@ -62,7 +61,7 @@ class _PunchInButtonState extends State<PunchInButton>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: colorScheme.secondary.withValues(alpha: glow),
+                    color: AppColors.ticketBorder.withValues(alpha: glow),
                     blurRadius: 42,
                     spreadRadius: 6,
                   ),
@@ -83,24 +82,21 @@ class _PunchInButtonState extends State<PunchInButton>
               height: 128,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: colorScheme.surface.withValues(alpha: 0.18),
-                  width: 2,
-                ),
+                border: Border.all(color: AppColors.ticketBorder, width: 1),
               ),
               alignment: Alignment.center,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.bolt_rounded,
-                    color: colorScheme.surface,
+                    color: AppColors.textInverse,
                     size: 30,
                   ),
                   Text(
                     context.l10n.punchIn,
                     style: textTheme.titleLarge!.copyWith(
-                      color: colorScheme.surface,
+                      color: AppColors.textInverse,
                       fontSize: 17,
                       letterSpacing: 0.5,
                     ),
