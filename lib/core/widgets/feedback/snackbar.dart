@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
-import '/core/theme/theme_extensions.dart';
 
 enum SnackType { info, success, warning, error }
 
@@ -24,7 +24,7 @@ class CustomSnackbar {
     final snackBar = SnackBar(
       duration: duration,
       behavior: SnackBarBehavior.floating,
-      backgroundColor: style.color,
+      backgroundColor: style.background,
       elevation: 6,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
@@ -33,13 +33,13 @@ class CustomSnackbar {
       ),
       content: Row(
         children: [
-          Icon(style.icon, color: style.border, size: 22),
+          Icon(style.icon, color: style.foreground, size: 22),
           AppSpacing.horizontalSpaceSm,
           Expanded(
             child: Text(
               message,
               style: TextStyle(
-                color: style.onColor,
+                color: style.foreground,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
@@ -78,34 +78,36 @@ class CustomSnackbar {
   );
 
   static _SnackStyle _styleFor(SnackType type, BuildContext context) {
-    final colorScheme = context.colorScheme;
     switch (type) {
       case SnackType.success:
-        return _SnackStyle(
-          color: context.successContainer,
-          border: context.successColor,
-          onColor: context.onSuccessContainer,
+        return const _SnackStyle(
+          background: AppColors.statusSuccess,
+          foreground: AppColors.surfaceElevated,
+          border: AppColors.statusSuccess,
           icon: Icons.emoji_events_rounded,
         );
+
       case SnackType.warning:
-        return _SnackStyle(
-          color: context.warningContainer,
-          border: context.warningColor,
-          onColor: context.onWarningContainer,
+        return const _SnackStyle(
+          background: AppColors.statusWarning,
+          foreground: AppColors.surfaceElevated,
+          border: AppColors.statusWarning,
           icon: Icons.bolt_rounded,
         );
+
       case SnackType.error:
-        return _SnackStyle(
-          color: colorScheme.errorContainer,
-          border: colorScheme.error,
-          onColor: colorScheme.onErrorContainer,
+        return const _SnackStyle(
+          background: AppColors.statusError,
+          foreground: AppColors.surfaceElevated,
+          border: AppColors.statusError,
           icon: Icons.heart_broken_rounded,
         );
+
       case SnackType.info:
-        return _SnackStyle(
-          color: colorScheme.tertiaryContainer,
-          border: colorScheme.tertiary,
-          onColor: colorScheme.onTertiaryContainer,
+        return const _SnackStyle(
+          background: AppColors.statusInfo,
+          foreground: AppColors.surfaceElevated,
+          border: AppColors.statusInfo,
           icon: Icons.shield_rounded,
         );
     }
@@ -114,14 +116,14 @@ class CustomSnackbar {
 
 class _SnackStyle {
   const _SnackStyle({
-    required this.color,
-    required this.onColor,
+    required this.background,
+    required this.foreground,
     required this.border,
     required this.icon,
   });
 
-  final Color color;
-  final Color onColor;
+  final Color background;
+  final Color foreground;
   final Color border;
   final IconData icon;
 }

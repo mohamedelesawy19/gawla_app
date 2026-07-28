@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 // Core imports
 import '/core/design_system/borders.dart';
 import '/core/design_system/colors.dart';
-import '/core/theme/theme_extensions.dart';
 
 // ─── Model ───────────────────────────────────────────────────────────────────
 
@@ -35,10 +34,10 @@ class CustomNavigationBar extends StatefulWidget {
     required this.items,
     required this.selectedIndex,
     required this.onItemSelected,
-    this.backgroundColor = const Color(0xFF140E1E),
-    this.activeColor = AppColors.secondary,
-    this.inactiveColor = AppColors.onSurfaceVariant,
-    this.indicatorColor = const Color(0x18FFC700),
+    this.backgroundColor = AppColors.surfaceDefault,
+    this.activeColor = AppColors.brandAccentCyan,
+    this.inactiveColor = AppColors.iconMuted,
+    this.indicatorColor = AppColors.cardSelected,
     this.height,
     this.margin = const EdgeInsets.fromLTRB(8, 0, 8, 8),
     this.showLabels = true,
@@ -151,17 +150,14 @@ class _Shell extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(40),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.10),
-          width: 1.1,
-        ),
-        boxShadow: [
+        border: Border.all(color: AppColors.white10, width: 1.1),
+        boxShadow: const [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.30),
+            color: AppColors.shadowStrong,
             blurRadius: 20,
-            offset: const Offset(0, 10),
+            offset: Offset(0, 10),
           ),
-          BoxShadow(color: Colors.white.withValues(alpha: 0.05), blurRadius: 2),
+          BoxShadow(color: AppColors.white10, blurRadius: 2),
         ],
       ),
       child: Padding(
@@ -308,17 +304,17 @@ class _Badge extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(minWidth: 15, minHeight: 15),
       padding: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        color: context.colorScheme.error,
+      decoration: const BoxDecoration(
+        color: AppColors.badgeCountBackground,
         borderRadius: AppBorders.borderRadiusMd,
       ),
       child: Center(
         child: Text(
           count > 99 ? '99+' : '$count',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.w700,
-            color: context.colorScheme.onError,
+            color: AppColors.badgeCountText,
             height: 1.3,
           ),
         ),

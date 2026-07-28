@@ -10,6 +10,8 @@ class CoreModule {
   CoreModule._();
 
   static Future<void> register() async {
+    if (kIsWeb) return;
+
     const crashReporting = FirebaseCrashReportingService();
     await crashReporting.initialize(enabled: kReleaseMode);
 

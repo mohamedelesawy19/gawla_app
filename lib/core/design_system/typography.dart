@@ -1,4 +1,8 @@
+// Package imports:
 import 'package:flutter/material.dart';
+
+// Core imports:
+import '/core/design_system/colors.dart';
 
 abstract final class AppTypography {
   const AppTypography._();
@@ -12,6 +16,10 @@ abstract final class AppTypography {
   static const String bodyFontFamily = 'Cairo';
 
   static const String monoFontFamily = 'RobotoMono';
+
+  // ── COLORS ─────────────────────────────────────────────────────────────────
+  static const primary = AppColors.textPrimary;
+  static const secondary = AppColors.textSecondary;
 
   // ── FONT WEIGHTS ───────────────────────────────────────────────────────────
 
@@ -33,6 +41,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.12,
     letterSpacing: -0.25,
+    color: primary,
   );
 
   static const TextStyle displayMedium = TextStyle(
@@ -41,6 +50,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.16,
     letterSpacing: 0,
+    color: primary,
   );
 
   static const TextStyle displaySmall = TextStyle(
@@ -49,6 +59,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.22,
     letterSpacing: 0,
+    color: primary,
   );
 
   // ── HEADLINE STYLES (Baloo) ────────────────────────────────────────────────
@@ -59,6 +70,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.25,
     letterSpacing: 0,
+    color: primary,
   );
 
   static const TextStyle headlineMedium = TextStyle(
@@ -67,6 +79,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.29,
     letterSpacing: 0,
+    color: primary,
   );
 
   static const TextStyle headlineSmall = TextStyle(
@@ -75,6 +88,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.33,
     letterSpacing: 0,
+    color: primary,
   );
 
   // ── TITLE STYLES (Baloo) ───────────────────────────────────────────────────
@@ -85,6 +99,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.27,
     letterSpacing: 0,
+    color: primary,
   );
 
   static const TextStyle titleMedium = TextStyle(
@@ -93,6 +108,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.50,
     letterSpacing: 0.15,
+    color: primary,
   );
 
   static const TextStyle titleSmall = TextStyle(
@@ -101,6 +117,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,
+    color: primary,
   );
 
   // ── LABEL STYLES (Cairo) ───────────────────────────────────────────────────
@@ -111,6 +128,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,
+    color: primary,
   );
 
   static const TextStyle labelMedium = TextStyle(
@@ -119,6 +137,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.33,
     letterSpacing: 0.50,
+    color: secondary,
   );
 
   static const TextStyle labelSmall = TextStyle(
@@ -127,6 +146,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.45,
     letterSpacing: 0.50,
+    color: secondary,
   );
 
   // ── BODY STYLES (Cairo) ────────────────────────────────────────────────────
@@ -137,6 +157,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.50,
     letterSpacing: 0.50,
+    color: primary,
   );
 
   static const TextStyle bodyMedium = TextStyle(
@@ -145,6 +166,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.43,
     letterSpacing: 0.25,
+    color: primary,
   );
 
   static const TextStyle bodySmall = TextStyle(
@@ -153,6 +175,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.33,
     letterSpacing: 0.40,
+    color: secondary,
   );
 
   // ── SPECIALIZED STYLES ─────────────────────────────────────────────────────
@@ -164,6 +187,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.43,
     letterSpacing: 0.25,
+    color: primary,
   );
 
   /// Caption style for image captions and metadata
@@ -173,6 +197,7 @@ abstract final class AppTypography {
     fontWeight: regular,
     height: 1.33,
     letterSpacing: 0.40,
+    color: secondary,
   );
 
   /// Overline style for category labels and tags
@@ -182,6 +207,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.60,
     letterSpacing: 1.50,
+    color: primary,
   );
 
   // ── BUTTON STYLES (Baloo) ──────────────────────────────────────────────────
@@ -192,6 +218,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,
+    color: primary,
   );
 
   static const TextStyle buttonSecondary = TextStyle(
@@ -200,6 +227,7 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,
+    color: secondary,
   );
 
   static const TextStyle buttonSmall = TextStyle(
@@ -208,25 +236,6 @@ abstract final class AppTypography {
     fontWeight: medium,
     height: 1.33,
     letterSpacing: 0.50,
-  );
-
-  // ── THEME INTEGRATION ──────────────────────────────────────────────────────
-
-  static const TextTheme defaultTextTheme = TextTheme(
-    displayLarge: displayLarge,
-    displayMedium: displayMedium,
-    displaySmall: displaySmall,
-    headlineLarge: headlineLarge,
-    headlineMedium: headlineMedium,
-    headlineSmall: headlineSmall,
-    titleLarge: titleLarge,
-    titleMedium: titleMedium,
-    titleSmall: titleSmall,
-    bodyLarge: bodyLarge,
-    bodyMedium: bodyMedium,
-    bodySmall: bodySmall,
-    labelLarge: labelLarge,
-    labelMedium: labelMedium,
-    labelSmall: labelSmall,
+    color: primary,
   );
 }
