@@ -32,5 +32,11 @@
   "milestoneLegend": "أسطورة",
 
   "playingSince": "يلعب منذ {year}",
-  "playerId": "معرّف اللاعب · {id}"
+  "playerId": "معرّف اللاعب · {id}",
+
+  "editProfile": "تعديل الملف الشخصي",
+  "avatarStyle": "نمط الصورة الرمزية",
+  "displayName": "اسم اللاعب",
+  "couldNotSaveChanges": "تعذر حفظ التغييرات — يرجى المحاولة مرة أخرى.",
+  "saveChanges": "حفظ التغييرات"
 }

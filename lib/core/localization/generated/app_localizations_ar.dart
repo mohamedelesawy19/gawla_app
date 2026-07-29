@@ -106,4 +106,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String playerId(Object id) {
     return 'معرّف اللاعب · $id';
   }
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get avatarStyle => 'نمط الصورة الرمزية';
+
+  @override
+  String get displayName => 'اسم اللاعب';
+
+  @override
+  String get couldNotSaveChanges =>
+      'تعذر حفظ التغييرات — يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
 }

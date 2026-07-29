@@ -271,6 +271,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Player ID · {id}'**
   String playerId(Object id);
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @avatarStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar style'**
+  String get avatarStyle;
+
+  /// No description provided for @displayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get displayName;
+
+  /// No description provided for @couldNotSaveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save changes — please try again.'**
+  String get couldNotSaveChanges;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChanges;
 }
 
 class _AppLocalizationsDelegate

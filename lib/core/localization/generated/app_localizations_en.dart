@@ -106,4 +106,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String playerId(Object id) {
     return 'Player ID · $id';
   }
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get avatarStyle => 'Avatar style';
+
+  @override
+  String get displayName => 'Display name';
+
+  @override
+  String get couldNotSaveChanges =>
+      'Couldn\'t save changes — please try again.';
+
+  @override
+  String get saveChanges => 'Save changes';
 }

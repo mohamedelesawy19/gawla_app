@@ -32,5 +32,11 @@
   "milestoneLegend": "Legend",
 
   "playingSince": "Playing since {year}",
-  "playerId": "Player ID · {id}"
+  "playerId": "Player ID · {id}",
+
+  "editProfile": "Edit profile",
+  "avatarStyle": "Avatar style",
+  "displayName": "Display name",
+  "couldNotSaveChanges": "Couldn't save changes — please try again.",
+  "saveChanges": "Save changes"
 }

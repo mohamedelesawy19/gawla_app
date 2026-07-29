@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Core imports:
 import '/core/localization/localization_helpers.dart';
 import '/core/widgets/navigation/bottom_navigation_bar.dart';
-import '/features/home/presentation/screens/home_screen.dart';
 
 // Feature imports:
+import '/features/home/presentation/screens/home_screen.dart';
 import '/features/main/presentation/bloc/navigation_cubit.dart';
+import '/features/profile/presentation/screenss/profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -33,7 +34,11 @@ class MainScreen extends StatelessWidget {
     ];
   }
 
-  static const List<Widget> _pages = [HomeScreen(), Scaffold(), Scaffold()];
+  static const List<Widget> _pages = [
+    HomeScreen(),
+    Scaffold(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
