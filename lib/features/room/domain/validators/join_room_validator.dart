@@ -15,14 +15,6 @@ class JoinRoomValidator
       errors.add(RoomValidationError.emptyRoomId);
     }
 
-    if (value.uid.trim().isEmpty) {
-      errors.add(RoomValidationError.emptyUid);
-    }
-
-    if (value.displayName.trim().isEmpty) {
-      errors.add(RoomValidationError.emptyDisplayName);
-    }
-
     return errors;
   }
 }

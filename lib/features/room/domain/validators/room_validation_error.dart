@@ -11,10 +11,6 @@ enum RoomValidationError implements ValidationError {
   emptyInviteCode,
   emptyRoomId,
 
-  // Player
-  emptyUid,
-  emptyDisplayName,
-
   // Kick
   hostCannotKickSelf,
 }

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 
 // Core imports:
 import '/core/errors/failures.dart';
+import '/core/services/current_player/current_player_service.dart';
 import '/core/usecases/usecase.dart';
 
 // Features imports:
@@ -15,41 +16,40 @@ import '/features/room/domain/validators/join_room_validator.dart';
 /// room browser, or a deep link) — as opposed to [QuickMatchUseCase],
 /// which finds one automatically.
 class JoinRoomUseCase implements UseCase<RoomEntity, JoinRoomParams> {
-  const JoinRoomUseCase({required this._repository, required this._validator});
+  const JoinRoomUseCase({
+    required this._repository,
+    required this._currentPlayer,
+    required this._validator,
+  });
 
   final RoomRepository _repository;
+  final CurrentPlayerService _currentPlayer;
   final JoinRoomValidator _validator;
 
   @override
-  Future<Either<Failure, RoomEntity>> call(JoinRoomParams params) {
+  Future<Either<Failure, RoomEntity>> call(JoinRoomParams params) async {
     final errors = _validator.validate(params);
+    if (errors.isNotEmpty) return Left(ValidationFailure(errors: errors));
 
-    if (errors.isNotEmpty) {
-      return Future.value(Left(ValidationFailure(errors: errors)));
-    }
+    final playerResult = await _currentPlayer.getCurrentPlayer();
 
-    return _repository.joinRoom(
-      roomId: params.roomId,
-      uid: params.uid,
-      displayName: params.displayName,
-      avatarUrl: params.avatarUrl,
+    return playerResult.fold(
+      Left.new,
+      (player) => _repository.joinRoom(
+        roomId: params.roomId,
+        uid: player.uid,
+        displayName: player.displayName,
+        avatarUrl: player.avatarUrl,
+      ),
     );
   }
 }
 
 class JoinRoomParams extends Equatable {
-  const JoinRoomParams({
-    required this.roomId,
-    required this.uid,
-    required this.displayName,
-    this.avatarUrl,
-  });
+  const JoinRoomParams({required this.roomId});
 
   final String roomId;
-  final String uid;
-  final String displayName;
-  final String? avatarUrl;
 
   @override
-  List<Object?> get props => [roomId, uid, displayName, avatarUrl];
+  List<Object?> get props => [roomId];
 }

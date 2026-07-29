@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 
 // Core imports:
 import '/core/errors/failures.dart';
+import '/core/services/current_player/current_player_service.dart';
 import '/core/usecases/usecase.dart';
 
 // Features imports:
@@ -19,44 +20,52 @@ import '/features/room/domain/repositories/room_repository.dart';
 /// genuine business logic, so it lives here rather than being pushed
 /// down into the repository or data source.
 class QuickMatchUseCase implements UseCase<RoomEntity, QuickMatchParams> {
-  const QuickMatchUseCase(this._repository);
+  const QuickMatchUseCase({
+    required this._repository,
+    required this._currentPlayer,
+  });
 
   final RoomRepository _repository;
+  final CurrentPlayerService _currentPlayer;
 
   @override
   Future<Either<Failure, RoomEntity>> call(QuickMatchParams params) async {
-    final openRoomResult = await _repository.findOpenPublicRoom();
+    final playerResult = await _currentPlayer.getCurrentPlayer();
 
-    Failure? failure;
-    RoomEntity? openRoom;
-    openRoomResult.fold((l) => failure = l, (r) => openRoom = r);
+    return playerResult.fold(Left.new, (player) async {
+      final openRoomResult = await _repository.findOpenPublicRoom();
 
-    if (failure != null) return Left(failure!);
+      Failure? failure;
+      RoomEntity? openRoom;
 
-    if (openRoom == null) {
-      return _repository.createRoom(
-        hostUid: params.uid,
-        hostDisplayName: params.displayName,
-        hostAvatarUrl: params.avatarUrl,
-        visibility: RoomVisibility.public,
-        settings: params.defaultSettings,
+      openRoomResult.fold((l) => failure = l, (r) => openRoom = r);
+
+      if (failure != null) {
+        return Left(failure!);
+      }
+
+      if (openRoom == null) {
+        return _repository.createRoom(
+          hostUid: player.uid,
+          hostDisplayName: player.displayName,
+          hostAvatarUrl: player.avatarUrl,
+          visibility: RoomVisibility.public,
+          settings: params.defaultSettings,
+        );
+      }
+
+      return _repository.joinRoom(
+        roomId: openRoom!.roomId,
+        uid: player.uid,
+        displayName: player.displayName,
+        avatarUrl: player.avatarUrl,
       );
-    }
-
-    return _repository.joinRoom(
-      roomId: openRoom!.roomId,
-      uid: params.uid,
-      displayName: params.displayName,
-      avatarUrl: params.avatarUrl,
-    );
+    });
   }
 }
 
 class QuickMatchParams extends Equatable {
   const QuickMatchParams({
-    required this.uid,
-    required this.displayName,
-    this.avatarUrl,
     this.defaultSettings = const RoomSettingsEntity(
       maxPlayers: 24,
       tournamentSize: 5,
@@ -64,14 +73,10 @@ class QuickMatchParams extends Equatable {
     ),
   });
 
-  final String uid;
-  final String displayName;
-  final String? avatarUrl;
-
   /// Used only if no open public room is found and a new one has to be
   /// created on the player's behalf.
   final RoomSettingsEntity defaultSettings;
 
   @override
-  List<Object?> get props => [uid, displayName, avatarUrl, defaultSettings];
+  List<Object?> get props => [defaultSettings];
 }
