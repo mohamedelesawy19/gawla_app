@@ -29,5 +29,8 @@
   "milestoneRisingStar": "Rising Star",
   "milestoneChampion": "Champion",
   "milestoneElite": "Elite",
-  "milestoneLegend": "Legend"
+  "milestoneLegend": "Legend",
+
+  "playingSince": "Playing since {year}",
+  "playerId": "Player ID · {id}"
 }

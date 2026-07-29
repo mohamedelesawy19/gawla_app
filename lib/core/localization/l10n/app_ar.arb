@@ -29,5 +29,8 @@
   "milestoneRisingStar": "نجم صاعد",
   "milestoneChampion": "بطل",
   "milestoneElite": "نخبة",
-  "milestoneLegend": "أسطورة"
+  "milestoneLegend": "أسطورة",
+
+  "playingSince": "يلعب منذ {year}",
+  "playerId": "معرّف اللاعب · {id}"
 }

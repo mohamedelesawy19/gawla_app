@@ -96,4 +96,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get milestoneLegend => 'أسطورة';
+
+  @override
+  String playingSince(Object year) {
+    return 'يلعب منذ $year';
+  }
+
+  @override
+  String playerId(Object id) {
+    return 'معرّف اللاعب · $id';
+  }
 }

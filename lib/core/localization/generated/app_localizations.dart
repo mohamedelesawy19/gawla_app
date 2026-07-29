@@ -259,6 +259,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Legend'**
   String get milestoneLegend;
+
+  /// No description provided for @playingSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Playing since {year}'**
+  String playingSince(Object year);
+
+  /// No description provided for @playerId.
+  ///
+  /// In en, this message translates to:
+  /// **'Player ID · {id}'**
+  String playerId(Object id);
 }
 
 class _AppLocalizationsDelegate
