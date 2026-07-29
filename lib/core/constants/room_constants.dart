@@ -11,4 +11,8 @@ abstract final class RoomConstants {
 
   static const int maxPlayersPerRoom = 100;
   static const int minPlayersToStart = 2;
+
+  /// How many of the oldest waiting public rooms
+  /// inspects before giving up and reporting none available.
+  static const int openRoomSearchBatchSize = 10;
 }
