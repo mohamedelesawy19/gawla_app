@@ -33,6 +33,23 @@ class RoomPlayerModel extends Equatable {
     );
   }
 
+  /// Parses a single entry of a room's `players` map field — `uid` is
+  /// the map key, `data` is that key's value (the same shape produced
+  /// by [toFirestore], i.e. no nested `uid`). Used instead of
+  /// [fromFirestore] because players are embedded directly on the room
+  /// document as a map, not stored as their own documents.
+  factory RoomPlayerModel.fromFirestoreMap(
+    String uid,
+    Map<String, dynamic> data,
+  ) {
+    return RoomPlayerModel(
+      uid: uid,
+      displayName: data['displayName'] as String? ?? 'Player',
+      avatarUrl: data['avatarUrl'] as String?,
+      joinedAt: (data['joinedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+    );
+  }
+
   Map<String, dynamic> toFirestore() {
     return {
       'displayName': displayName,

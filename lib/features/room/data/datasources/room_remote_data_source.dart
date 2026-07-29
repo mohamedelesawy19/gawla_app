@@ -349,19 +349,19 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
         );
       }
 
-      final updatedPlayers = [
-        ...model.players,
-        RoomPlayerModel(
-          uid: uid,
-          displayName: displayName,
-          avatarUrl: avatarUrl,
-          joinedAt: DateTime.now(),
-        ),
-      ];
+      final newPlayer = RoomPlayerModel(
+        uid: uid,
+        displayName: displayName,
+        avatarUrl: avatarUrl,
+        joinedAt: DateTime.now(),
+      );
 
+      // Partial update: only the new player's own map entry is
+      // written, so concurrent writes to other players' entries (e.g.
+      // a kick happening in a different transaction) aren't clobbered.
       transaction.update(docRef, {
-        'players': updatedPlayers.map((player) => player.toJson()).toList(),
-        'playerUids': updatedPlayers.map((player) => player.uid).toList(),
+        'players.$uid': newPlayer.toFirestore(),
+        'playerUids': FieldValue.arrayUnion([uid]),
       });
 
       return RoomModel(
@@ -371,7 +371,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
         inviteCode: model.inviteCode,
         status: model.status,
         settings: model.settings,
-        players: updatedPlayers,
+        players: [...model.players, newPlayer],
         createdAt: model.createdAt,
       );
     });
@@ -392,7 +392,12 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
         if (!snapshot.exists) return; // Already gone — nothing to do.
 
         final model = RoomModel.fromFirestore(snapshot);
-        _applyPlayerListChange(transaction, docRef, computeNextState(model));
+        _applyPlayerListChange(
+          transaction,
+          docRef,
+          model,
+          computeNextState(model),
+        );
       });
     } on FirebaseException catch (e) {
       throw ServerException(
@@ -438,7 +443,12 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
           );
         }
 
-        _applyPlayerListChange(transaction, docRef, computeNextState(model));
+        _applyPlayerListChange(
+          transaction,
+          docRef,
+          model,
+          computeNextState(model),
+        );
       });
     } on FirebaseException catch (e) {
       throw ServerException(
@@ -455,12 +465,16 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     }
   }
 
-  /// Shared write logic for [leaveRoom] and [kickPlayer]: `null` means
-  /// the room has no players left and should be deleted; otherwise
-  /// persist the new host/player list.
+  /// Shared write logic for [leaveRoom] and [kickPlayer]. `nextModel ==
+  /// null` means the room has no players left and should be deleted.
+  /// Otherwise, only the player(s) present in [currentModel] but absent
+  /// from [nextModel] are removed — via a partial `players.$uid`
+  /// delete rather than rewriting the whole `players` map — plus a
+  /// `hostUid` write if [RoomEntity.withPlayerRemoved] reassigned it.
   void _applyPlayerListChange(
     Transaction transaction,
     DocumentReference<Map<String, dynamic>> docRef,
+    RoomModel currentModel,
     RoomModel? nextModel,
   ) {
     if (nextModel == null) {
@@ -468,11 +482,21 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
       return;
     }
 
-    transaction.update(docRef, {
-      'hostUid': nextModel.hostUid,
-      'players': nextModel.players.map((player) => player.toJson()).toList(),
-      'playerUids': nextModel.players.map((player) => player.uid).toList(),
-    });
+    final nextUids = nextModel.players.map((player) => player.uid).toSet();
+    final removedUids = currentModel.players
+        .map((player) => player.uid)
+        .where((uid) => !nextUids.contains(uid))
+        .toList();
+
+    final update = <String, dynamic>{
+      if (currentModel.hostUid != nextModel.hostUid)
+        'hostUid': nextModel.hostUid,
+      for (final uid in removedUids) 'players.$uid': FieldValue.delete(),
+      if (removedUids.isNotEmpty)
+        'playerUids': FieldValue.arrayRemove(removedUids),
+    };
+
+    if (update.isNotEmpty) transaction.update(docRef, update);
   }
 
   // ── Settings ─────────────────────────────────────────────────────────────

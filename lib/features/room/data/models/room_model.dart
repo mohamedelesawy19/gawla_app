@@ -43,13 +43,21 @@ class RoomModel extends Equatable {
       settings: RoomSettingsModel.fromJson(
         data['settings'] as Map<String, dynamic>,
       ),
-      players: (data['players'] as List<dynamic>? ?? [])
-          .map(
-            (player) => RoomPlayerModel.fromJson(
-              Map<String, dynamic>.from(player as Map),
-            ),
-          )
-          .toList(),
+      // `players` is stored as a map keyed by uid (not an array) so
+      // individual players can be added/removed with partial Firestore
+      // updates. Map field order isn't guaranteed, so re-sort by
+      // joinedAt to preserve the join-order invariant that
+      // RoomEntity.withPlayerRemoved relies on for host reassignment.
+      players:
+          (data['players'] as Map<String, dynamic>? ?? {}).entries
+              .map(
+                (entry) => RoomPlayerModel.fromFirestoreMap(
+                  entry.key,
+                  Map<String, dynamic>.from(entry.value as Map),
+                ),
+              )
+              .toList()
+            ..sort((a, b) => a.joinedAt.compareTo(b.joinedAt)),
       createdAt: (data['createdAt'] as Timestamp).toDate(),
     );
   }
@@ -61,7 +69,9 @@ class RoomModel extends Equatable {
       'inviteCode': inviteCode,
       'status': status.name,
       'settings': settings.toJson(),
-      'players': players.map((player) => player.toJson()).toList(),
+      'players': {
+        for (final player in players) player.uid: player.toFirestore(),
+      },
       'createdAt': Timestamp.fromDate(createdAt),
     };
   }

@@ -82,7 +82,7 @@ class _PunchInButtonState extends State<PunchInButton>
               height: 128,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.ticketBorder, width: 1),
+                border: Border.all(color: AppColors.ticketBorder),
               ),
               alignment: Alignment.center,
               child: Column(
