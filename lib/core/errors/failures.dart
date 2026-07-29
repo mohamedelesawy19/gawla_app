@@ -1,4 +1,8 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Core imports:
+import '/core/validator/validator.dart';
 
 abstract class Failure extends Equatable {
   const Failure({required this.message, this.code});
@@ -27,7 +31,13 @@ class NetworkFailure extends Failure {
 }
 
 class ValidationFailure extends Failure {
-  const ValidationFailure({required super.message, super.code});
+  const ValidationFailure({required this.errors})
+    : super(message: 'validation_failed');
+
+  final List<ValidationError> errors;
+
+  @override
+  List<Object?> get props => [errors];
 }
 
 class UnknownFailure extends Failure {

@@ -8,30 +8,28 @@ import '/core/usecases/usecase.dart';
 
 // Feature imports:
 import '/features/profile/domain/repositories/profile_repository.dart';
+import '/features/profile/domain/validators/update_profile_validator.dart';
 
 class UpdateProfileUseCase implements UseCase<void, UpdateProfileParams> {
-  const UpdateProfileUseCase(this._repository);
+  const UpdateProfileUseCase({
+    required this._repository,
+    required this._validator,
+  });
+
   final ProfileRepository _repository;
+  final UpdateProfileValidator _validator;
 
   @override
   Future<Either<Failure, void>> call(UpdateProfileParams params) {
-    final displayName = params.displayName?.trim();
+    final errors = _validator.validate(params);
 
-    if (displayName == null && params.avatarUrl == null) {
-      return Future.value(
-        const Left(ValidationFailure(message: 'Nothing to update')),
-      );
-    }
-
-    if (displayName != null && displayName.isEmpty) {
-      return Future.value(
-        const Left(ValidationFailure(message: 'Display name cannot be empty')),
-      );
+    if (errors.isNotEmpty) {
+      return Future.value(Left(ValidationFailure(errors: errors)));
     }
 
     return _repository.updateProfile(
       uid: params.uid,
-      displayName: displayName,
+      displayName: params.displayName?.trim(),
       avatarUrl: params.avatarUrl,
     );
   }

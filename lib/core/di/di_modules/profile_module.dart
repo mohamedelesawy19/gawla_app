@@ -10,6 +10,7 @@ import '/features/profile/data/repositories/profile_repository_impl.dart';
 import '/features/profile/domain/repositories/profile_repository.dart';
 import '/features/profile/domain/usecases/get_profile_usecase.dart';
 import '/features/profile/domain/usecases/update_profile_usecase.dart';
+import '/features/profile/domain/validators/update_profile_validator.dart';
 import '/features/profile/presentation/blocs/profile_bloc.dart';
 
 class ProfileModule {
@@ -27,13 +28,21 @@ class ProfileModule {
           ProfileRepositoryImpl(ServiceLocator.get<ProfileRemoteDataSource>()),
     );
 
+    // Validators
+    ServiceLocator.registerLazySingleton<UpdateProfileValidator>(
+      () => const UpdateProfileValidator(),
+    );
+
     // Use Cases
     ServiceLocator.registerFactory<GetProfileUseCase>(
       () => GetProfileUseCase(ServiceLocator.get<ProfileRepository>()),
     );
 
     ServiceLocator.registerFactory<UpdateProfileUseCase>(
-      () => UpdateProfileUseCase(ServiceLocator.get<ProfileRepository>()),
+      () => UpdateProfileUseCase(
+        repository: ServiceLocator.get<ProfileRepository>(),
+        validator: ServiceLocator.get<UpdateProfileValidator>(),
+      ),
     );
 
     // Presentation BLoCs
