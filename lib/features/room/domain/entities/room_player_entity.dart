@@ -11,16 +11,12 @@ class RoomPlayerEntity extends Equatable {
     required this.uid,
     required this.displayName,
     this.avatarUrl,
-    required this.isReady,
     required this.joinedAt,
   });
 
   final String uid;
   final String displayName;
   final String? avatarUrl;
-
-  /// Whether the player has marked themselves ready in the waiting room.
-  final bool isReady;
   final DateTime joinedAt;
 
   RoomPlayerEntity copyWith({
@@ -32,11 +28,10 @@ class RoomPlayerEntity extends Equatable {
       uid: uid,
       displayName: displayName ?? this.displayName,
       avatarUrl: avatarUrl ?? this.avatarUrl,
-      isReady: isReady ?? this.isReady,
       joinedAt: joinedAt,
     );
   }
 
   @override
-  List<Object?> get props => [uid, displayName, avatarUrl, isReady, joinedAt];
+  List<Object?> get props => [uid, displayName, avatarUrl, joinedAt];
 }
