@@ -17,7 +17,7 @@ class LevelSystem {
   }
 }
 
-extension PlayerLevelX on PlayerEntity {
+extension PlayerLevel on PlayerEntity {
   double get levelProgress => LevelSystem.progress(xp, level);
   int get xpToNextLevel => LevelSystem.xpRequiredForLevel(level) - xp;
 }

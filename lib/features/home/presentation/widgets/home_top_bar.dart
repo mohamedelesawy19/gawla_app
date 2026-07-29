@@ -6,11 +6,12 @@ import '/core/design_system/borders.dart';
 import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/theme/theme_extensions.dart';
-import '/core/widgets/common/image_widget.dart';
+import '/core/widgets/common/avatar_face.dart';
 
 // Feature imports:
 import '/features/profile/domain/entities/player_entity.dart';
 import '/features/profile/domain/services/level_system.dart';
+import '/features/profile/domain/services/player_initials.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({
@@ -32,6 +33,7 @@ class HomeTopBar extends StatelessWidget {
         children: [
           _LevelRingAvatar(
             emoji: player.avatarUrl,
+            initials: player.initials,
             progress: player.levelProgress,
             level: player.level,
             onTap: onAvatarTap,
@@ -58,17 +60,19 @@ class HomeTopBar extends StatelessWidget {
 }
 
 class _LevelRingAvatar extends StatelessWidget {
-  final String? emoji;
-  final double progress;
-  final int level;
-  final VoidCallback onTap;
-
   const _LevelRingAvatar({
     this.emoji,
     required this.progress,
+    required this.initials,
     required this.level,
     required this.onTap,
   });
+
+  final String? emoji;
+  final String initials;
+  final double progress;
+  final int level;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +108,7 @@ class _LevelRingAvatar extends StatelessWidget {
               alignment: Alignment.center,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(48),
-                child: ImageWidget(src: emoji ?? '', height: 48, width: 48),
+                child: AvatarFace(avatarUrl: emoji, initials: initials),
               ),
             ),
             Positioned(

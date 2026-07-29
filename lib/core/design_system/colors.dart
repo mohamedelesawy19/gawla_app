@@ -907,4 +907,13 @@ class AppColors {
 
   /// 60% opacity white.
   static const Color white60 = Color(0x99FFFFFF);
+
+  static const Map<String, List<Color>> avatarPresetGradients = {
+    'preset:blaze': [Color(0xFFFF3D7F), Color(0xFFFF9F43)],
+    'preset:gold': [Color(0xFFFFC64B), Color(0xFFC98A1E)],
+    'preset:teal': [Color(0xFF37E6C4), Color(0xFF1B9C86)],
+    'preset:violet': [Color(0xFF8B7CF6), Color(0xFF4C3FBF)],
+    'preset:rose': [Color(0xFFFF7CA3), Color(0xFFB4437C)],
+    'preset:sky': [Color(0xFF5ED2FF), Color(0xFF2D6FE0)],
+  };
 }
