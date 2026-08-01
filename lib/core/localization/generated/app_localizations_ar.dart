@@ -125,4 +125,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get or_divider => 'أو';
+
+  @override
+  String get enterInviteCode => 'أدخل رمز الدعوة';
+
+  @override
+  String get quickMatch => 'مباراة سريعة';
 }

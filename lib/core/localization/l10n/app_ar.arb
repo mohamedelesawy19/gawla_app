@@ -40,5 +40,8 @@
   "couldNotSaveChanges": "تعذر حفظ التغييرات — يرجى المحاولة مرة أخرى.",
   "saveChanges": "حفظ التغييرات",
 
-  "or_divider": "أو"
+  "or_divider": "أو",
+
+  "enterInviteCode": "أدخل رمز الدعوة",
+  "quickMatch": "مباراة سريعة"
 }

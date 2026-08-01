@@ -40,5 +40,8 @@
   "couldNotSaveChanges": "Couldn't save changes — please try again.",
   "saveChanges": "Save changes",
 
-  "or_divider": "Or"
+  "or_divider": "Or",
+
+  "enterInviteCode": "Enter invite code",
+  "quickMatch": "Quick Match"
 }

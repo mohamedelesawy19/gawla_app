@@ -125,4 +125,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get or_divider => 'Or';
+
+  @override
+  String get enterInviteCode => 'Enter invite code';
+
+  @override
+  String get quickMatch => 'Quick Match';
 }

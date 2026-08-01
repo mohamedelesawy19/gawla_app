@@ -307,6 +307,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Or'**
   String get or_divider;
+
+  /// No description provided for @enterInviteCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter invite code'**
+  String get enterInviteCode;
+
+  /// No description provided for @quickMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Match'**
+  String get quickMatch;
 }
 
 class _AppLocalizationsDelegate
