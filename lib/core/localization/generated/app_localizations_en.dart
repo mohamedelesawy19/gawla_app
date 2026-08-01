@@ -122,4 +122,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveChanges => 'Save changes';
+
+  @override
+  String get or_divider => 'Or';
 }

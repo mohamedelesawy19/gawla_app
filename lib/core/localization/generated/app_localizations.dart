@@ -301,6 +301,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save changes'**
   String get saveChanges;
+
+  /// No description provided for @or_divider.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or_divider;
 }
 
 class _AppLocalizationsDelegate

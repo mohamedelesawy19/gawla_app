@@ -38,5 +38,7 @@
   "avatarStyle": "نمط الصورة الرمزية",
   "displayName": "اسم اللاعب",
   "couldNotSaveChanges": "تعذر حفظ التغييرات — يرجى المحاولة مرة أخرى.",
-  "saveChanges": "حفظ التغييرات"
+  "saveChanges": "حفظ التغييرات",
+
+  "or_divider": "أو"
 }

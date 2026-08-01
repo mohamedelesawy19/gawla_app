@@ -38,5 +38,7 @@
   "avatarStyle": "Avatar style",
   "displayName": "Display name",
   "couldNotSaveChanges": "Couldn't save changes — please try again.",
-  "saveChanges": "Save changes"
+  "saveChanges": "Save changes",
+
+  "or_divider": "Or"
 }
