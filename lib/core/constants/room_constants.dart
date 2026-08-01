@@ -4,8 +4,8 @@ abstract final class RoomConstants {
   static const int codeLength = 6;
   static const int maxCodeGenerationRetries = 5;
 
-  /// Only uppercase letters + digits so codes are easy to read and type.
-  static const String codeCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  /// Digits only, making the code easy to read and enter.
+  static const String codeCharset = '0123456789';
 
   // ── Business rules ────────────────────────────────────────────────────────
 

@@ -223,7 +223,7 @@ abstract final class AppTypography {
 
   static const TextStyle buttonPrimary = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 14,
+    fontSize: 14.5,
     fontWeight: medium,
     height: 1.43,
     letterSpacing: 0.10,

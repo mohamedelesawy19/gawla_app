@@ -221,7 +221,7 @@ class AppTheme {
   // ═════════════════════════════════════════════════════════════════════
 
   static AppBarTheme get _appBarTheme => const AppBarTheme(
-    backgroundColor: AppColors.surfaceDefault,
+    backgroundColor: AppColors.backgroundPrimary,
     foregroundColor: AppColors.textPrimary,
     elevation: 0,
     scrolledUnderElevation: 0,
@@ -232,8 +232,8 @@ class AppTheme {
     centerTitle: true,
     titleTextStyle: TextStyle(
       color: AppColors.textPrimary,
-      fontSize: 20,
-      fontWeight: FontWeight.w700,
+      fontSize: 19,
+      fontWeight: FontWeight.w600,
     ),
     iconTheme: IconThemeData(color: AppColors.iconDefault),
     actionsIconTheme: IconThemeData(color: AppColors.iconDefault),

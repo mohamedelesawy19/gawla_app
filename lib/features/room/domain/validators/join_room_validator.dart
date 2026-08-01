@@ -7,6 +7,8 @@ import '/features/room/domain/validators/room_validation_error.dart';
 
 class JoinRoomValidator
     implements Validator<JoinRoomParams, RoomValidationError> {
+  const JoinRoomValidator();
+
   @override
   List<RoomValidationError> validate(JoinRoomParams value) {
     final errors = <RoomValidationError>[];

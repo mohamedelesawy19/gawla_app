@@ -9,6 +9,7 @@ enum RoomValidationError implements ValidationError {
 
   // Join room
   emptyInviteCode,
+  invalidInviteCodeLength,
   emptyRoomId,
 
   // Kick

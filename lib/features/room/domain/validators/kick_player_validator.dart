@@ -6,6 +6,8 @@ import '/features/room/domain/validators/room_validation_error.dart';
 
 class KickPlayerValidator
     implements Validator<KickPlayerValidationInput, RoomValidationError> {
+  const KickPlayerValidator();
+
   @override
   List<RoomValidationError> validate(KickPlayerValidationInput value) {
     final errors = <RoomValidationError>[];
