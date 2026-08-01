@@ -3,24 +3,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
+import '/core/di/service_locator.dart';
 import '/core/session/bloc/session_bloc.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 import '/core/widgets/feedback/snackbar.dart';
+import '/features/auth/presentation/bloc/auth_bloc.dart';
 
 // Features imports:
 import '/features/profile/presentation/blocs/profile_bloc.dart';
 import '/features/profile/presentation/widgets/edit_profile_sheet.dart';
 import '/features/profile/presentation/widgets/profile_content.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => ServiceLocator.get<AuthBloc>(),
+      child: const _ProfileView(),
+    );
+  }
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileView extends StatefulWidget {
+  const _ProfileView();
+
+  @override
+  State<_ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<_ProfileView> {
   @override
   void initState() {
     super.initState();
@@ -59,6 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 isSaving: false,
                 onEditTap: () =>
                     showEditProfileSheet(context, profile: profile),
+                onLogoutTap: () =>
+                    context.read<AuthBloc>().add(const SignOutEvent()),
                 onRefresh: _refresh,
               ),
               ProfileUpdating(:final profile) =>
@@ -67,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         profile: profile,
                         isSaving: true,
                         onEditTap: () {}, // editing is already in flight
+                        onLogoutTap: () {},
                         onRefresh: _refresh,
                       )
                     : const Center(child: LoadingIndicator()),
@@ -77,6 +94,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         isSaving: false,
                         onEditTap: () =>
                             showEditProfileSheet(context, profile: profile),
+                        onLogoutTap: () =>
+                            context.read<AuthBloc>().add(const SignOutEvent()),
                         onRefresh: _refresh,
                       )
                     : ErrorStateWidget(

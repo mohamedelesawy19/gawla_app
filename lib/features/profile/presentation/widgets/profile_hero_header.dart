@@ -24,6 +24,7 @@ class ProfileHeroHeader extends StatelessWidget {
     required this.levelProgress,
     required this.isSaving,
     required this.onEditTap,
+    required this.onLogoutTap,
   });
 
   final String displayName;
@@ -33,13 +34,13 @@ class ProfileHeroHeader extends StatelessWidget {
   final double levelProgress;
   final bool isSaving;
   final VoidCallback onEditTap;
+  final VoidCallback onLogoutTap;
 
   @override
   Widget build(BuildContext context) {
     final tier = MilestoneTiers.currentFor(level);
 
-    return Container(
-      width: double.infinity,
+    return Padding(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.lg,
         AppSpacing.xxl,
@@ -48,6 +49,18 @@ class ProfileHeroHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: AppIconButton(
+              icon: Icons.logout_rounded,
+              onTap: onLogoutTap,
+              iconSize: 24,
+              backgroundColor: AppColors.buttonDangerPressed.withValues(
+                alpha: 0.08,
+              ),
+              iconColor: AppColors.buttonDangerPressed,
+            ),
+          ),
           TrophyRingAvatar(
             progress: levelProgress,
             level: level,

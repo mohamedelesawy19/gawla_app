@@ -19,12 +19,14 @@ class ProfileContent extends StatelessWidget {
     required this.profile,
     required this.isSaving,
     required this.onEditTap,
+    required this.onLogoutTap,
     required this.onRefresh,
   });
 
   final PlayerEntity profile;
   final bool isSaving;
   final VoidCallback onEditTap;
+  final VoidCallback onLogoutTap;
   final Future<void> Function() onRefresh;
 
   @override
@@ -45,6 +47,7 @@ class ProfileContent extends StatelessWidget {
               levelProgress: profile.levelProgress,
               isSaving: isSaving,
               onEditTap: onEditTap,
+              onLogoutTap: onLogoutTap,
             ),
           ),
           SliverList.list(
