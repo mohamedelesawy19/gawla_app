@@ -53,9 +53,7 @@ abstract class RoomRemoteDataSource {
 
   /// Looks at a small batch of the oldest waiting public rooms and
   /// returns the first one with a free slot. Firestore can't filter
-  /// on "players.length < settings.maxPlayers" server-side since
-  /// `maxPlayers` is per-document, so capacity is checked client-side
-  /// against a bounded batch. Returns `null` if none qualify.
+  /// on "players.length < RoomConstants.maxPlayersPerRoom".
   Future<RoomModel?> findOpenPublicRoom();
 
   /// Joins [roomId]. Capacity/status are re-checked inside a Firestore
