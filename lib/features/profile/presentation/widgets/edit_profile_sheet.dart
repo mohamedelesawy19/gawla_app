@@ -90,162 +90,145 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
         final hasError = state is ProfileError && _submitted;
 
         return Padding(
-          padding: EdgeInsets.only(bottom: bottomInset),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: AppColors.surfaceDefault,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(AppBorders.radiusXxxl),
+          padding: EdgeInsets.fromLTRB(
+            AppSpacing.xl,
+            AppSpacing.md,
+            AppSpacing.xl,
+            bottomInset + AppSpacing.xxl,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    color: AppColors.borderDefault,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
               ),
-            ),
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.xl,
-              AppSpacing.md,
-              AppSpacing.xl,
-              AppSpacing.xxl,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.only(bottom: AppSpacing.lg),
-                    decoration: BoxDecoration(
-                      color: AppColors.borderDefault,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.l10n.editProfile,
-                      style: AppTypography.titleMedium.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close_rounded, color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Center(
-                  child: TrophyRingAvatar(
-                    size: 96,
-                    progress: 1,
-                    level: widget.profile.level,
-                    initials: StringUtils.initials(_nameController.text),
-                    avatarUrl: _selectedAvatarUrl,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                Text(
-                  context.l10n.avatarStyle,
-                  style: AppTypography.labelMedium,
-                ),
-                const SizedBox(height: AppSpacing.md),
-                SizedBox(
-                  height: 52,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: AppColors.avatarPresetGradients.length,
-                    separatorBuilder: (_, _) =>
-                        const SizedBox(width: AppSpacing.md),
-                    itemBuilder: (context, index) {
-                      final entry = AppColors.avatarPresetGradients.entries
-                          .elementAt(index);
-                      final selected = _selectedAvatarUrl == entry.key;
-                      return GestureDetector(
-                        onTap: () =>
-                            setState(() => _selectedAvatarUrl = entry.key),
-                        child: Container(
-                          width: 44,
-                          height: 44,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(colors: entry.value),
-                            border: Border.all(
-                              color: selected
-                                  ? Colors.white
-                                  : Colors.transparent,
-                              width: 2.5,
-                            ),
-                          ),
-                          child: selected
-                              ? const Icon(
-                                  Icons.check_rounded,
-                                  color: Colors.white,
-                                  size: 18,
-                                )
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                Text(
-                  context.l10n.displayName,
-                  style: AppTypography.labelMedium,
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                TextField(
-                  controller: _nameController,
-                  maxLength: 20,
-                  style: AppTypography.bodyLarge.copyWith(
-                    height: 1.35,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  onChanged: (_) => setState(() {}),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: AppColors.surfaceSunken,
-                    counterStyle: AppTypography.caption,
-                    contentPadding: AppSpacing.paddingLg,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppBorders.radiusXl),
-                      borderSide: const BorderSide(
-                        color: AppColors.borderSubtle,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppBorders.radiusXl),
-                      borderSide: const BorderSide(
-                        color: AppColors.brandPrimary,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppBorders.radiusXl),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                if (hasError) ...[
-                  const SizedBox(height: AppSpacing.sm),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
-                    context.l10n.couldNotSaveChanges,
-                    style: AppTypography.caption.copyWith(
-                      color: context.colorScheme.error,
+                    context.l10n.editProfile,
+                    style: AppTypography.titleMedium.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: AppColors.textTertiary,
                     ),
                   ),
                 ],
-                const SizedBox(height: AppSpacing.xl),
-                PrimaryButton(
-                  label: context.l10n.saveChanges,
-                  isLoading: isSaving,
-                  onPressed: (_nameValid && _hasChanges && !isSaving)
-                      ? _save
-                      : null,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Center(
+                child: TrophyRingAvatar(
+                  size: 96,
+                  progress: 1,
+                  level: widget.profile.level,
+                  initials: StringUtils.initials(_nameController.text),
+                  avatarUrl: _selectedAvatarUrl,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              Text(context.l10n.avatarStyle, style: AppTypography.labelMedium),
+              const SizedBox(height: AppSpacing.md),
+              SizedBox(
+                height: 52,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: AppColors.avatarPresetGradients.length,
+                  separatorBuilder: (_, _) =>
+                      const SizedBox(width: AppSpacing.md),
+                  itemBuilder: (context, index) {
+                    final entry = AppColors.avatarPresetGradients.entries
+                        .elementAt(index);
+                    final selected = _selectedAvatarUrl == entry.key;
+                    return GestureDetector(
+                      onTap: () =>
+                          setState(() => _selectedAvatarUrl = entry.key),
+                      child: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(colors: entry.value),
+                          border: Border.all(
+                            color: selected ? Colors.white : Colors.transparent,
+                            width: 2.5,
+                          ),
+                        ),
+                        child: selected
+                            ? const Icon(
+                                Icons.check_rounded,
+                                color: Colors.white,
+                                size: 18,
+                              )
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              Text(context.l10n.displayName, style: AppTypography.labelMedium),
+              const SizedBox(height: AppSpacing.sm),
+              TextField(
+                controller: _nameController,
+                maxLength: 20,
+                style: AppTypography.bodyLarge.copyWith(
+                  height: 1.35,
+                  fontWeight: FontWeight.w500,
+                ),
+                onChanged: (_) => setState(() {}),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColors.surfaceSunken,
+                  counterStyle: AppTypography.caption,
+                  contentPadding: AppSpacing.paddingLg,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppBorders.radiusXl),
+                    borderSide: const BorderSide(color: AppColors.borderSubtle),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppBorders.radiusXl),
+                    borderSide: const BorderSide(color: AppColors.brandPrimary),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppBorders.radiusXl),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              if (hasError) ...[
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  context.l10n.couldNotSaveChanges,
+                  style: AppTypography.caption.copyWith(
+                    color: context.colorScheme.error,
+                  ),
                 ),
               ],
-            ),
+              const SizedBox(height: AppSpacing.xl),
+              PrimaryButton(
+                label: context.l10n.saveChanges,
+                isLoading: isSaving,
+                icon: Icons.check_circle_rounded,
+                onPressed: (_nameValid && _hasChanges && !isSaving)
+                    ? _save
+                    : null,
+              ),
+            ],
           ),
         );
       },

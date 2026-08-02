@@ -163,6 +163,9 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get roomSettings => 'إعدادات الغرفة';
+
+  @override
   String seatsSuffix(Object maxPlayers) {
     return ' / $maxPlayers مكان';
   }

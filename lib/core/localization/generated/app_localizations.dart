@@ -374,6 +374,12 @@ abstract class AppLocalizations {
   /// **'{count} selected'**
   String gamesSelected(Object count);
 
+  /// No description provided for @roomSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Room settings'**
+  String get roomSettings;
+
   /// No description provided for @seatsSuffix.
   ///
   /// In en, this message translates to:
