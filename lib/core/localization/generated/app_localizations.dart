@@ -392,11 +392,41 @@ abstract class AppLocalizations {
   /// **'Ready to start'**
   String get readyToStart;
 
+  /// No description provided for @openPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Open place'**
+  String get openPlace;
+
+  /// No description provided for @openPlaceOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Open (optional)'**
+  String get openPlaceOptional;
+
+  /// No description provided for @moreOpenPlaces.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more open'**
+  String moreOpenPlaces(Object count);
+
   /// No description provided for @waitingForMorePlayers.
   ///
   /// In en, this message translates to:
   /// **'Waiting for {remainingPlayers} more'**
   String waitingForMorePlayers(Object remainingPlayers);
+
+  /// No description provided for @you.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get you;
+
+  /// No description provided for @removePlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove player'**
+  String get removePlayer;
 }
 
 class _AppLocalizationsDelegate

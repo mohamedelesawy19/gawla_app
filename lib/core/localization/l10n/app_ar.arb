@@ -59,5 +59,10 @@
   "roomSettings": "إعدادات الغرفة",
   "seatsSuffix": " / {maxPlayers} مكان",
   "readyToStart": "جاهز لبدء البطولة",
-  "waitingForMorePlayers": "بانتظار {remainingPlayers} لاعبين آخرين"
+  "openPlace": "مكان متاح",
+  "openPlaceOptional": "مكان متاح (اختياري)",
+  "moreOpenPlaces": "+{count} أماكن متاحة",
+  "waitingForMorePlayers": "بانتظار {remainingPlayers} لاعبين آخرين",
+  "you": "أنت",
+  "removePlayer": "إزالة اللاعب"
 }

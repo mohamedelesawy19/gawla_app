@@ -174,7 +174,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get readyToStart => 'جاهز لبدء البطولة';
 
   @override
+  String get openPlace => 'مكان متاح';
+
+  @override
+  String get openPlaceOptional => 'مكان متاح (اختياري)';
+
+  @override
+  String moreOpenPlaces(Object count) {
+    return '+$count أماكن متاحة';
+  }
+
+  @override
   String waitingForMorePlayers(Object remainingPlayers) {
     return 'بانتظار $remainingPlayers لاعبين آخرين';
   }
+
+  @override
+  String get you => 'أنت';
+
+  @override
+  String get removePlayer => 'إزالة اللاعب';
 }

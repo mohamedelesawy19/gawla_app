@@ -174,7 +174,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readyToStart => 'Ready to start';
 
   @override
+  String get openPlace => 'Open place';
+
+  @override
+  String get openPlaceOptional => 'Open (optional)';
+
+  @override
+  String moreOpenPlaces(Object count) {
+    return '+$count more open';
+  }
+
+  @override
   String waitingForMorePlayers(Object remainingPlayers) {
     return 'Waiting for $remainingPlayers more';
   }
+
+  @override
+  String get you => 'You';
+
+  @override
+  String get removePlayer => 'Remove player';
 }

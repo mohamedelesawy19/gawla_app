@@ -59,5 +59,10 @@
   "roomSettings": "Room settings",
   "seatsSuffix": " / {maxPlayers} seats",
   "readyToStart": "Ready to start",
-  "waitingForMorePlayers": "Waiting for {remainingPlayers} more"
+  "openPlace": "Open place",
+  "openPlaceOptional": "Open (optional)",
+  "moreOpenPlaces": "+{count} more open",
+  "waitingForMorePlayers": "Waiting for {remainingPlayers} more",
+  "you": "You",
+  "removePlayer": "Remove player"
 }
