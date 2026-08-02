@@ -49,8 +49,10 @@
   "publicDescription": "Anyone can find and join",
   "private": "Private",
   "privateDescription": "Invite code required to join",
-  "maxPlayers": "Max players",
-  "playersToStart": "Players to start",
-  "roundNumber": "Round {number}",
-  "winner": "Winner"
+
+  "roomVisibility": "Room visibility",
+  "roomVisibilitySubtitle": "Who can find and join your lobby",
+  "miniGameRotation": "Mini-game rotation",
+  "miniGameRotationSubtitle": "Tap games in the order you want them played",
+  "gamesSelected": "{count} selected"
 }

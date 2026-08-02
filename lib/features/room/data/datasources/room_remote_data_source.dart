@@ -222,7 +222,9 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
 
       for (final doc in snapshot.docs) {
         final model = RoomModel.fromFirestore(doc);
-        if (model.players.length < model.settings.maxPlayers) return model;
+        if (model.players.length < RoomConstants.maxPlayersPerRoom) {
+          return model;
+        }
       }
 
       return null;
@@ -342,7 +344,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
         return model;
       }
 
-      if (model.players.length >= model.settings.maxPlayers) {
+      if (model.players.length >= RoomConstants.maxPlayersPerRoom) {
         throw const ServerException(
           message: 'Room is full.',
           code: 'room-full',

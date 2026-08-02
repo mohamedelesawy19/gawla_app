@@ -145,16 +145,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get privateDescription => 'يتطلب رمز دعوة للانضمام';
 
   @override
-  String get maxPlayers => 'الحد الأقصى للاعبين';
+  String get roomVisibility => 'خصوصية الغرفة';
 
   @override
-  String get playersToStart => 'اللاعبون لبدء البطولة';
+  String get roomVisibilitySubtitle =>
+      'حدد من يمكنه العثور على الغرفة والانضمام إليها';
 
   @override
-  String roundNumber(Object number) {
-    return 'الجولة $number';
+  String get miniGameRotation => 'ترتيب الألعاب';
+
+  @override
+  String get miniGameRotationSubtitle => 'اختر ترتيب الألعاب التي ستُلعب';
+
+  @override
+  String gamesSelected(Object count) {
+    return 'تم اختيار $count';
   }
-
-  @override
-  String get winner => 'الفائز';
 }

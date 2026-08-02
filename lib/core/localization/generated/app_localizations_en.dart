@@ -145,16 +145,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privateDescription => 'Invite code required to join';
 
   @override
-  String get maxPlayers => 'Max players';
+  String get roomVisibility => 'Room visibility';
 
   @override
-  String get playersToStart => 'Players to start';
+  String get roomVisibilitySubtitle => 'Who can find and join your lobby';
 
   @override
-  String roundNumber(Object number) {
-    return 'Round $number';
+  String get miniGameRotation => 'Mini-game rotation';
+
+  @override
+  String get miniGameRotationSubtitle =>
+      'Tap games in the order you want them played';
+
+  @override
+  String gamesSelected(Object count) {
+    return '$count selected';
   }
-
-  @override
-  String get winner => 'Winner';
 }

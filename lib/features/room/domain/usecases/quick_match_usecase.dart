@@ -66,11 +66,7 @@ class QuickMatchUseCase implements UseCase<RoomEntity, QuickMatchParams> {
 
 class QuickMatchParams extends Equatable {
   const QuickMatchParams({
-    this.defaultSettings = const RoomSettingsEntity(
-      maxPlayers: 24,
-      tournamentSize: 5,
-      miniGameRotation: [],
-    ),
+    this.defaultSettings = const RoomSettingsEntity(miniGameRotation: []),
   });
 
   /// Used only if no open public room is found and a new one has to be

@@ -49,8 +49,10 @@
   "publicDescription": "يمكن لأي شخص الانضمام",
   "private": "خاصة",
   "privateDescription": "يتطلب رمز دعوة للانضمام",
-  "maxPlayers": "الحد الأقصى للاعبين",
-  "playersToStart": "اللاعبون لبدء البطولة",
-  "roundNumber": "الجولة {number}",
-  "winner": "الفائز"
+
+  "roomVisibility": "خصوصية الغرفة",
+  "roomVisibilitySubtitle": "حدد من يمكنه العثور على الغرفة والانضمام إليها",
+  "miniGameRotation": "ترتيب الألعاب",
+  "miniGameRotationSubtitle": "اختر ترتيب الألعاب التي ستُلعب",
+  "gamesSelected": "تم اختيار {count}"
 }

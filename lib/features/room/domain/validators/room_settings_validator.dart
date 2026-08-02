@@ -1,5 +1,4 @@
 // Package imports:
-import '/core/constants/room_constants.dart';
 import '/core/validator/validator.dart';
 
 // Core imports:
@@ -14,16 +13,6 @@ class RoomSettingsValidator
   List<RoomValidationError> validate(RoomSettingsEntity settings) {
     final errors = <RoomValidationError>[];
 
-    if (settings.maxPlayers < RoomConstants.minPlayersToStart ||
-        settings.maxPlayers > RoomConstants.maxPlayersPerRoom) {
-      errors.add(RoomValidationError.maxPlayersOutOfRange);
-    }
-    if (settings.tournamentSize < RoomConstants.minPlayersToStart) {
-      errors.add(RoomValidationError.tournamentSizeTooSmall);
-    }
-    if (settings.tournamentSize > settings.maxPlayers) {
-      errors.add(RoomValidationError.tournamentSizeExceedsMaxPlayers);
-    }
     if (settings.miniGameRotation.isEmpty) {
       errors.add(RoomValidationError.emptyMiniGameRotation);
     }

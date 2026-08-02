@@ -3,38 +3,19 @@ import 'package:equatable/equatable.dart';
 /// Host-configurable rules for a room, set on the "Room Settings" step
 /// and editable by the host until the tournament starts.
 class RoomSettingsEntity extends Equatable {
-  const RoomSettingsEntity({
-    required this.maxPlayers,
-    required this.tournamentSize,
-    required this.miniGameRotation,
-  });
-
-  /// Hard capacity of the room — the lobby stops accepting joins past
-  /// this many players.
-  final int maxPlayers;
-
-  /// Number of players required for the tournament to be eligible to
-  /// start. Allowed to be <= [maxPlayers] so a host can, e.g., cap a
-  /// room at 30 but only require 24 to kick things off.
-  final int tournamentSize;
+  const RoomSettingsEntity({required this.miniGameRotation});
 
   /// Ordered list of mini-game ids to play, one per round. Stored as
   /// plain ids (not a mini-games domain type) so the Room feature has
   /// no compile-time dependency on the future Mini Games feature.
   final List<String> miniGameRotation;
 
-  RoomSettingsEntity copyWith({
-    int? maxPlayers,
-    int? tournamentSize,
-    List<String>? miniGameRotation,
-  }) {
+  RoomSettingsEntity copyWith({List<String>? miniGameRotation}) {
     return RoomSettingsEntity(
-      maxPlayers: maxPlayers ?? this.maxPlayers,
-      tournamentSize: tournamentSize ?? this.tournamentSize,
       miniGameRotation: miniGameRotation ?? this.miniGameRotation,
     );
   }
 
   @override
-  List<Object?> get props => [maxPlayers, tournamentSize, miniGameRotation];
+  List<Object?> get props => [miniGameRotation];
 }

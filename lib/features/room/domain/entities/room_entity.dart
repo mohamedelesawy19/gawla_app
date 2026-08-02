@@ -35,12 +35,6 @@ class RoomEntity extends Equatable {
   final List<RoomPlayerEntity> players;
   final DateTime createdAt;
 
-  bool get isFull => players.length >= settings.maxPlayers;
-
-  bool get isJoinable => status == RoomStatus.waiting && !isFull;
-
-  bool get hasEnoughPlayersToStart => players.length >= settings.tournamentSize;
-
   bool isHost(String uid) => hostUid == uid;
 
   bool hasPlayer(String uid) => players.any((player) => player.uid == uid);

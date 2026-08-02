@@ -344,29 +344,35 @@ abstract class AppLocalizations {
   /// **'Invite code required to join'**
   String get privateDescription;
 
-  /// No description provided for @maxPlayers.
+  /// No description provided for @roomVisibility.
   ///
   /// In en, this message translates to:
-  /// **'Max players'**
-  String get maxPlayers;
+  /// **'Room visibility'**
+  String get roomVisibility;
 
-  /// No description provided for @playersToStart.
+  /// No description provided for @roomVisibilitySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Players to start'**
-  String get playersToStart;
+  /// **'Who can find and join your lobby'**
+  String get roomVisibilitySubtitle;
 
-  /// No description provided for @roundNumber.
+  /// No description provided for @miniGameRotation.
   ///
   /// In en, this message translates to:
-  /// **'Round {number}'**
-  String roundNumber(Object number);
+  /// **'Mini-game rotation'**
+  String get miniGameRotation;
 
-  /// No description provided for @winner.
+  /// No description provided for @miniGameRotationSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Winner'**
-  String get winner;
+  /// **'Tap games in the order you want them played'**
+  String get miniGameRotationSubtitle;
+
+  /// No description provided for @gamesSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String gamesSelected(Object count);
 }
 
 class _AppLocalizationsDelegate
