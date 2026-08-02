@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
+import '/core/widgets/buttons/app_icon_button.dart';
 
 /// A reusable stepper for editing bounded integer values.
 ///
@@ -58,23 +59,25 @@ class NumericStepperField extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _StepperButton(
+                AppIconButton(
                   icon: Icons.remove_rounded,
-                  onPressed: _canDecrement ? () => _change(value - step) : null,
+                  onTap: _canDecrement ? () => _change(value - step) : null,
+                  iconSize: 17,
                 ),
                 SizedBox(
-                  width: 48,
+                  width: 50,
                   child: Text(
                     '$value',
-                    textAlign: TextAlign.center,
+                    textAlign: .center,
                     style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: .w600,
                     ),
                   ),
                 ),
-                _StepperButton(
+                AppIconButton(
                   icon: Icons.add_rounded,
-                  onPressed: _canIncrement ? () => _change(value + step) : null,
+                  onTap: _canIncrement ? () => _change(value + step) : null,
+                  iconSize: 17,
                 ),
               ],
             ),
@@ -96,31 +99,6 @@ class NumericStepperField extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _StepperButton extends StatelessWidget {
-  const _StepperButton({required this.icon, required this.onPressed});
-
-  final IconData icon;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final enabled = onPressed != null;
-    return IconButton.filledTonal(
-      onPressed: onPressed,
-      icon: Icon(icon),
-      style: IconButton.styleFrom(
-        backgroundColor: enabled
-            ? theme.colorScheme.secondaryContainer
-            : theme.colorScheme.surfaceContainerHighest,
-        foregroundColor: enabled
-            ? theme.colorScheme.onSecondaryContainer
-            : theme.colorScheme.onSurface.withValues(alpha: 0.38),
-      ),
     );
   }
 }

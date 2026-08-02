@@ -143,4 +143,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get privateDescription => 'يتطلب رمز دعوة للانضمام';
+
+  @override
+  String get maxPlayers => 'الحد الأقصى للاعبين';
+
+  @override
+  String get playersToStart => 'اللاعبون لبدء البطولة';
+
+  @override
+  String roundNumber(Object number) {
+    return 'الجولة $number';
+  }
+
+  @override
+  String get winner => 'الفائز';
 }

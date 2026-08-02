@@ -48,5 +48,9 @@
   "public": "Public",
   "publicDescription": "Anyone can find and join",
   "private": "Private",
-  "privateDescription": "Invite code required to join"
+  "privateDescription": "Invite code required to join",
+  "maxPlayers": "Max players",
+  "playersToStart": "Players to start",
+  "roundNumber": "Round {number}",
+  "winner": "Winner"
 }

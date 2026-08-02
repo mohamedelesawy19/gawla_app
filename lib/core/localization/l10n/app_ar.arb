@@ -48,5 +48,9 @@
   "public": "عامة",
   "publicDescription": "يمكن لأي شخص الانضمام",
   "private": "خاصة",
-  "privateDescription": "يتطلب رمز دعوة للانضمام"
+  "privateDescription": "يتطلب رمز دعوة للانضمام",
+  "maxPlayers": "الحد الأقصى للاعبين",
+  "playersToStart": "اللاعبون لبدء البطولة",
+  "roundNumber": "الجولة {number}",
+  "winner": "الفائز"
 }

@@ -143,4 +143,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privateDescription => 'Invite code required to join';
+
+  @override
+  String get maxPlayers => 'Max players';
+
+  @override
+  String get playersToStart => 'Players to start';
+
+  @override
+  String roundNumber(Object number) {
+    return 'Round $number';
+  }
+
+  @override
+  String get winner => 'Winner';
 }

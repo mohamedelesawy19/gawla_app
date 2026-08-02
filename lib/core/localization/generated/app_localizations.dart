@@ -343,6 +343,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite code required to join'**
   String get privateDescription;
+
+  /// No description provided for @maxPlayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Max players'**
+  String get maxPlayers;
+
+  /// No description provided for @playersToStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Players to start'**
+  String get playersToStart;
+
+  /// No description provided for @roundNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {number}'**
+  String roundNumber(Object number);
+
+  /// No description provided for @winner.
+  ///
+  /// In en, this message translates to:
+  /// **'Winner'**
+  String get winner;
 }
 
 class _AppLocalizationsDelegate
