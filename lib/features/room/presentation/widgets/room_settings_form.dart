@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Core imports:
 import '/core/design_system/spacing.dart';
 import '/core/localization/localization_helpers.dart';
-import '/core/widgets/common/count_badge.dart';
+import '/core/widgets/common/info_badge.dart';
 import '/core/widgets/common/section_header.dart';
 
 // Feature imports:

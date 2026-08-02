@@ -373,6 +373,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} selected'**
   String gamesSelected(Object count);
+
+  /// No description provided for @seatsSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **' / {maxPlayers} seats'**
+  String seatsSuffix(Object maxPlayers);
+
+  /// No description provided for @readyToStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to start'**
+  String get readyToStart;
+
+  /// No description provided for @waitingForMorePlayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for {remainingPlayers} more'**
+  String waitingForMorePlayers(Object remainingPlayers);
 }
 
 class _AppLocalizationsDelegate

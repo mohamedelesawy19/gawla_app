@@ -161,4 +161,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String gamesSelected(Object count) {
     return '$count selected';
   }
+
+  @override
+  String seatsSuffix(Object maxPlayers) {
+    return ' / $maxPlayers seats';
+  }
+
+  @override
+  String get readyToStart => 'Ready to start';
+
+  @override
+  String waitingForMorePlayers(Object remainingPlayers) {
+    return 'Waiting for $remainingPlayers more';
+  }
 }

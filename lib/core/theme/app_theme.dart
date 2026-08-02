@@ -481,8 +481,8 @@ class AppTheme {
 
   static BottomSheetThemeData get _bottomSheetTheme =>
       const BottomSheetThemeData(
-        backgroundColor: AppColors.surfaceElevated,
-        modalBackgroundColor: AppColors.surfaceElevated,
+        backgroundColor: AppColors.cardDefault,
+        modalBackgroundColor: AppColors.surfaceSunken,
         surfaceTintColor: Colors.transparent,
         modalBarrierColor: AppColors.overlayScrim,
         dragHandleColor: AppColors.borderDefault,

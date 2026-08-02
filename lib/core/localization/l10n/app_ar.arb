@@ -54,5 +54,9 @@
   "roomVisibilitySubtitle": "حدد من يمكنه العثور على الغرفة والانضمام إليها",
   "miniGameRotation": "ترتيب الألعاب",
   "miniGameRotationSubtitle": "اختر ترتيب الألعاب التي ستُلعب",
-  "gamesSelected": "تم اختيار {count}"
+  "gamesSelected": "تم اختيار {count}",
+
+  "seatsSuffix": " / {maxPlayers} مكان",
+  "readyToStart": "جاهز لبدء البطولة",
+  "waitingForMorePlayers": "بانتظار {remainingPlayers} لاعبين آخرين"
 }

@@ -54,5 +54,9 @@
   "roomVisibilitySubtitle": "Who can find and join your lobby",
   "miniGameRotation": "Mini-game rotation",
   "miniGameRotationSubtitle": "Tap games in the order you want them played",
-  "gamesSelected": "{count} selected"
+  "gamesSelected": "{count} selected",
+
+  "seatsSuffix": " / {maxPlayers} seats",
+  "readyToStart": "Ready to start",
+  "waitingForMorePlayers": "Waiting for {remainingPlayers} more"
 }
