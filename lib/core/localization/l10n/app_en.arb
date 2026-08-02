@@ -64,5 +64,6 @@
   "moreOpenPlaces": "+{count} more open",
   "waitingForMorePlayers": "Waiting for {remainingPlayers} more",
   "you": "You",
-  "removePlayer": "Remove player"
+  "removePlayer": "Remove player",
+  "inviteCodeCopied": "Invite code copied"
 }

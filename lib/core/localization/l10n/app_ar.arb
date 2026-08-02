@@ -64,5 +64,6 @@
   "moreOpenPlaces": "+{count} أماكن متاحة",
   "waitingForMorePlayers": "بانتظار {remainingPlayers} لاعبين آخرين",
   "you": "أنت",
-  "removePlayer": "إزالة اللاعب"
+  "removePlayer": "إزالة اللاعب",
+  "inviteCodeCopied": "تم نسخ رمز الدعوة"
 }

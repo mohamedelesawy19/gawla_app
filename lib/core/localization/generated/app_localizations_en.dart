@@ -194,4 +194,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get removePlayer => 'Remove player';
+
+  @override
+  String get inviteCodeCopied => 'Invite code copied';
 }

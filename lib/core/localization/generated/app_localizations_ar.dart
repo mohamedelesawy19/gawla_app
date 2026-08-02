@@ -194,4 +194,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get removePlayer => 'إزالة اللاعب';
+
+  @override
+  String get inviteCodeCopied => 'تم نسخ رمز الدعوة';
 }
