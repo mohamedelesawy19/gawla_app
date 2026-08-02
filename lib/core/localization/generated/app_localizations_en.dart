@@ -131,4 +131,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quickMatch => 'Quick Match';
+
+  @override
+  String get public => 'Public';
+
+  @override
+  String get publicDescription => 'Anyone can find and join';
+
+  @override
+  String get private => 'Private';
+
+  @override
+  String get privateDescription => 'Invite code required to join';
 }

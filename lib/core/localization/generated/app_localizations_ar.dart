@@ -131,4 +131,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quickMatch => 'مباراة سريعة';
+
+  @override
+  String get public => 'عامة';
+
+  @override
+  String get publicDescription => 'يمكن لأي شخص الانضمام';
+
+  @override
+  String get private => 'خاصة';
+
+  @override
+  String get privateDescription => 'يتطلب رمز دعوة للانضمام';
 }

@@ -43,5 +43,10 @@
   "or_divider": "أو",
 
   "enterInviteCode": "أدخل رمز الدعوة",
-  "quickMatch": "مباراة سريعة"
+  "quickMatch": "مباراة سريعة",
+
+  "public": "عامة",
+  "publicDescription": "يمكن لأي شخص الانضمام",
+  "private": "خاصة",
+  "privateDescription": "يتطلب رمز دعوة للانضمام"
 }

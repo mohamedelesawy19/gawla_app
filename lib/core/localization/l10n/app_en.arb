@@ -43,5 +43,10 @@
   "or_divider": "Or",
 
   "enterInviteCode": "Enter invite code",
-  "quickMatch": "Quick Match"
+  "quickMatch": "Quick Match",
+
+  "public": "Public",
+  "publicDescription": "Anyone can find and join",
+  "private": "Private",
+  "privateDescription": "Invite code required to join"
 }

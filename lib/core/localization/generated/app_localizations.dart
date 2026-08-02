@@ -319,6 +319,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quick Match'**
   String get quickMatch;
+
+  /// No description provided for @public.
+  ///
+  /// In en, this message translates to:
+  /// **'Public'**
+  String get public;
+
+  /// No description provided for @publicDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Anyone can find and join'**
+  String get publicDescription;
+
+  /// No description provided for @private.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get private;
+
+  /// No description provided for @privateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code required to join'**
+  String get privateDescription;
 }
 
 class _AppLocalizationsDelegate
