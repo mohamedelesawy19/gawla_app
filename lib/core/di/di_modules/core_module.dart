@@ -16,12 +16,12 @@ class CoreModule {
   CoreModule._();
 
   static Future<void> register() async {
-    if (kIsWeb) return;
+    if (!kIsWeb) {
+      const crashReporting = FirebaseCrashReportingService();
+      await crashReporting.initialize(enabled: kReleaseMode);
 
-    const crashReporting = FirebaseCrashReportingService();
-    await crashReporting.initialize(enabled: kReleaseMode);
-
-    ServiceLocator.registerSingleton<CrashReportingService>(crashReporting);
+      ServiceLocator.registerSingleton<CrashReportingService>(crashReporting);
+    }
 
     // Current player
     ServiceLocator.registerLazySingleton<CurrentPlayerService>(

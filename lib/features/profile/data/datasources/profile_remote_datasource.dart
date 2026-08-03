@@ -9,7 +9,11 @@ import '/core/errors/exceptions.dart';
 import '/features/profile/data/models/player_model.dart';
 
 abstract class ProfileRemoteDataSource {
-  Future<PlayerModel> getProfile(String uid);
+  Future<PlayerModel> getProfile(
+    String uid, {
+    int maxAttempts = 10,
+    Duration retryDelay = const Duration(milliseconds: 500),
+  });
   Future<void> updateProfile({
     required String uid,
     String? displayName,
@@ -28,16 +32,25 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   // ── Fetch ──────────────────────────────────────────────────────────────────
 
   @override
-  Future<PlayerModel> getProfile(String uid) async {
+  Future<PlayerModel> getProfile(
+    String uid, {
+    int maxAttempts = 10,
+    Duration retryDelay = const Duration(milliseconds: 500),
+  }) async {
     try {
-      final snapshot = await _players.doc(uid).get();
+      for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+        final snapshot = await _players.doc(uid).get();
 
-      final data = snapshot.data();
-      if (!snapshot.exists || data == null) {
-        throw const ServerException(message: 'Player profile not found');
+        if (snapshot.exists && snapshot.data() != null) {
+          return PlayerModel.fromFirestore(snapshot);
+        }
+
+        if (attempt < maxAttempts) {
+          await Future.delayed(retryDelay);
+        }
       }
 
-      return PlayerModel.fromFirestore(snapshot);
+      throw const ServerException(message: 'Player profile not found');
     } on ServerException {
       rethrow;
     } on FirebaseException catch (e) {

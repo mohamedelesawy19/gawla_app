@@ -302,6 +302,24 @@ abstract class AppLocalizations {
   /// **'Save changes'**
   String get saveChanges;
 
+  /// No description provided for @logoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get logoutTitle;
+
+  /// No description provided for @logoutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll need to sign in again to access your account.'**
+  String get logoutDescription;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
   /// No description provided for @or_divider.
   ///
   /// In en, this message translates to:

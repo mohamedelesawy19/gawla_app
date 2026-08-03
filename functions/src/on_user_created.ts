@@ -11,7 +11,7 @@ export const onUserCreated = functionsV1
 
     await playerRef.set({
       displayName: user.displayName ?? `Player${user.uid.substring(0, 6)}`,
-      avatarUrl: user.photoURL ?? null,
+      avatarUrl: user.photoURL ?? "preset:rose",
       level: 1,
       xp: 0,
       coins: 100,

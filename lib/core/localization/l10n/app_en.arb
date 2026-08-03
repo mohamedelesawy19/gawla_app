@@ -40,6 +40,10 @@
   "couldNotSaveChanges": "Couldn't save changes — please try again.",
   "saveChanges": "Save changes",
 
+  "logoutTitle": "Log out?",
+  "logoutDescription": "You'll need to sign in again to access your account.",
+  "logout": "Log out",
+
   "or_divider": "Or",
 
   "enterInviteCode": "Enter invite code",

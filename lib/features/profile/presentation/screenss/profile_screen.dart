@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Core imports:
 import '/core/di/service_locator.dart';
+import '/core/localization/localization_helpers.dart';
 import '/core/session/bloc/session_bloc.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
+import '/core/widgets/feedback/premium_dialog.dart';
 import '/core/widgets/feedback/snackbar.dart';
-import '/features/auth/presentation/bloc/auth_bloc.dart';
 
 // Features imports:
+import '/features/auth/presentation/bloc/auth_bloc.dart';
 import '/features/profile/presentation/blocs/profile_bloc.dart';
 import '/features/profile/presentation/widgets/edit_profile_sheet.dart';
 import '/features/profile/presentation/widgets/profile_content.dart';
@@ -53,6 +55,20 @@ class _ProfileViewState extends State<_ProfileView> {
         .timeout(const Duration(seconds: 8), onTimeout: () => bloc.state);
   }
 
+  void _onLogout() {
+    showPremiumDialog<void>(
+      context: context,
+      title: context.l10n.logoutTitle,
+      description: context.l10n.logoutDescription,
+      dialogType: PremiumDialogType.error,
+      primaryButtonText: context.l10n.logout,
+      onPrimaryPressed: () =>
+          context.read<AuthBloc>().add(const SignOutEvent()),
+      secondaryButtonText: context.l10n.cancel,
+      onSecondaryPressed: () => Navigator.of(context).pop(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +89,7 @@ class _ProfileViewState extends State<_ProfileView> {
                 isSaving: false,
                 onEditTap: () =>
                     showEditProfileSheet(context, profile: profile),
-                onLogoutTap: () =>
-                    context.read<AuthBloc>().add(const SignOutEvent()),
+                onLogoutTap: _onLogout,
                 onRefresh: _refresh,
               ),
               ProfileUpdating(:final profile) =>
@@ -94,8 +109,7 @@ class _ProfileViewState extends State<_ProfileView> {
                         isSaving: false,
                         onEditTap: () =>
                             showEditProfileSheet(context, profile: profile),
-                        onLogoutTap: () =>
-                            context.read<AuthBloc>().add(const SignOutEvent()),
+                        onLogoutTap: _onLogout,
                         onRefresh: _refresh,
                       )
                     : ErrorStateWidget(

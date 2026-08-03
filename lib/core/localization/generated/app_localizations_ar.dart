@@ -124,6 +124,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveChanges => 'حفظ التغييرات';
 
   @override
+  String get logoutTitle => 'تسجيل الخروج؟';
+
+  @override
+  String get logoutDescription =>
+      'ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
   String get or_divider => 'أو';
 
   @override

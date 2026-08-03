@@ -56,7 +56,7 @@ class ProfileHeroHeader extends StatelessWidget {
               onTap: onLogoutTap,
               iconSize: 24,
               backgroundColor: AppColors.buttonDangerPressed.withValues(
-                alpha: 0.08,
+                alpha: 0.3,
               ),
               iconColor: AppColors.buttonDangerPressed,
             ),

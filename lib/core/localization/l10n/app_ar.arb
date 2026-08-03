@@ -40,6 +40,10 @@
   "couldNotSaveChanges": "تعذر حفظ التغييرات — يرجى المحاولة مرة أخرى.",
   "saveChanges": "حفظ التغييرات",
 
+  "logoutTitle": "تسجيل الخروج؟",
+  "logoutDescription": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
+  "logout": "تسجيل الخروج",
+
   "or_divider": "أو",
 
   "enterInviteCode": "أدخل رمز الدعوة",

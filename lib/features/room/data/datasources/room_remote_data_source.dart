@@ -139,11 +139,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
       // if it's missing.
       yield* _rooms
           .where('playerUids', arrayContains: uid)
-          //.where('status', isNotEqualTo: RoomStatus.closed.name)
-          // TODO: Re-enable the status filter once Firestore supports
-          // `isNotEqualTo` in array queries (or switch to a different
-          // query strategy). For now, we just return the first room
-          // the user is in, even if it's closed.
+          .where('status', isNotEqualTo: RoomStatus.closed.name)
           .limit(1)
           .snapshots()
           .map(

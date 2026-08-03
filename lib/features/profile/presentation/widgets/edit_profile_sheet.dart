@@ -24,7 +24,6 @@ Future<void> showEditProfileSheet(
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
-    backgroundColor: Colors.transparent,
     builder: (_) => BlocProvider.value(
       value: context.read<ProfileBloc>(),
       child: EditProfileSheet(profile: profile),

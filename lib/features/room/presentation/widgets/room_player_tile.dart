@@ -41,18 +41,22 @@ class RoomPlayerTile extends StatelessWidget {
       ),
       child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        leading: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: isHost
-                ? Border.all(color: AppColors.brandAccentCyan, width: 2)
-                : null,
-          ),
-          padding: EdgeInsets.all(isHost ? 2 : 0),
-          child: ClipOval(
-            child: AvatarFace(
-              avatarUrl: avatarUrl,
-              initials: StringUtils.initials(player.displayName),
+        leading: SizedBox(
+          width: 44,
+          height: 44,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: isHost
+                  ? Border.all(color: AppColors.brandAccentCyan, width: 2)
+                  : null,
+            ),
+            padding: EdgeInsets.all(isHost ? 2 : 0),
+            child: ClipOval(
+              child: AvatarFace(
+                avatarUrl: avatarUrl,
+                initials: StringUtils.initials(player.displayName),
+              ),
             ),
           ),
         ),

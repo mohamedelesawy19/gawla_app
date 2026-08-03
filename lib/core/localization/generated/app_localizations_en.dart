@@ -124,6 +124,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveChanges => 'Save changes';
 
   @override
+  String get logoutTitle => 'Log out?';
+
+  @override
+  String get logoutDescription =>
+      'You\'ll need to sign in again to access your account.';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
   String get or_divider => 'Or';
 
   @override
