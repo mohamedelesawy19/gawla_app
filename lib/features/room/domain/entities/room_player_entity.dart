@@ -19,11 +19,7 @@ class RoomPlayerEntity extends Equatable {
   final String? avatarUrl;
   final DateTime joinedAt;
 
-  RoomPlayerEntity copyWith({
-    String? displayName,
-    String? avatarUrl,
-    bool? isReady,
-  }) {
+  RoomPlayerEntity copyWith({String? displayName, String? avatarUrl}) {
     return RoomPlayerEntity(
       uid: uid,
       displayName: displayName ?? this.displayName,

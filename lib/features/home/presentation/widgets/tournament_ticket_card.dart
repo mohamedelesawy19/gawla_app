@@ -110,7 +110,7 @@ class TournamentTicketCard extends StatelessWidget {
                 PunchInButton(onTap: onPunchIn),
                 AppSpacing.verticalSpaceSm,
                 Text(
-                  context.l10n.tapToFindMatch,
+                  context.l10n.tapToFindTournament,
                   style: textTheme.bodySmall!.copyWith(
                     color: AppColors.ticketTextSecondary,
                   ),

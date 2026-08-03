@@ -18,7 +18,7 @@ import '/core/widgets/inputs/code_input_field.dart';
 import '/features/room/presentation/blocs/room_bloc.dart';
 
 /// Lets a player join an existing room — either by entering a private
-/// room's invite code, or via Quick Match into an open public room.
+/// room's invite code, or via Quick Tournament into an open public room.
 ///
 /// As with [CreateRoomScreen], a successful join does not navigate
 /// itself: [SessionBloc]'s room subscription picks up the membership
@@ -58,8 +58,8 @@ class _JoinRoomViewState extends State<_JoinRoomView> {
     context.read<RoomBloc>().add(RoomJoinByCodeEvent(inviteCode: code));
   }
 
-  void _quickMatch() {
-    context.read<RoomBloc>().add(const RoomQuickMatchEvent());
+  void _quickTournament() {
+    context.read<RoomBloc>().add(const RoomQuickJoinEvent());
   }
 
   @override
@@ -109,8 +109,8 @@ class _JoinRoomViewState extends State<_JoinRoomView> {
                   builder: (context, isLoading) {
                     return SecondaryButton(
                       isLoading: isLoading,
-                      onPressed: _quickMatch,
-                      label: context.l10n.quickMatch,
+                      onPressed: _quickTournament,
+                      label: context.l10n.quickTournament,
                       icon: Icons.flash_on_rounded,
                     );
                   },

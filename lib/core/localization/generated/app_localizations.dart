@@ -188,11 +188,11 @@ abstract class AppLocalizations {
   /// **'{count} rounds'**
   String numRounds(Object count);
 
-  /// No description provided for @tapToFindMatch.
+  /// No description provided for @tapToFindTournament.
   ///
   /// In en, this message translates to:
-  /// **'Tap to find a match'**
-  String get tapToFindMatch;
+  /// **'Tap to find a tournament'**
+  String get tapToFindTournament;
 
   /// No description provided for @coins.
   ///
@@ -332,11 +332,11 @@ abstract class AppLocalizations {
   /// **'Enter invite code'**
   String get enterInviteCode;
 
-  /// No description provided for @quickMatch.
+  /// No description provided for @quickTournament.
   ///
   /// In en, this message translates to:
-  /// **'Quick Match'**
-  String get quickMatch;
+  /// **'Quick Tournament'**
+  String get quickTournament;
 
   /// No description provided for @public.
   ///

@@ -28,7 +28,7 @@ class AppRouter {
   ///
   /// `authenticated` is a free-roam zone — home, profile, leaderboard,
   /// settings, etc. are all valid; we only bounce the user out of the
-  /// pre-auth screens. `inRoom` / `inMatch` are exclusive locks, matching
+  /// pre-auth screens. `inRoom` / `inTournament` are exclusive locks, matching
   /// this game's actual design (5–8 min elimination tournaments): you cannot
   /// be anywhere else in the app while one is active, so *any* other
   /// location gets redirected there.
@@ -47,15 +47,15 @@ class AppRouter {
             location == AppRoutes.splash ||
             location == AppRoutes.login ||
             location.startsWith(AppRoutes.room) ||
-            location.startsWith(AppRoutes.match);
+            location.startsWith(AppRoutes.tournament);
         return mustLeave ? AppRoutes.main : null;
 
       case SessionStatus.inRoom:
         final target = '${AppRoutes.room}/${session.roomId}';
         return _isAt(location, target) ? null : target;
 
-      case SessionStatus.inMatch:
-        final target = '${AppRoutes.match}/${session.matchId}';
+      case SessionStatus.inTournament:
+        final target = '${AppRoutes.tournament}/${session.tournamentId}';
         return _isAt(location, target) ? null : target;
     }
   }

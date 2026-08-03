@@ -14,7 +14,7 @@ import '/features/room/domain/usecases/join_room_by_code_usecase.dart';
 import '/features/room/domain/usecases/join_room_usecase.dart';
 import '/features/room/domain/usecases/kick_player_usecase.dart';
 import '/features/room/domain/usecases/leave_room_usecase.dart';
-import '/features/room/domain/usecases/quick_match_usecase.dart';
+import '/features/room/domain/usecases/quick_join_usecase.dart';
 import '/features/room/domain/usecases/update_room_settings_usecase.dart';
 import '/features/room/domain/usecases/watch_room_id_for_user_usecase.dart';
 import '/features/room/domain/usecases/watch_room_usecase.dart';
@@ -97,8 +97,8 @@ class RoomModule {
       ),
     );
 
-    ServiceLocator.registerFactory<QuickMatchUseCase>(
-      () => QuickMatchUseCase(
+    ServiceLocator.registerFactory<QuickJoinUseCase>(
+      () => QuickJoinUseCase(
         repository: ServiceLocator.get<RoomRepository>(),
         currentPlayer: ServiceLocator.get<CurrentPlayerService>(),
       ),
@@ -126,7 +126,7 @@ class RoomModule {
         createRoom: ServiceLocator.get<CreateRoomUseCase>(),
         joinRoom: ServiceLocator.get<JoinRoomUseCase>(),
         joinRoomByCode: ServiceLocator.get<JoinRoomByCodeUseCase>(),
-        quickMatch: ServiceLocator.get<QuickMatchUseCase>(),
+        quickJoin: ServiceLocator.get<QuickJoinUseCase>(),
         leaveRoom: ServiceLocator.get<LeaveRoomUseCase>(),
         kickPlayer: ServiceLocator.get<KickPlayerUseCase>(),
         updateRoomSettings: ServiceLocator.get<UpdateRoomSettingsUseCase>(),

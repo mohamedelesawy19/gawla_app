@@ -40,11 +40,11 @@ final class RoomJoinByCodeEvent extends RoomEvent {
 }
 
 /// Finds (or creates) an open public room automatically.
-final class RoomQuickMatchEvent extends RoomEvent {
-  const RoomQuickMatchEvent({this.defaultSettings});
+final class RoomQuickJoinEvent extends RoomEvent {
+  const RoomQuickJoinEvent({this.defaultSettings});
 
   /// Used only if no open public room is found and a new one has to be
-  /// created; falls back to [QuickMatchParams]'s own default when
+  /// created; falls back to [QuickJoinParams]'s own default when
   /// omitted.
   final RoomSettingsEntity? defaultSettings;
 
@@ -80,7 +80,7 @@ final class RoomUpdateSettingsEvent extends RoomEvent {
 /// Starts streaming realtime updates for [roomId], or — when [roomId]
 /// is `null` — stops watching and resets to [RoomState]'s initial value.
 ///
-/// Dispatched internally after a successful create/join/quick-match,
+/// Dispatched internally after a successful create/join/quick-tournament,
 /// and dispatched by the app shell once it learns (via `SessionBloc`
 /// and `WatchRoomIdForUserUseCase`) that the current user already
 /// belongs to a room on app start or rehydration.

@@ -16,7 +16,7 @@
   "tournamentSlogan": "تحدَّ · اصمد · انتصر",
   "numPlayers": "{count} لاعب",
   "numRounds": "{count} جولات",
-  "tapToFindMatch": "اضغط للعثور على مباراة",
+  "tapToFindTournament": "اضغط للعثور على بطولة",
 
   "coins": "العملات",
   "gems": "الجواهر",
@@ -47,7 +47,7 @@
   "or_divider": "أو",
 
   "enterInviteCode": "أدخل رمز الدعوة",
-  "quickMatch": "مباراة سريعة",
+  "quickTournament": "بطولة سريعة",
 
   "public": "عامة",
   "publicDescription": "يمكن لأي شخص الانضمام",

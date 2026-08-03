@@ -25,12 +25,12 @@ final class _RoomChanged extends SessionEvent {
   List<Object?> get props => [roomId];
 }
 
-/// Internal — fired whenever the active match id changes for the current
+/// Internal — fired whenever the active tournament id changes for the current
 /// room.
-final class _MatchChanged extends SessionEvent {
-  const _MatchChanged(this.matchId);
-  final String? matchId;
+final class _TournamentChanged extends SessionEvent {
+  const _TournamentChanged(this.tournamentId);
+  final String? tournamentId;
 
   @override
-  List<Object?> get props => [matchId];
+  List<Object?> get props => [tournamentId];
 }

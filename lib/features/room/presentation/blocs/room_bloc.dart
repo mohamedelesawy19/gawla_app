@@ -17,7 +17,7 @@ import '/features/room/domain/usecases/join_room_by_code_usecase.dart';
 import '/features/room/domain/usecases/join_room_usecase.dart';
 import '/features/room/domain/usecases/kick_player_usecase.dart';
 import '/features/room/domain/usecases/leave_room_usecase.dart';
-import '/features/room/domain/usecases/quick_match_usecase.dart';
+import '/features/room/domain/usecases/quick_join_usecase.dart';
 import '/features/room/domain/usecases/update_room_settings_usecase.dart';
 import '/features/room/domain/usecases/watch_room_usecase.dart';
 
@@ -29,7 +29,7 @@ part 'room_state.dart';
 /// of [RoomState] for the presentation layer.
 ///
 /// Ownership boundary: this bloc renders and drives a room *once its id
-/// is known* — right after a successful create/join/quick-match, or on
+/// is known* — right after a successful create/join/quick-join, or on
 /// rehydration once the app shell tells it to via [RoomWatchEvent].
 /// Deciding *whether* the current user belongs to a room at all is
 /// `SessionBloc`'s job (via `WatchRoomIdForUserUseCase`), not this
@@ -39,7 +39,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     required this._createRoom,
     required this._joinRoom,
     required this._joinRoomByCode,
-    required this._quickMatch,
+    required this._quickJoin,
     required this._leaveRoom,
     required this._kickPlayer,
     required this._updateRoomSettings,
@@ -48,7 +48,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<RoomCreateEvent>(_onCreate, transformer: droppable());
     on<RoomJoinEvent>(_onJoin, transformer: droppable());
     on<RoomJoinByCodeEvent>(_onJoinByCode, transformer: droppable());
-    on<RoomQuickMatchEvent>(_onQuickMatch, transformer: droppable());
+    on<RoomQuickJoinEvent>(_onQuickJoin, transformer: droppable());
     on<RoomLeaveEvent>(_onLeave, transformer: droppable());
     // Sequential, not droppable: a host kicking several players in quick
     // succession expects every kick to go through, not just the first.
@@ -63,7 +63,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
   final CreateRoomUseCase _createRoom;
   final JoinRoomUseCase _joinRoom;
   final JoinRoomByCodeUseCase _joinRoomByCode;
-  final QuickMatchUseCase _quickMatch;
+  final QuickJoinUseCase _quickJoin;
   final LeaveRoomUseCase _leaveRoom;
   final KickPlayerUseCase _kickPlayer;
   final UpdateRoomSettingsUseCase _updateRoomSettings;
@@ -100,16 +100,16 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     _emitRoomResult(result, emit);
   }
 
-  Future<void> _onQuickMatch(
-    RoomQuickMatchEvent event,
+  Future<void> _onQuickJoin(
+    RoomQuickJoinEvent event,
     Emitter<RoomState> emit,
   ) async {
     emit(state.copyWith(status: RoomBlocStatus.loading, clearFailure: true));
 
     final defaultSettings = event.defaultSettings;
     final result = await (defaultSettings == null
-        ? _quickMatch(const QuickMatchParams())
-        : _quickMatch(QuickMatchParams(defaultSettings: defaultSettings)));
+        ? _quickJoin(const QuickJoinParams())
+        : _quickJoin(QuickJoinParams(defaultSettings: defaultSettings)));
 
     _emitRoomResult(result, emit);
   }
@@ -203,7 +203,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
   }
 
   /// Shared by every one-shot action that produces a [RoomEntity]
-  /// (create, join, join-by-code, quick match): moves into the room and
+  /// (create, join, join-by-code, quick join): moves into the room and
   /// kicks off realtime watching for it.
   void _emitRoomResult(
     Either<Failure, RoomEntity> result,

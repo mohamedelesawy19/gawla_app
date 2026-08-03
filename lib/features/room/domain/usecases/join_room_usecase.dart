@@ -13,7 +13,7 @@ import '/features/room/domain/repositories/room_repository.dart';
 import '/features/room/domain/validators/join_room_validator.dart';
 
 /// Joins a specific, already-known room (e.g. selected from a public
-/// room browser, or a deep link) — as opposed to [QuickMatchUseCase],
+/// room browser, or a deep link) — as opposed to [QuickJoinUseCase],
 /// which finds one automatically.
 class JoinRoomUseCase implements UseCase<RoomEntity, JoinRoomParams> {
   const JoinRoomUseCase({

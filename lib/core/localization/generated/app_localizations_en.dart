@@ -58,7 +58,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get tapToFindMatch => 'Tap to find a match';
+  String get tapToFindTournament => 'Tap to find a tournament';
 
   @override
   String get coins => 'Coins';
@@ -140,7 +140,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterInviteCode => 'Enter invite code';
 
   @override
-  String get quickMatch => 'Quick Match';
+  String get quickTournament => 'Quick Tournament';
 
   @override
   String get public => 'Public';

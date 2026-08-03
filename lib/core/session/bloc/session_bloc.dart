@@ -22,35 +22,36 @@ part 'session_state.dart';
 /// useful before the Room feature exists.
 typedef WatchRoomId = Stream<String?> Function(String uid);
 
-/// Watches the id of the currently active match for [roomId], or `null` if
-/// that room has no match in progress. Implemented later by the Match
+/// Watches the id of the currently active tournament for [roomId], or `null` if
+/// that room has no tournament in progress. Implemented later by the Tournament
 /// feature.
-typedef WatchMatchId = Stream<String?> Function(String roomId);
+typedef WatchTournamentId = Stream<String?> Function(String roomId);
 
 /// The single global bloc for app-wide navigation state.
 ///
 /// [SessionBloc] does NOT own or store profile data (name, coins, gems,
 /// level, ...) — that stays `ProfileBloc`'s job, loaded lazily by whichever
 /// screen actually needs it. This bloc only tracks *identity + navigation*:
-/// `uid`, `roomId`, `matchId`, and the derived [SessionStatus]. Keeping it
+/// `uid`, `roomId`, `tournamentId`, and the derived [SessionStatus]. Keeping it
 /// this thin is what stops it turning into a "God Bloc".
 ///
 /// It never receives events from the UI. It is entirely self-driven: it
 /// subscribes directly to the underlying repository streams (auth, room,
-/// match — the same pattern `AuthBloc`'s doc comment already points at:
+/// tournament — the same pattern `AuthBloc`'s doc comment already points at:
 /// "the SessionBloc will observe login success through the stream") and
 /// reduces them into one [SessionState] that the router reads.
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   SessionBloc({
     required this._watchAuthState,
     WatchRoomId? watchRoomId,
-    WatchMatchId? watchMatchId,
+    WatchTournamentId? watchTournamentId,
   }) : _watchRoomId = watchRoomId ?? ((_) => Stream<String?>.value(null)),
-       _watchMatchId = watchMatchId ?? ((_) => Stream<String?>.value(null)),
+       _watchTournamentId =
+           watchTournamentId ?? ((_) => Stream<String?>.value(null)),
        super(const SessionState.unknown()) {
     on<_AuthChanged>(_onAuthChanged);
     on<_RoomChanged>(_onRoomChanged);
-    on<_MatchChanged>(_onMatchChanged);
+    on<_TournamentChanged>(_onTournamentChanged);
 
     _authSubscription = _watchAuthState().listen(
       (user) => add(_AuthChanged(user)),
@@ -59,11 +60,11 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
   final WatchAuthStateUseCase _watchAuthState;
   final WatchRoomId _watchRoomId;
-  final WatchMatchId _watchMatchId;
+  final WatchTournamentId _watchTournamentId;
 
   late final StreamSubscription<AuthUserEntity?> _authSubscription;
   StreamSubscription<String?>? _roomSubscription;
-  StreamSubscription<String?>? _matchSubscription;
+  StreamSubscription<String?>? _tournamentSubscription;
 
   // ── Auth → drives the room subscription ────────────────────────────────────
 
@@ -72,12 +73,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     Emitter<SessionState> emit,
   ) async {
     // Identity changed (login / logout / account switch) — whatever room or
-    // match we were watching belonged to the *previous* uid, so it must be
+    // tournament we were watching belonged to the *previous* uid, so it must be
     // torn down before we react to the new one.
     await _roomSubscription?.cancel();
-    await _matchSubscription?.cancel();
+    await _tournamentSubscription?.cancel();
     _roomSubscription = null;
-    _matchSubscription = null;
+    _tournamentSubscription = null;
 
     final user = event.user;
     if (user == null) {
@@ -92,7 +93,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     ).listen((roomId) => add(_RoomChanged(roomId)));
   }
 
-  // ── Room → drives the match subscription ───────────────────────────────────
+  // ── Room → drives the tournament subscription ──────────────────────────────
 
   void _onRoomChanged(_RoomChanged event, Emitter<SessionState> emit) {
     final uid = state.uid;
@@ -101,32 +102,39 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     final roomId = event.roomId;
 
     if (roomId == null) {
-      _matchSubscription?.cancel();
-      _matchSubscription = null;
+      _tournamentSubscription?.cancel();
+      _tournamentSubscription = null;
       emit(SessionState.authenticated(uid: uid));
       return;
     }
 
     emit(SessionState.inRoom(uid: uid, roomId: roomId));
 
-    _matchSubscription?.cancel();
-    _matchSubscription = _watchMatchId(
+    _tournamentSubscription?.cancel();
+    _tournamentSubscription = _watchTournamentId(
       roomId,
-    ).listen((matchId) => add(_MatchChanged(matchId)));
+    ).listen((tournamentId) => add(_TournamentChanged(tournamentId)));
   }
 
-  // ── Match ──────────────────────────────────────────────────────────────────
+  // ── Tournament ─────────────────────────────────────────────────────────────
 
-  void _onMatchChanged(_MatchChanged event, Emitter<SessionState> emit) {
+  void _onTournamentChanged(
+    _TournamentChanged event,
+    Emitter<SessionState> emit,
+  ) {
     final uid = state.uid;
     final roomId = state.roomId;
     if (uid == null || roomId == null) return;
 
-    final matchId = event.matchId;
+    final tournamentId = event.tournamentId;
     emit(
-      matchId == null
+      tournamentId == null
           ? SessionState.inRoom(uid: uid, roomId: roomId)
-          : SessionState.inMatch(uid: uid, roomId: roomId, matchId: matchId),
+          : SessionState.inTournament(
+              uid: uid,
+              roomId: roomId,
+              tournamentId: tournamentId,
+            ),
     );
   }
 
@@ -134,7 +142,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   Future<void> close() async {
     await _authSubscription.cancel();
     await _roomSubscription?.cancel();
-    await _matchSubscription?.cancel();
+    await _tournamentSubscription?.cancel();
     return super.close();
   }
 }

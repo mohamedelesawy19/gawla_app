@@ -19,8 +19,8 @@ import '/features/room/domain/repositories/room_repository.dart';
 /// This try-then-fallback orchestration across two repository calls is
 /// genuine business logic, so it lives here rather than being pushed
 /// down into the repository or data source.
-class QuickMatchUseCase implements UseCase<RoomEntity, QuickMatchParams> {
-  const QuickMatchUseCase({
+class QuickJoinUseCase implements UseCase<RoomEntity, QuickJoinParams> {
+  const QuickJoinUseCase({
     required this._repository,
     required this._currentPlayer,
   });
@@ -29,7 +29,7 @@ class QuickMatchUseCase implements UseCase<RoomEntity, QuickMatchParams> {
   final CurrentPlayerService _currentPlayer;
 
   @override
-  Future<Either<Failure, RoomEntity>> call(QuickMatchParams params) async {
+  Future<Either<Failure, RoomEntity>> call(QuickJoinParams params) async {
     final playerResult = await _currentPlayer.getCurrentPlayer();
 
     return playerResult.fold(Left.new, (player) async {
@@ -64,8 +64,8 @@ class QuickMatchUseCase implements UseCase<RoomEntity, QuickMatchParams> {
   }
 }
 
-class QuickMatchParams extends Equatable {
-  const QuickMatchParams({
+class QuickJoinParams extends Equatable {
+  const QuickJoinParams({
     this.defaultSettings = const RoomSettingsEntity(miniGameRotation: []),
   });
 

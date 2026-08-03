@@ -58,7 +58,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get tapToFindMatch => 'اضغط للعثور على مباراة';
+  String get tapToFindTournament => 'اضغط للعثور على بطولة';
 
   @override
   String get coins => 'العملات';
@@ -140,7 +140,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterInviteCode => 'أدخل رمز الدعوة';
 
   @override
-  String get quickMatch => 'مباراة سريعة';
+  String get quickTournament => 'بطولة سريعة';
 
   @override
   String get public => 'عامة';

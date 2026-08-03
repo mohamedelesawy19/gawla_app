@@ -16,7 +16,7 @@
   "tournamentSlogan": "CHALLENGE · SURVIVE · WIN",
   "numPlayers": "{count} players",
   "numRounds": "{count} rounds",
-  "tapToFindMatch": "Tap to find a match",
+  "tapToFindTournament": "Tap to find a tournament",
 
   "coins": "Coins",
   "gems": "Gems",
@@ -47,7 +47,7 @@
   "or_divider": "Or",
 
   "enterInviteCode": "Enter invite code",
-  "quickMatch": "Quick Match",
+  "quickTournament": "Quick Tournament",
 
   "public": "Public",
   "publicDescription": "Anyone can find and join",

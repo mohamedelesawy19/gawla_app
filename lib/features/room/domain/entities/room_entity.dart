@@ -9,8 +9,8 @@ import '/features/room/domain/entities/room_settings_entity.dart';
 /// A lobby that players join before a tournament starts.
 ///
 /// Mirrors the `rooms` collection described in the project overview.
-/// The Room feature owns everything up to "Waiting Room" in the match
-/// flow; once a match is created, `SessionBloc`'s match subscription
+/// The Room feature owns everything up to "Waiting Room" in the tournament
+/// flow; once a tournament is created, `SessionBloc`'s tournament subscription
 /// takes over and this room becomes read-only history.
 class RoomEntity extends Equatable {
   const RoomEntity({

@@ -16,7 +16,7 @@ class AppRoutes {
   static const createRoom = '/create-room';
   static const joinRoom = '/join-room';
 
-  // ── Match Routes ─────────────────────────────────────────────────────
+  // ── Tournament Routes ────────────────────────────────────────────────
 
-  static const match = '/match';
+  static const tournament = '/tournament';
 }
