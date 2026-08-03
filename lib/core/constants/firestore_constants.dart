@@ -5,6 +5,7 @@ abstract final class FirestoreConstants {
   static const String configCollection = 'config';
   static const String miniGamesCollection = 'miniGames';
   static const String roomsCollection = 'rooms';
+  static const String tournamentsCollection = 'tournaments';
 
   // ── Document ─────────────────────────────────────────────────────────────
 
