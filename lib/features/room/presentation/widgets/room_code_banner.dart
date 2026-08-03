@@ -26,7 +26,7 @@ class RoomCodeBanner extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       child: Material(
-        color: AppColors.brandSecondaryLight.withValues(alpha: 0.3),
+        color: AppColors.brandSecondaryLight.withValues(alpha: 0.5),
         child: InkWell(
           onTap: () => _copy(context),
           child: Padding(
