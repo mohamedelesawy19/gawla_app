@@ -1,10 +1,12 @@
 // Package imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 // Core imports:
 import '/core/design_system/spacing.dart';
 import '/core/di/service_locator.dart';
+import '/core/router/app_routes.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 import '/core/widgets/feedback/snackbar.dart';
@@ -76,8 +78,15 @@ class _HomeViewState extends State<_HomeView> {
                 return _LoadedContent(
                   state: homeState,
                   onPunchIn: () => _notifyComingSoon('Matchmaking'),
-                  onCreateRoom: () => _notifyComingSoon('Create room'),
-                  onJoinRoom: () => _notifyComingSoon('Join room'),
+                  // Room feature entry points — pushed on top of the
+                  // main shell (not a NavigationCubit tab switch, since
+                  // Create/Join Room aren't part of the persistent
+                  // bottom-nav destinations). A successful create/join
+                  // then lands the user on `/room/:roomId` on its own,
+                  // via SessionBloc + the router's redirect — see
+                  // CreateRoomScreen/JoinRoomScreen's doc comments.
+                  onCreateRoom: () => context.push(AppRoutes.createRoom),
+                  onJoinRoom: () => context.push(AppRoutes.joinRoom),
                   onWalletTap: () => _notifyComingSoon('Shop'),
                   onAvatarTap: () =>
                       context.read<NavigationCubit>().goProfile(),

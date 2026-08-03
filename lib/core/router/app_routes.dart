@@ -13,6 +13,8 @@ class AppRoutes {
   // ── Room Routes ──────────────────────────────────────────────────────
 
   static const room = '/room';
+  static const createRoom = '/create-room';
+  static const joinRoom = '/join-room';
 
   // ── Match Routes ─────────────────────────────────────────────────────
 
