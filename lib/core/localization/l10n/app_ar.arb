@@ -65,5 +65,13 @@
   "waitingForMorePlayers": "بانتظار {remainingPlayers} لاعبين آخرين",
   "you": "أنت",
   "removePlayer": "إزالة اللاعب",
-  "inviteCodeCopied": "تم نسخ رمز الدعوة"
+  "inviteCodeCopied": "تم نسخ رمز الدعوة",
+
+  "leaveRoomTitle": "مغادرة الغرفة؟",
+  "leaveRoomDescription": "ستحتاج إلى دعوة أو رمز جديد للانضمام مرة أخرى.",
+  "leave": "مغادرة",
+  "cancel": "إلغاء",
+  "waitingRoom": "غرفة الانتظار",
+  "players": "اللاعبون",
+  "tournamentStartingGetReady": "البطولة على وشك البدء — استعد!"
 }

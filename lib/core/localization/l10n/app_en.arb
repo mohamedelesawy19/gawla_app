@@ -65,5 +65,13 @@
   "waitingForMorePlayers": "Waiting for {remainingPlayers} more",
   "you": "You",
   "removePlayer": "Remove player",
-  "inviteCodeCopied": "Invite code copied"
+  "inviteCodeCopied": "Invite code copied",
+
+  "leaveRoomTitle": "Leave room?",
+  "leaveRoomDescription": "You'll need a new invite or code to rejoin.",
+  "leave": "Leave",
+  "cancel": "Cancel",
+  "waitingRoom": "Waiting Room",
+  "players": "Players",
+  "tournamentStartingGetReady": "Tournament starting — get ready!"
 }

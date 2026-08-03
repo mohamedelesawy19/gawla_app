@@ -433,6 +433,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite code copied'**
   String get inviteCodeCopied;
+
+  /// No description provided for @leaveRoomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave room?'**
+  String get leaveRoomTitle;
+
+  /// No description provided for @leaveRoomDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll need a new invite or code to rejoin.'**
+  String get leaveRoomDescription;
+
+  /// No description provided for @leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leave;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @waitingRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting Room'**
+  String get waitingRoom;
+
+  /// No description provided for @players.
+  ///
+  /// In en, this message translates to:
+  /// **'Players'**
+  String get players;
+
+  /// No description provided for @tournamentStartingGetReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Tournament starting — get ready!'**
+  String get tournamentStartingGetReady;
 }
 
 class _AppLocalizationsDelegate

@@ -197,4 +197,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get inviteCodeCopied => 'تم نسخ رمز الدعوة';
+
+  @override
+  String get leaveRoomTitle => 'مغادرة الغرفة؟';
+
+  @override
+  String get leaveRoomDescription =>
+      'ستحتاج إلى دعوة أو رمز جديد للانضمام مرة أخرى.';
+
+  @override
+  String get leave => 'مغادرة';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get waitingRoom => 'غرفة الانتظار';
+
+  @override
+  String get players => 'اللاعبون';
+
+  @override
+  String get tournamentStartingGetReady => 'البطولة على وشك البدء — استعد!';
 }

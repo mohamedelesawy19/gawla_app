@@ -197,4 +197,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inviteCodeCopied => 'Invite code copied';
+
+  @override
+  String get leaveRoomTitle => 'Leave room?';
+
+  @override
+  String get leaveRoomDescription =>
+      'You\'ll need a new invite or code to rejoin.';
+
+  @override
+  String get leave => 'Leave';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get waitingRoom => 'Waiting Room';
+
+  @override
+  String get players => 'Players';
+
+  @override
+  String get tournamentStartingGetReady => 'Tournament starting — get ready!';
 }
