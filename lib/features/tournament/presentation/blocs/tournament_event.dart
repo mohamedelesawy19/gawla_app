@@ -7,20 +7,6 @@ sealed class TournamentEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// Host-only: turns [roomId]'s waiting-room state into a running
-/// tournament. On success, internally dispatches [TournamentWatchEvent]
-/// for the newly created tournament — `StartTournamentUseCase` only hands
-/// back the new id, never a full snapshot (see its doc comment), so there
-/// is nothing to show until the watch subscription delivers one.
-final class TournamentStartEvent extends TournamentEvent {
-  const TournamentStartEvent({required this.roomId});
-
-  final String roomId;
-
-  @override
-  List<Object?> get props => [roomId];
-}
-
 /// Starts streaming realtime updates for [tournamentId], or — when
 /// [tournamentId] is `null` — stops watching and resets to
 /// [TournamentState]'s initial value.

@@ -9,6 +9,7 @@ import '/core/di/service_locator.dart';
 import '/core/localization/localization_helpers.dart';
 import '/core/router/app_routes.dart';
 import '/core/session/bloc/session_bloc.dart';
+import '/core/widgets/buttons/primary_button.dart';
 import '/core/widgets/feedback/error_widget.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 import '/core/widgets/feedback/premium_dialog.dart';
@@ -96,6 +97,11 @@ class _RoomViewState extends State<_RoomView> {
     );
   }
 
+  void _startTournament() {
+    HapticFeedback.mediumImpact();
+    context.read<RoomBloc>().add(const RoomStartTournamentEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,6 +144,37 @@ class _RoomViewState extends State<_RoomView> {
             );
           },
         ),
+      ),
+      bottomNavigationBar: BlocSelector<RoomBloc, RoomState, bool>(
+        selector: (state) {
+          final room = state.room;
+          if (room == null) return false;
+
+          return room.isHost(_viewerUid ?? '') && room.canStartTournament;
+        },
+        builder: (context, canStartTournament) {
+          if (!canStartTournament) {
+            return const SizedBox.shrink();
+          }
+
+          return BlocSelector<RoomBloc, RoomState, bool>(
+            selector: (state) => state.isPerformingAction,
+            builder: (context, isLoading) => SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: PrimaryButton(
+                  isLoading: isLoading,
+                  label: context.l10n.startTournament,
+                  onPressed: _startTournament,
+                  icon: Icons.stadium_rounded,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

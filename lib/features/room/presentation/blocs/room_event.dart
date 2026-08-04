@@ -77,6 +77,11 @@ final class RoomUpdateSettingsEvent extends RoomEvent {
   List<Object?> get props => [settings];
 }
 
+/// Host-only: starts a tournament in the current room.
+final class RoomStartTournamentEvent extends RoomEvent {
+  const RoomStartTournamentEvent();
+}
+
 /// Starts streaming realtime updates for [roomId], or — when [roomId]
 /// is `null` — stops watching and resets to [RoomState]'s initial value.
 ///

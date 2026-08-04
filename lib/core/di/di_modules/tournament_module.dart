@@ -24,7 +24,7 @@ class TournamentModule {
     ServiceLocator.registerLazySingleton<TournamentRemoteDataSource>(
       () => TournamentRemoteDataSourceImpl(
         firestore: FirebaseFirestore.instance,
-        functions: FirebaseFunctions.instance,
+        functions: FirebaseFunctions.instanceFor(region: 'europe-west6'),
       ),
     );
 
@@ -65,7 +65,6 @@ class TournamentModule {
     // Presentation BLoCs
     ServiceLocator.registerFactory<TournamentBloc>(
       () => TournamentBloc(
-        startTournament: ServiceLocator.get<StartTournamentUseCase>(),
         watchTournament: ServiceLocator.get<WatchTournamentUseCase>(),
         submitRoundResult: ServiceLocator.get<SubmitRoundResultUseCase>(),
       ),

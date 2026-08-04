@@ -10,7 +10,6 @@ import '/core/usecases/usecase.dart';
 // Feature imports:
 import '/features/tournament/domain/entities/tournament_entity.dart';
 import '/features/tournament/domain/entities/tournament_round_entity.dart';
-import '/features/tournament/domain/usecases/start_tournament_usecase.dart';
 import '/features/tournament/domain/usecases/submit_round_result_usecase.dart';
 import '/features/tournament/domain/usecases/watch_tournament_usecase.dart';
 
@@ -31,11 +30,9 @@ part 'tournament_state.dart';
 /// bloc owns that decision.
 class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
   TournamentBloc({
-    required this._startTournament,
     required this._watchTournament,
     required this._submitRoundResult,
   }) : super(const TournamentState()) {
-    on<TournamentStartEvent>(_onStart, transformer: droppable());
     // Restartable: a new watch request (including a "stop", i.e. `null`
     // tournamentId) must always supersede whatever was previously being
     // streamed, so the old subscription is cancelled cleanly.
@@ -49,31 +46,8 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
     );
   }
 
-  final StartTournamentUseCase _startTournament;
   final WatchTournamentUseCase _watchTournament;
   final SubmitRoundResultUseCase _submitRoundResult;
-
-  Future<void> _onStart(
-    TournamentStartEvent event,
-    Emitter<TournamentState> emit,
-  ) async {
-    emit(
-      state.copyWith(status: TournamentBlocStatus.loading, clearFailure: true),
-    );
-
-    final result = await _startTournament(
-      StartTournamentParams(roomId: event.roomId),
-    );
-
-    result.fold(
-      (failure) => emit(
-        state.copyWith(status: TournamentBlocStatus.failure, failure: failure),
-      ),
-      // No full TournamentEntity to show yet — kick off the watch stream,
-      // which will deliver one and move state into inTournament itself.
-      (tournamentId) => add(TournamentWatchEvent(tournamentId: tournamentId)),
-    );
-  }
 
   Future<void> _onWatch(
     TournamentWatchEvent event,

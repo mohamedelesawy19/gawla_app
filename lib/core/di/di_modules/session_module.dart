@@ -1,5 +1,4 @@
 // Core imports:
-
 import '/core/di/service_locator.dart';
 import '/core/session/bloc/session_bloc.dart';
 import '/core/usecases/usecase.dart';

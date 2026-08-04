@@ -23,6 +23,7 @@ import '/features/room/domain/validators/join_room_validator.dart';
 import '/features/room/domain/validators/kick_player_validator.dart';
 import '/features/room/domain/validators/room_settings_validator.dart';
 import '/features/room/presentation/blocs/room_bloc.dart';
+import '/features/tournament/domain/usecases/start_tournament_usecase.dart';
 
 class RoomModule {
   RoomModule._();
@@ -130,6 +131,7 @@ class RoomModule {
         leaveRoom: ServiceLocator.get<LeaveRoomUseCase>(),
         kickPlayer: ServiceLocator.get<KickPlayerUseCase>(),
         updateRoomSettings: ServiceLocator.get<UpdateRoomSettingsUseCase>(),
+        startTournament: ServiceLocator.get<StartTournamentUseCase>(),
         watchRoom: ServiceLocator.get<WatchRoomUseCase>(),
       ),
     );

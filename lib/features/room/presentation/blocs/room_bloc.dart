@@ -20,6 +20,9 @@ import '/features/room/domain/usecases/leave_room_usecase.dart';
 import '/features/room/domain/usecases/quick_join_usecase.dart';
 import '/features/room/domain/usecases/update_room_settings_usecase.dart';
 import '/features/room/domain/usecases/watch_room_usecase.dart';
+// Safe cross-feature dependency: imports only the Tournament domain contract,
+// never its presentation layer.
+import '/features/tournament/domain/usecases/start_tournament_usecase.dart';
 
 // Part imports:
 part 'room_event.dart';
@@ -43,6 +46,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     required this._leaveRoom,
     required this._kickPlayer,
     required this._updateRoomSettings,
+    required this._startTournament,
     required this._watchRoom,
   }) : super(const RoomState()) {
     on<RoomCreateEvent>(_onCreate, transformer: droppable());
@@ -54,6 +58,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     // succession expects every kick to go through, not just the first.
     on<RoomKickPlayerEvent>(_onKickPlayer, transformer: sequential());
     on<RoomUpdateSettingsEvent>(_onUpdateSettings, transformer: droppable());
+    on<RoomStartTournamentEvent>(_onStartTournament, transformer: droppable());
     // Restartable: a new watch request (including a "stop", i.e. `null`
     // roomId) must always supersede whatever was previously being
     // streamed, so the old subscription is cancelled cleanly.
@@ -67,6 +72,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
   final LeaveRoomUseCase _leaveRoom;
   final KickPlayerUseCase _kickPlayer;
   final UpdateRoomSettingsUseCase _updateRoomSettings;
+  final StartTournamentUseCase _startTournament;
   final WatchRoomUseCase _watchRoom;
 
   Future<void> _onCreate(RoomCreateEvent event, Emitter<RoomState> emit) async {
@@ -167,6 +173,33 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
       UpdateRoomSettingsParams(roomId: roomId, settings: event.settings),
     );
 
+    emit(
+      result.fold(
+        (failure) =>
+            state.copyWith(isPerformingAction: false, failure: failure),
+        (_) => state.copyWith(isPerformingAction: false),
+      ),
+    );
+  }
+
+  Future<void> _onStartTournament(
+    RoomStartTournamentEvent event,
+    Emitter<RoomState> emit,
+  ) async {
+    final room = state.room;
+    if (room == null) return;
+
+    emit(state.copyWith(isPerformingAction: true, clearFailure: true));
+
+    final result = await _startTournament(
+      StartTournamentParams(roomId: room.roomId),
+    );
+
+    // No need to navigate manually here or store the tournamentId in RoomState.
+    // The SessionBloc will pick up the change from the stream and drive the
+    // router.
+    // The RoomScreen will be disposed normally once the redirect moves the user
+    // to /tournament/:id.
     emit(
       result.fold(
         (failure) =>

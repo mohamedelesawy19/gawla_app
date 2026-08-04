@@ -39,6 +39,9 @@ class RoomEntity extends Equatable {
 
   bool hasPlayer(String uid) => players.any((player) => player.uid == uid);
 
+  bool get canStartTournament =>
+      players.length >= 2 && settings.miniGameRotation.isNotEmpty;
+
   /// Business rule for what happens to the room when [uid] leaves
   /// (voluntarily or via kick):
   /// - Returns `null` when the room should be closed/deleted — no
