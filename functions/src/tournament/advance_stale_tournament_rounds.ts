@@ -1,7 +1,12 @@
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {onSchedule} from "firebase-functions/v2/scheduler";
 import {closeRound} from "./tournament_round_closer";
-import {ROUND_STATUS, TOURNAMENTS_COLLECTION, TOURNAMENT_STATUS, TournamentDoc} from "./tournament_types";
+import {
+  ROUND_STATUS,
+  TOURNAMENTS_COLLECTION,
+  TOURNAMENT_STATUS,
+  TournamentDoc,
+} from "./tournament_types";
 
 const db = getFirestore();
 
@@ -21,44 +26,46 @@ const db = getFirestore();
  * to create it the first time this runs against real data if it's
  * missing.
  */
-export const advanceStaleTournamentRounds = onSchedule("every 1 minutes", async () => {
-  const now = Timestamp.now();
+export const advanceStaleTournamentRounds = onSchedule(
+  "every 1 minutes",
+  async () => {
+    const now = Timestamp.now();
 
-  const staleTournaments = await db
-    .collection(TOURNAMENTS_COLLECTION)
-    .where("status", "==", TOURNAMENT_STATUS.inProgress)
-    .where("currentRoundEndsAt", "<=", now)
-    .get();
+    const staleTournaments = await db
+      .collection(TOURNAMENTS_COLLECTION)
+      .where("status", "==", TOURNAMENT_STATUS.inProgress)
+      .where("currentRoundEndsAt", "<=", now)
+      .get();
 
-  await Promise.all(
-    staleTournaments.docs.map((doc) =>
-      db.runTransaction(async (tx) => {
-        const snap = await tx.get(doc.ref);
-        if (!snap.exists) return;
+    await Promise.all(
+      staleTournaments.docs.map((doc) =>
+        db.runTransaction(async (tx) => {
+          const snap = await tx.get(doc.ref);
+          if (!snap.exists) return;
 
-        const tournament = snap.data() as TournamentDoc;
+          const tournament = snap.data() as TournamentDoc;
 
-        // Re-check inside the transaction: another scheduler run, or a
-        // last-second `submitRoundResult` call, may have already closed
-        // this round between the query above and this read.
-        if (tournament.status !== TOURNAMENT_STATUS.inProgress) return;
+          // Re-check inside the transaction: another scheduler run, or a
+          // last-second `submitRoundResult` call, may have already closed
+          // this round between the query above and this read.
+          if (tournament.status !== TOURNAMENT_STATUS.inProgress) return;
 
-        const round = tournament.rounds[tournament.currentRoundIndex];
-        if (!round || round.status !== ROUND_STATUS.active) return;
-        if (!round.endsAt || round.endsAt.toMillis() > now.toMillis()) return;
+          const round = tournament.rounds[tournament.currentRoundIndex];
+          if (!round || round.status !== ROUND_STATUS.active) return;
+          if (!round.endsAt || round.endsAt.toMillis() > now.toMillis()) return;
 
-        closeRound(tournament, round);
+          closeRound(tournament, round);
 
-        tx.update(doc.ref, {
-          rounds: tournament.rounds,
-          players: tournament.players,
-          currentRoundIndex: tournament.currentRoundIndex,
-          currentRoundEndsAt: tournament.currentRoundEndsAt,
-          status: tournament.status,
-          winnerUid: tournament.winnerUid,
-          completedAt: tournament.completedAt,
-        });
-      }),
-    ),
-  );
-});
+          tx.update(doc.ref, {
+            rounds: tournament.rounds,
+            players: tournament.players,
+            currentRoundIndex: tournament.currentRoundIndex,
+            currentRoundEndsAt: tournament.currentRoundEndsAt,
+            status: tournament.status,
+            winnerUid: tournament.winnerUid,
+            completedAt: tournament.completedAt,
+          });
+        }),
+      ),
+    );
+  });

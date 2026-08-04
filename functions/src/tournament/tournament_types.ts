@@ -10,9 +10,14 @@ export const ROOMS_COLLECTION = "rooms";
 // the Flutter side parses them with `EnumType.values.byName(...)`, which
 // throws on any mismatch. Update these (and the maps below) if your real
 // enum members differ.
-export type TournamentStatus = "starting" | "inProgress" | "completed" | "cancelled";
+export type TournamentStatus =
+  | "starting"
+  | "inProgress"
+  | "completed"
+  | "cancelled";
 export type RoundStatus = "pending" | "active" | "completed";
 export type TournamentPlayerStatus = "active" | "eliminated" | "winner";
+export type RoomStatus = "waiting" | "starting" | "inProgress" | "closed";
 
 export const TOURNAMENT_STATUS: Record<string, TournamentStatus> = {
   starting: "starting",
@@ -33,6 +38,13 @@ export const PLAYER_STATUS: Record<string, TournamentPlayerStatus> = {
   winner: "winner",
 };
 
+export const ROOM_STATUS: Record<string, RoomStatus> = {
+  waiting: "waiting",
+  starting: "starting",
+  inProgress: "inProgress",
+  closed: "closed",
+};
+
 // ── Room status strings ─────
 export const ROOM_STATUS_IN_PROGRESS = "inProgress";
 export const ROOM_STATUS_WAITING = "waiting";
@@ -40,7 +52,8 @@ export const ROOM_STATUS_WAITING = "waiting";
 // ── Tunable gameplay constants ─────
 export const MIN_PLAYERS_TO_START = 2;
 export const DEFAULT_ROUND_DURATION_MS = 60_000; // 60s/round; tune freely
-export const ELIMINATION_FRACTION = 0.25; // cut the worst 25% of active players each round
+export const ELIMINATION_FRACTION = 0.25; // cut the worst 25% of active
+// players each round.
 export const MIN_SURVIVORS_PER_ROUND = 1; // never eliminate down to 0
 
 // ── Firestore document shapes (mirror the Dart models 1:1) ──────────────────
@@ -101,12 +114,24 @@ export interface RoomSnapshot {
   players: Array<{uid: string; displayName: string; avatarUrl?: string | null}>;
 }
 
-export function parseRoomSnapshot(data: FirebaseFirestore.DocumentData): RoomSnapshot {
-  const playersMap = (data.players ?? {}) as Record<string, Record<string, unknown>>;
+/**
+ * Converts a Firestore room document into the shape used by the function.
+ *
+ * @param {FirebaseFirestore.DocumentData} data The raw room document data.
+ * @return {RoomSnapshot} The normalized snapshot.
+ */
+export function parseRoomSnapshot(
+  data: FirebaseFirestore.DocumentData,
+): RoomSnapshot {
+  const playersMap =
+    (data.players ?? {}) as Record<string, Record<string, unknown>>;
+  const settings = (data.settings ?? {}) as Record<string, unknown>;
+
   return {
     hostUid: data.hostUid,
     status: data.status,
-    miniGameRotation: data.miniGameRotation ?? [],
+    miniGameRotation:
+    (settings.miniGameRotation as string[] | undefined) ?? [],
     players: Object.entries(playersMap).map(([uid, p]) => ({
       uid,
       displayName: (p.displayName as string) ?? "Player",

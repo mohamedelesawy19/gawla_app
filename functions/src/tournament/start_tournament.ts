@@ -1,4 +1,4 @@
-import {getFirestore, Timestamp, FieldValue} from "firebase-admin/firestore";
+import {FieldValue, getFirestore, Timestamp} from "firebase-admin/firestore";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {
   DEFAULT_ROUND_DURATION_MS,
@@ -38,7 +38,10 @@ export const startTournament = onCall<StartTournamentRequest>(
   async (request): Promise<StartTournamentResponse> => {
     const uid = request.auth?.uid;
     if (!uid) {
-      throw new HttpsError("unauthenticated", "You must be signed in to start a tournament.");
+      throw new HttpsError(
+        "unauthenticated",
+        "You must be signed in to start a tournament.",
+      );
     }
 
     const roomId = request.data?.roomId;
@@ -55,13 +58,21 @@ export const startTournament = onCall<StartTournamentRequest>(
         throw new HttpsError("not-found", "Room not found.");
       }
 
-      const room = parseRoomSnapshot(roomSnap.data()!);
-
-      if (room.hostUid !== uid) {
-        throw new HttpsError("permission-denied", "Only the host can start the tournament.");
+      const roomData = roomSnap.data();
+      if (!roomData) {
+        throw new HttpsError("not-found", "Room not found.");
       }
 
-      // A tournament can only start while the room is still waiting for players.
+      const room = parseRoomSnapshot(roomData);
+
+      if (room.hostUid !== uid) {
+        throw new HttpsError(
+          "permission-denied",
+          "Only the host can start the tournament.",
+        );
+      }
+
+      // A tournament can only start while the room is still waiting for players
       // Any other state (already running, cancelled, closed, ...) is rejected.
       if (room.status !== ROOM_STATUS_WAITING) {
         throw new HttpsError(
@@ -78,11 +89,16 @@ export const startTournament = onCall<StartTournamentRequest>(
       }
 
       if (room.miniGameRotation.length === 0) {
-        throw new HttpsError("failed-precondition", "Room has no mini-game rotation configured.");
+        throw new HttpsError(
+          "failed-precondition",
+          "Room has no mini-game rotation configured.",
+        );
       }
 
       const now = Timestamp.now();
-      const firstRoundEndsAt = Timestamp.fromMillis(now.toMillis() + DEFAULT_ROUND_DURATION_MS);
+      const firstRoundEndsAt = Timestamp.fromMillis(
+        now.toMillis() + DEFAULT_ROUND_DURATION_MS,
+      );
 
       const players: Record<string, TournamentPlayerDoc> = {};
       for (const p of room.players) {
@@ -95,14 +111,16 @@ export const startTournament = onCall<StartTournamentRequest>(
         };
       }
 
-      const rounds: TournamentRoundDoc[] = room.miniGameRotation.map((miniGameId, index) => ({
-        roundIndex: index,
-        miniGameId,
-        status: index === 0 ? ROUND_STATUS.active : ROUND_STATUS.pending,
-        startedAt: index === 0 ? now : null,
-        endsAt: index === 0 ? firstRoundEndsAt : null,
-        results: [],
-      }));
+      const rounds: TournamentRoundDoc[] = room.miniGameRotation.map(
+        (miniGameId, index) => ({
+          roundIndex: index,
+          miniGameId,
+          status: index === 0 ? ROUND_STATUS.active : ROUND_STATUS.pending,
+          startedAt: index === 0 ? now : null,
+          endsAt: index === 0 ? firstRoundEndsAt : null,
+          results: [],
+        }),
+      );
 
       const tournament: TournamentDoc = {
         roomId,

@@ -28,6 +28,13 @@ export interface MiniGameRule {
   isPlausible: (payload: Record<string, unknown>) => boolean;
 }
 
+/**
+ * Returns a finite numeric field from a payload, or null if missing.
+ *
+ * @param {Record<string, unknown>} payload The payload to read from.
+ * @param {string} key The payload key to inspect.
+ * @return {number | null} The numeric value, or null when absent.
+ */
 function num(payload: Record<string, unknown>, key: string): number | null {
   const v = payload[key];
   return typeof v === "number" && Number.isFinite(v) ? v : null;
@@ -60,7 +67,8 @@ const accuracyRule: MiniGameRule = {
   isPlausible: (payload) => {
     const correct = num(payload, "correctAnswers");
     const totalTime = num(payload, "totalTimeMs");
-    return correct !== null && correct >= 0 && totalTime !== null && totalTime >= 0;
+    return correct !== null && correct >= 0 &&
+      totalTime !== null && totalTime >= 0;
   },
 };
 
@@ -86,16 +94,25 @@ const genericRule: MiniGameRule = {
     if (score !== null) return score;
 
     const correct = num(payload, "correctAnswers");
-    if (correct !== null) return correct * 1_000_000 - (num(payload, "totalTimeMs") ?? 0);
+    if (correct !== null) {
+      return correct * 1_000_000 - (num(payload, "totalTimeMs") ?? 0);
+    }
 
     const t = num(payload, "reactionTimeMs");
     if (t !== null) return -t;
 
     return null; // truly unrecognized payload shape
   },
-  isPlausible: () => true, // no game-specific bounds known yet — accept by default
+  // no game-specific bounds known yet — accept by default
+  isPlausible: () => true,
 };
 
+/**
+ * Returns the scoring rule for a mini-game id, or the generic fallback.
+ *
+ * @param {string} miniGameId The mini-game identifier.
+ * @return {MiniGameRule} The scoring rule for the id.
+ */
 export function getMiniGameRule(miniGameId: string): MiniGameRule {
   return MINI_GAME_RULES[miniGameId] ?? genericRule;
 }

@@ -24,8 +24,14 @@ import {
  *
  * MVP elimination rule — see prior version's doc comment for the rationale;
  * unchanged apart from the map-based player lookup.
+ *
+ * @param {TournamentDoc} tournament Tournament document to mutate in place.
+ * @param {TournamentRoundDoc} round Completed round document to mutate.
  */
-export function closeRound(tournament: TournamentDoc, round: TournamentRoundDoc): void {
+export function closeRound(
+  tournament: TournamentDoc,
+  round: TournamentRoundDoc,
+): void {
   round.status = ROUND_STATUS.completed;
 
   const scoreOf = (uid: string): number | null =>
@@ -55,16 +61,22 @@ export function closeRound(tournament: TournamentDoc, round: TournamentRoundDoc)
     if (result) result.rank = i + 1;
   });
 
-  const isFinalRound = tournament.currentRoundIndex === tournament.rounds.length - 1;
+  const isFinalRound =
+    tournament.currentRoundIndex === tournament.rounds.length - 1;
   const survivorTarget = isFinalRound ?
     1 :
-    Math.max(MIN_SURVIVORS_PER_ROUND, Math.ceil(ranked.length * (1 - ELIMINATION_FRACTION)));
+    Math.max(
+      MIN_SURVIVORS_PER_ROUND,
+      Math.ceil(
+        ranked.length * (1 - ELIMINATION_FRACTION),
+      ),
+    );
   const eliminationCount = Math.max(0, ranked.length - survivorTarget);
 
   const totalPlayers = Object.keys(tournament.players).length;
-  const alreadyPlaced = Object.values(tournament.players).filter(
-    (p) => p.finalPlacement !== null,
-  ).length;
+  const alreadyPlaced = Object.values(tournament.players)
+    .filter((p) => p.finalPlacement !== null)
+    .length;
 
   // Tail of `ranked` (already sorted best→worst) = this round's cut,
   // ordered best→worst within the eliminated group.
@@ -100,7 +112,9 @@ export function closeRound(tournament: TournamentDoc, round: TournamentRoundDoc)
   const nextIndex = tournament.currentRoundIndex + 1;
   const nextRound = tournament.rounds[nextIndex];
   const now = Timestamp.now();
-  const endsAt = Timestamp.fromMillis(now.toMillis() + DEFAULT_ROUND_DURATION_MS);
+  const endsAt = Timestamp.fromMillis(
+    now.toMillis() + DEFAULT_ROUND_DURATION_MS,
+  );
 
   tournament.currentRoundIndex = nextIndex;
   nextRound.status = ROUND_STATUS.active;

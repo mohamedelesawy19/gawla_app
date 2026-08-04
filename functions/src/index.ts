@@ -12,4 +12,6 @@ export {onUserCreated} from "./on_user_created";
 
 export {startTournament} from "./tournament/start_tournament";
 export {submitRoundResult} from "./tournament/submit_round_result";
-export {advanceStaleTournamentRounds} from "./tournament/advance_stale_tournament_rounds";
+export {
+  advanceStaleTournamentRounds,
+} from "./tournament/advance_stale_tournament_rounds";
