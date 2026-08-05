@@ -20,6 +20,8 @@ The focus is on:
 
 The game should feel like joining a live tournament rather than playing a single game.
 
+Elimination is the emotional core of that feeling: it should never be predictable. Every mini-game carries **its own elimination rule** — ranked cutoff, single-mistake fail, head-to-head duel, survival timer, or team result — so players never know exactly how the next round will cut the pool. See `MINI_GAMES_LIBRARY.md` for the full elimination taxonomy and every mini-game's spec.
+
 ---
 
 # Core Principles
@@ -28,6 +30,7 @@ The game should feel like joining a live tournament rather than playing a single
 - Every tournament contains multiple mini-games.
 - Each mini-game lasts 30–90 seconds.
 - Players are eliminated after each round.
+- **Elimination method varies per mini-game** — there is no single fixed elimination formula. Each mini-game declares its own elimination type (ranked cutoff, single-mistake fail, duel, survival timer, or team result), so the *how* of elimination stays unpredictable across a tournament, not just the *who*.
 - Easy to learn.
 - Hard to master.
 - No complex 3D graphics.
@@ -65,17 +68,19 @@ Leaderboard Update
 
 # Example Tournament
 
+Elimination *types* are deliberately mixed across rounds — not just player counts. See `MINI_GAMES_LIBRARY.md §6` for the taxonomy behind each tag below.
+
 ```
 24 Players
-  ↓ Reaction Challenge
-18 Players
-  ↓ Memory Challenge
-12 Players
-  ↓ Trivia Challenge
-8 Players
-  ↓ Find the Difference
-4 Players
-  ↓ Final Challenge
+  ↓ Reaction Tap        (ranked cutoff)
+16 Players
+  ↓ Tile Trap            (single-mistake fail)
+10 Players
+  ↓ Tug of Power         (team result)
+6 Players
+  ↓ Odd One Out          (head-to-head duel)
+3 Players
+  ↓ Boss Round           (composite finale)
 Winner
 ```
 
@@ -104,22 +109,39 @@ Players join using an invite code shared by the host.
 
 # Mini-Games
 
-## MVP Set
+> Full specs (mechanics, interaction, timing, elimination rule, anti-cheat notes) for every mini-game below live in **`MINI_GAMES_LIBRARY.md`**. This section is a quick-reference index only.
 
-| Mini-Game | Skill Type | Cheat Risk | Notes |
-|---|---|---|---|
-| Reaction Tap | Reflex | High — timestamp spoofing | Requires server-authoritative timing |
-| Quick Trivia | Knowledge | Medium | Answer pool must rotate to prevent memorization/sharing |
-| Memory Cards | Memory | Low | — |
-| Find the Difference | Precision/Perception | Low | — |
-| Color Challenge | Reflex/Attention | Medium | Same timing risk as Reaction Tap |
-| Math Rush | Knowledge/Speed | Medium | Watch for calculator/macro assistance |
-| Sequence Order | Memory | Low | — |
-| Speed Typing | Precision/Speed | Medium | Device keyboard latency varies — needs normalization |
-| True or False | Knowledge | Low | — |
-| Hidden Object | Perception | Low | — |
+## Tier A — MVP Set
 
-## Future Mini-Games
+| Mini-Game | ID | Skill Type | Elimination Type | Cheat Risk | Notes |
+|---|---|---|---|---|---|
+| Reaction Tap | `reaction_tap` | Reflex | Ranked cutoff | High — timestamp spoofing | Requires server-authoritative timing |
+| Quick Trivia | `quick_trivia` | Knowledge | Ranked cutoff | Medium | Answer pool must rotate to prevent memorization/sharing |
+| Memory Cards | `memory_cards` | Memory | Ranked cutoff | Low | — |
+| Find the Difference | `find_the_difference` | Precision/Perception | Ranked cutoff | Low | — |
+| Color Challenge | `color_challenge` | Reflex/Attention | Ranked cutoff | Medium | Same timing risk as Reaction Tap |
+| Math Rush | `math_rush` | Knowledge/Speed | Ranked cutoff | Medium | Watch for calculator/macro assistance |
+| Sequence Order | `sequence_order` | Memory | Single-mistake fail / Ranked cutoff | Low | — |
+| Speed Typing | `speed_typing` | Precision/Speed | Ranked cutoff | Medium | Device keyboard latency varies — needs normalization |
+| True or False | `true_or_false` | Knowledge | Ranked cutoff | Low | — |
+| Hidden Object | `hidden_object` | Perception | Ranked cutoff | Low | — |
+
+## Tier B — Signature Elimination Games
+
+*The set built specifically around the "live elimination tournament" vision — one unpredictable rule per round.*
+
+| Mini-Game | ID | Skill Type | Elimination Type | Notes |
+|---|---|---|---|---|
+| Freeze Frenzy | `freeze_frenzy` | Reflex/Self-control | Single-mistake fail | Server-owned red/green signal |
+| Tile Trap | `tile_trap` | Risk/Memory | Single-mistake fail | Per-player hidden safe path |
+| Musical Freeze | `musical_freeze` | Timing/Reflex | Ranked cutoff | False starts always eliminated |
+| Steady Hands | `steady_hands` | Precision/Control | Survival timer | Gyroscope + touch-drag fallback |
+| Trace the Shape | `trace_the_shape` | Precision/Steadiness | Single-mistake fail | Path validated against shape geometry |
+| Odd One Out | `odd_one_out` | Psychology/Deduction | Head-to-head duel | Commit-then-reveal choice pattern |
+| Tug of Power | `tug_of_power` | Speed/Team | Team result | Per-user tap-rate cap required |
+| Boss Round | `boss_round` | Mixed (finale only) | Composite finale | Replaces the generic "Final Round" step |
+
+## Tier C — Future Concepts
 
 - Drawing Guess
 - Bluff Game
@@ -128,8 +150,7 @@ Players join using an invite code shared by the host.
 - Audio Guess
 - Emoji Puzzle
 - Pattern Memory
-- Team Battle
-- Boss Round
+- Season Events (cosmetic reskins of Tier B games)
 
 ---
 
