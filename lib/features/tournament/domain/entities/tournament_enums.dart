@@ -53,3 +53,41 @@ enum TournamentPlayerStatus {
   /// [TournamentStatus.completed].
   winner,
 }
+
+/// How a round's `MiniGameConfigEntity` decides who's cut, per
+/// `MINI_GAMES_LIBRARY.md §1`'s elimination taxonomy. This is what makes
+/// elimination pluggable per mini-game instead of one formula applying to
+/// every round — see that doc's taxonomy table for the full rationale
+/// behind each member.
+///
+/// Resolution of *which* players are eliminated always happens server-side
+/// (Cloud Functions' `EliminationStrategy` registry — never the client, per
+/// the project's anti-cheat rules). This enum exists on the Flutter side
+/// purely so the Tournament and Mini Games features can *interpret* round
+/// state — e.g. deciding which widget to render, or showing a "Team Blue"
+/// badge — not to compute eliminations themselves.
+enum EliminationType {
+  /// Players ranked by score/time; bottom X% or bottom N eliminated.
+  rankCutoff,
+
+  /// One wrong action/choice = instant elimination, no ranking needed.
+  binaryFail,
+
+  /// Players paired 1v1; losers of each pairing eliminated.
+  duelLoser,
+
+  /// Must maintain a state for the full round duration; failing at any
+  /// point = out.
+  survivalFail,
+
+  /// Two teams compete; the losing team (or its weakest contributors) is
+  /// eliminated.
+  teamLoss,
+
+  /// Finale-only: mixes mechanics, resolves to a single winner.
+  compositeFinal,
+}
+
+/// Whether a round's `EliminationTargetEntity.value` is an absolute
+/// headcount or a fraction of the active pool.
+enum EliminationTargetKind { count, percentage }

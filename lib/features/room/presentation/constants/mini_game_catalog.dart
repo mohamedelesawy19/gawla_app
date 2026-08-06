@@ -27,6 +27,7 @@ class MiniGameCatalogEntry {
 /// catalog use case, this file should be deleted in favor of that.
 abstract final class MiniGameCatalog {
   static const List<MiniGameCatalogEntry> mvpSet = [
+    // ── Tier A ───────────────────────────────────────────────────────────
     MiniGameCatalogEntry(
       id: 'reaction_tap',
       label: 'Reaction Tap',
@@ -76,6 +77,48 @@ abstract final class MiniGameCatalog {
       id: 'hidden_object',
       label: 'Hidden Object',
       icon: Icons.visibility_rounded,
+    ),
+
+    // ── Tier B ───────────────────────────────────────────────────────────
+    MiniGameCatalogEntry(
+      id: 'freeze_frenzy',
+      label: 'Freeze Frenzy',
+      icon: Icons.ac_unit_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'tile_trap',
+      label: 'Tile Trap',
+      icon: Icons.grid_on_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'musical_freeze',
+      label: 'Musical Freeze',
+      icon: Icons.music_note_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'steady_hands',
+      label: 'Steady Hands',
+      icon: Icons.pan_tool_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'trace_the_shape',
+      label: 'Trace the Shape',
+      icon: Icons.gesture_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'odd_one_out',
+      label: 'Odd One Out',
+      icon: Icons.psychology_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'tug_of_power',
+      label: 'Tug of Power',
+      icon: Icons.groups_rounded,
+    ),
+    MiniGameCatalogEntry(
+      id: 'boss_round',
+      label: 'Boss Round',
+      icon: Icons.emoji_events_rounded,
     ),
   ];
 }

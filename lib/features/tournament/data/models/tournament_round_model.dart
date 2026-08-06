@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 // Feature imports:
+import '/features/tournament/data/models/mini_game_config_model.dart';
 import '/features/tournament/data/models/round_result_model.dart';
 import '/features/tournament/domain/entities/tournament_enums.dart';
 import '/features/tournament/domain/entities/tournament_round_entity.dart';
@@ -10,26 +11,30 @@ import '/features/tournament/domain/entities/tournament_round_entity.dart';
 class TournamentRoundModel extends Equatable {
   const TournamentRoundModel({
     required this.roundIndex,
-    required this.miniGameId,
+    required this.miniGameConfig,
     required this.status,
     this.startedAt,
     this.endsAt,
     this.results = const [],
+    this.groupAssignments,
   });
 
   final int roundIndex;
-  final String miniGameId;
+  final MiniGameConfigModel miniGameConfig;
   final RoundStatus status;
   final DateTime? startedAt;
   final DateTime? endsAt;
   final List<RoundResultModel> results;
+  final Map<String, String>? groupAssignments;
 
   // ── Firestore ──────────────────────────────────────────────────────────────
 
   factory TournamentRoundModel.fromMap(Map<String, dynamic> data) {
     return TournamentRoundModel(
       roundIndex: (data['roundIndex'] as num).toInt(),
-      miniGameId: data['miniGameId'] as String,
+      miniGameConfig: MiniGameConfigModel.fromMap(
+        data['miniGameConfig'] as Map<String, dynamic>,
+      ),
       status: RoundStatus.values.byName(
         data['status'] as String? ?? RoundStatus.pending.name,
       ),
@@ -38,17 +43,20 @@ class TournamentRoundModel extends Equatable {
       results: (data['results'] as List<dynamic>? ?? [])
           .map((e) => RoundResultModel.fromMap(e as Map<String, dynamic>))
           .toList(),
+      groupAssignments: (data['groupAssignments'] as Map<String, dynamic>?)
+          ?.map((k, v) => MapEntry(k, v as String)),
     );
   }
 
   Map<String, dynamic> toFirestore() {
     return {
       'roundIndex': roundIndex,
-      'miniGameId': miniGameId,
+      'miniGameConfig': miniGameConfig.toFirestore(),
       'status': status.name,
       'startedAt': startedAt != null ? Timestamp.fromDate(startedAt!) : null,
       'endsAt': endsAt != null ? Timestamp.fromDate(endsAt!) : null,
       'results': results.map((e) => e.toFirestore()).toList(),
+      'groupAssignments': groupAssignments,
     };
   }
 
@@ -57,7 +65,9 @@ class TournamentRoundModel extends Equatable {
   factory TournamentRoundModel.fromJson(Map<String, dynamic> json) {
     return TournamentRoundModel(
       roundIndex: json['roundIndex'] as int,
-      miniGameId: json['miniGameId'] as String,
+      miniGameConfig: MiniGameConfigModel.fromJson(
+        json['miniGameConfig'] as Map<String, dynamic>,
+      ),
       status: RoundStatus.values.byName(json['status'] as String),
       startedAt: json['startedAt'] == null
           ? null
@@ -68,17 +78,20 @@ class TournamentRoundModel extends Equatable {
       results: (json['results'] as List<dynamic>? ?? [])
           .map((e) => RoundResultModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      groupAssignments: (json['groupAssignments'] as Map<String, dynamic>?)
+          ?.map((k, v) => MapEntry(k, v as String)),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'roundIndex': roundIndex,
-      'miniGameId': miniGameId,
+      'miniGameConfig': miniGameConfig.toJson(),
       'status': status.name,
       'startedAt': startedAt?.toIso8601String(),
       'endsAt': endsAt?.toIso8601String(),
       'results': results.map((e) => e.toJson()).toList(),
+      'groupAssignments': groupAssignments,
     };
   }
 
@@ -87,32 +100,35 @@ class TournamentRoundModel extends Equatable {
   factory TournamentRoundModel.fromEntity(TournamentRoundEntity entity) {
     return TournamentRoundModel(
       roundIndex: entity.roundIndex,
-      miniGameId: entity.miniGameId,
+      miniGameConfig: MiniGameConfigModel.fromEntity(entity.miniGameConfig),
       status: entity.status,
       startedAt: entity.startedAt,
       endsAt: entity.endsAt,
       results: entity.results.map(RoundResultModel.fromEntity).toList(),
+      groupAssignments: entity.groupAssignments,
     );
   }
 
   TournamentRoundEntity toEntity() {
     return TournamentRoundEntity(
       roundIndex: roundIndex,
-      miniGameId: miniGameId,
+      miniGameConfig: miniGameConfig.toEntity(),
       status: status,
       startedAt: startedAt,
       endsAt: endsAt,
       results: results.map((e) => e.toEntity()).toList(),
+      groupAssignments: groupAssignments,
     );
   }
 
   @override
   List<Object?> get props => [
     roundIndex,
-    miniGameId,
+    miniGameConfig,
     status,
     startedAt,
     endsAt,
     results,
+    groupAssignments,
   ];
 }

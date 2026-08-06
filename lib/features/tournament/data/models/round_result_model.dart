@@ -9,16 +9,22 @@ class RoundResultModel extends Equatable {
   const RoundResultModel({
     required this.uid,
     this.score,
+    this.passed,
     this.rank,
     required this.eliminated,
     this.submittedAt,
+    this.groupId,
+    this.metadata,
   });
 
   final String uid;
   final double? score;
+  final bool? passed;
   final int? rank;
   final bool eliminated;
   final DateTime? submittedAt;
+  final String? groupId;
+  final Map<String, dynamic>? metadata;
 
   // ── Firestore ──────────────────────────────────────────────────────────────
 
@@ -26,9 +32,12 @@ class RoundResultModel extends Equatable {
     return RoundResultModel(
       uid: data['uid'] as String,
       score: (data['score'] as num?)?.toDouble(),
+      passed: data['passed'] as bool?,
       rank: (data['rank'] as num?)?.toInt(),
       eliminated: data['eliminated'] as bool? ?? false,
       submittedAt: (data['submittedAt'] as Timestamp?)?.toDate(),
+      groupId: data['groupId'] as String?,
+      metadata: (data['metadata'] as Map<String, dynamic>?),
     );
   }
 
@@ -36,11 +45,14 @@ class RoundResultModel extends Equatable {
     return {
       'uid': uid,
       'score': score,
+      'passed': passed,
       'rank': rank,
       'eliminated': eliminated,
       'submittedAt': submittedAt != null
           ? Timestamp.fromDate(submittedAt!)
           : null,
+      'groupId': groupId,
+      'metadata': metadata,
     };
   }
 
@@ -50,11 +62,14 @@ class RoundResultModel extends Equatable {
     return RoundResultModel(
       uid: json['uid'] as String,
       score: (json['score'] as num?)?.toDouble(),
+      passed: json['passed'] as bool?,
       rank: json['rank'] as int?,
       eliminated: json['eliminated'] as bool? ?? false,
       submittedAt: json['submittedAt'] == null
           ? null
           : DateTime.parse(json['submittedAt'] as String),
+      groupId: json['groupId'] as String?,
+      metadata: (json['metadata'] as Map<String, dynamic>?),
     );
   }
 
@@ -62,9 +77,12 @@ class RoundResultModel extends Equatable {
     return {
       'uid': uid,
       'score': score,
+      'passed': passed,
       'rank': rank,
       'eliminated': eliminated,
       'submittedAt': submittedAt?.toIso8601String(),
+      'groupId': groupId,
+      'metadata': metadata,
     };
   }
 
@@ -74,9 +92,12 @@ class RoundResultModel extends Equatable {
     return RoundResultModel(
       uid: entity.uid,
       score: entity.score,
+      passed: entity.passed,
       rank: entity.rank,
       eliminated: entity.eliminated,
       submittedAt: entity.submittedAt,
+      groupId: entity.groupId,
+      metadata: entity.metadata,
     );
   }
 
@@ -84,12 +105,24 @@ class RoundResultModel extends Equatable {
     return RoundResultEntity(
       uid: uid,
       score: score,
+      passed: passed,
       rank: rank,
       eliminated: eliminated,
       submittedAt: submittedAt,
+      groupId: groupId,
+      metadata: metadata,
     );
   }
 
   @override
-  List<Object?> get props => [uid, score, rank, eliminated, submittedAt];
+  List<Object?> get props => [
+    uid,
+    score,
+    passed,
+    rank,
+    eliminated,
+    submittedAt,
+    groupId,
+    metadata,
+  ];
 }

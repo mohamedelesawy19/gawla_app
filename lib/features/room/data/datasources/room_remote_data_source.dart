@@ -134,12 +134,8 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
   @override
   Stream<String?> watchRoomIdForUser(String uid) async* {
     try {
-      // Requires a composite index on (playerUids ARRAY, status ASC) —
-      // Firestore will surface a console link the first time this runs
-      // if it's missing.
       yield* _rooms
           .where('playerUids', arrayContains: uid)
-          .where('status', isNotEqualTo: RoomStatus.closed.name)
           .limit(1)
           .snapshots()
           .map(
