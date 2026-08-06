@@ -15,3 +15,6 @@ export {submitRoundResult} from "./tournament/submit_round_result";
 export {
   advanceStaleTournamentRounds,
 } from "./tournament/advance_stale_tournament_rounds";
+export {
+  driveTugOfPowerRound,
+} from "./tournament/mini_games/tug_of_power/drive_tug_of_power_round";

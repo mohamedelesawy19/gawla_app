@@ -14,9 +14,14 @@ const db = getFirestore();
  * Safety net for rounds nobody explicitly closes: if every active player
  * already submitted, `submitRoundResult` closes the round itself. This
  * scheduled function catches the other case — a round whose `endsAt` has
- * passed with players still missing (disconnected, AFK, ...) — and
- * force-closes it, treating anyone who never submitted as a no-show
- * (ranked last, per `closeRound`'s tie-break rules).
+ * passed with players still missing (disconnected, AFK, an unresolved duel
+ * tie, ...) — and force-closes it via the same `closeRound` orchestration,
+ * which delegates to whichever `EliminationStrategy` the round's
+ * `miniGameConfig.eliminationType` declares. Every built-in strategy
+ * treats a missing submission as an automatic loss (see
+ * `elimination_strategy.ts`'s doc comment on `RoundParticipant`), so this
+ * function never needs its own elimination-type-specific logic — same as
+ * `submitRoundResult`'s early-close path.
  *
  * Runs every minute; cheap given a tournament only lives ~5-8 minutes
  * total and there should be very few `inProgress` tournaments at once.

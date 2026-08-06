@@ -1,8 +1,9 @@
 import {Timestamp} from "firebase-admin/firestore";
 import {
-  DEFAULT_ROUND_DURATION_MS,
-  ELIMINATION_FRACTION,
-  MIN_SURVIVORS_PER_ROUND,
+  getEliminationStrategy,
+} from "./elimination/elimination_strategy_registry";
+import {RoundParticipant} from "./elimination/elimination_strategy";
+import {
   PLAYER_STATUS,
   ROUND_STATUS,
   TOURNAMENT_STATUS,
@@ -12,18 +13,22 @@ import {
 } from "./tournament_types";
 
 /**
- * Ranks a round's results, eliminates the bottom `ELIMINATION_FRACTION` of
- * still-active players, and either opens the next round or ends the
+ * Ranks/resolves a round's results by delegating to whichever
+ * `EliminationStrategy` the round's own `miniGameConfig.eliminationType`
+ * declares, applies the resulting eliminations, and either opens the next
+ * round (using *its* config, not a global default) or ends the
  * tournament. Mutates `tournament` and `round` in place — the caller
  * writes them back inside its own transaction.
+ *
+ * This function no longer contains ANY elimination-type-specific logic —
+ * that's the actual fix over the previous version, which only ever
+ * implemented `rankCutoff` at a hardcoded 25%. See
+ * ARCHITECTURE_ANALYSIS.md §Gap 1 for the full rationale.
  *
  * `tournament.players` is a map keyed by uid (mirrors `RoomModel`), so this
  * works over `Object.entries(...)` rather than array methods. Mutating a
  * value obtained from `Object.entries`/`Object.values` still mutates the
  * original map entry, since object values are references.
- *
- * MVP elimination rule — see prior version's doc comment for the rationale;
- * unchanged apart from the map-based player lookup.
  *
  * @param {TournamentDoc} tournament Tournament document to mutate in place.
  * @param {TournamentRoundDoc} round Completed round document to mutate.
@@ -34,91 +39,121 @@ export function closeRound(
 ): void {
   round.status = ROUND_STATUS.completed;
 
-  const scoreOf = (uid: string): number | null =>
-    round.results.find((r) => r.uid === uid)?.score ?? null;
-
-  // Best → worst. A null score (voided submission or no-show) always ranks
-  // below any real score.
-  const byScoreDesc = (
-    a: [string, TournamentPlayerDoc],
-    b: [string, TournamentPlayerDoc],
-  ): number => {
-    const scoreA = scoreOf(a[0]);
-    const scoreB = scoreOf(b[0]);
-    if (scoreA === null && scoreB === null) return 0;
-    if (scoreA === null) return 1;
-    if (scoreB === null) return -1;
-    return scoreB - scoreA;
-  };
+  const config = round.miniGameConfig;
+  const strategy = getEliminationStrategy(config.eliminationType);
 
   const activeEntries = Object.entries(tournament.players).filter(
     ([, p]) => p.status === PLAYER_STATUS.active,
   );
-  const ranked = [...activeEntries].sort(byScoreDesc);
 
-  ranked.forEach(([uid], i) => {
+  const participants: RoundParticipant[] = activeEntries.map(([uid]) => {
+    const result = round.results.find((r) => r.uid === uid);
+    return {
+      uid,
+      score: result?.score ?? null,
+      passed: result?.passed ?? null,
+      groupId: round.groupAssignments?.[uid] ?? null,
+    };
+  });
+
+  const decision = strategy.resolve(participants, config);
+
+  decision.rankedUids.forEach((uid, i) => {
     const result = round.results.find((r) => r.uid === uid);
     if (result) result.rank = i + 1;
   });
-
-  const isFinalRound =
-    tournament.currentRoundIndex === tournament.rounds.length - 1;
-  const survivorTarget = isFinalRound ?
-    1 :
-    Math.max(
-      MIN_SURVIVORS_PER_ROUND,
-      Math.ceil(
-        ranked.length * (1 - ELIMINATION_FRACTION),
-      ),
-    );
-  const eliminationCount = Math.max(0, ranked.length - survivorTarget);
-
-  const totalPlayers = Object.keys(tournament.players).length;
-  const alreadyPlaced = Object.values(tournament.players)
-    .filter((p) => p.finalPlacement !== null)
-    .length;
-
-  // Tail of `ranked` (already sorted best→worst) = this round's cut,
-  // ordered best→worst within the eliminated group.
-  const eliminatedThisRound = ranked.slice(ranked.length - eliminationCount);
-  [...eliminatedThisRound].reverse().forEach(([uid, p], i) => {
-    // reversed: worst-of-the-eliminated first, so it gets the numerically
-    // worst placement.
-    p.status = PLAYER_STATUS.eliminated;
-    p.eliminatedAtRoundIndex = tournament.currentRoundIndex;
-    p.finalPlacement = totalPlayers - alreadyPlaced - i;
+  decision.eliminatedUids.forEach((uid) => {
     const result = round.results.find((r) => r.uid === uid);
     if (result) result.eliminated = true;
+  });
+
+  const totalPlayers = Object.keys(tournament.players).length;
+  const alreadyPlaced = Object.values(tournament.players).filter(
+    (p) => p.finalPlacement !== null,
+  ).length;
+
+  // Worst-of-the-eliminated-this-round first, so it gets the numerically
+  // worst placement. `decision.rankedUids` is best->worst, so eliminated
+  // uids within it are already in best->worst order among themselves;
+  // reverse just that slice.
+  const eliminatedThisRound = decision.eliminatedUids;
+  [...eliminatedThisRound].reverse().forEach((uid, i) => {
+    const player = tournament.players[uid];
+    if (!player) return;
+    player.status = PLAYER_STATUS.eliminated;
+    player.eliminatedAtRoundIndex = tournament.currentRoundIndex;
+    player.finalPlacement = totalPlayers - alreadyPlaced - i;
   });
 
   const remainingEntries = Object.entries(tournament.players).filter(
     ([, p]) => p.status === PLAYER_STATUS.active,
   );
 
-  if (remainingEntries.length <= 1 || isFinalRound) {
-    const finalRanked = [...remainingEntries].sort(byScoreDesc);
-    finalRanked.forEach(([, p], i) => {
-      p.finalPlacement = i + 1;
-      p.status = i === 0 ? PLAYER_STATUS.winner : PLAYER_STATUS.eliminated;
-    });
+  const isFinalRound =
+    tournament.currentRoundIndex === tournament.rounds.length - 1;
 
-    tournament.status = TOURNAMENT_STATUS.completed;
-    tournament.winnerUid = finalRanked[0]?.[0] ?? null;
-    tournament.completedAt = Timestamp.now();
-    tournament.currentRoundEndsAt = null;
+  if (remainingEntries.length <= 1 || isFinalRound) {
+    finishTournament(tournament, remainingEntries);
     return;
   }
 
+  advanceToNextRound(tournament, remainingEntries.map(([uid]) => uid));
+}
+
+/**
+ * Finalizes placements for remaining players and marks tournament complete.
+ *
+ * @param {TournamentDoc} tournament Tournament being finalized.
+ * @param {Array<[string, TournamentPlayerDoc]>} remainingEntries
+ * Remaining active players.
+ * @return {void}
+ */
+function finishTournament(
+  tournament: TournamentDoc,
+  remainingEntries: Array<[string, TournamentPlayerDoc]>,
+): void {
+  // No further round data to rank by at this point (elimination already
+  // decided the outcome) — remaining players are placed in whatever order
+  // they're left in, with the sole survivor (if any) crowned winner.
+  remainingEntries.forEach(([, p], i) => {
+    p.finalPlacement = i + 1;
+    p.status = i === 0 ? PLAYER_STATUS.winner : PLAYER_STATUS.eliminated;
+  });
+
+  tournament.status = TOURNAMENT_STATUS.completed;
+  tournament.winnerUid = remainingEntries[0]?.[0] ?? null;
+  tournament.completedAt = Timestamp.now();
+  tournament.currentRoundEndsAt = null;
+}
+
+/**
+ * Activates the next round and computes round timing/group assignments.
+ *
+ * @param {TournamentDoc} tournament Tournament to mutate.
+ * @param {string[]} remainingActiveUids Active player ids for grouping.
+ * @return {void}
+ */
+function advanceToNextRound(
+  tournament: TournamentDoc,
+  remainingActiveUids: string[],
+): void {
   const nextIndex = tournament.currentRoundIndex + 1;
   const nextRound = tournament.rounds[nextIndex];
+  const nextConfig = nextRound.miniGameConfig;
+  const nextStrategy = getEliminationStrategy(nextConfig.eliminationType);
+
   const now = Timestamp.now();
   const endsAt = Timestamp.fromMillis(
-    now.toMillis() + DEFAULT_ROUND_DURATION_MS,
+    now.toMillis() + nextConfig.roundDurationSec * 1000,
   );
 
   tournament.currentRoundIndex = nextIndex;
   nextRound.status = ROUND_STATUS.active;
   nextRound.startedAt = now;
   nextRound.endsAt = endsAt;
+  nextRound.groupAssignments = nextStrategy.prepareGroups(
+    remainingActiveUids,
+    nextConfig,
+  );
   tournament.currentRoundEndsAt = endsAt;
 }

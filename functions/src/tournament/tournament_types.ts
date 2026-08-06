@@ -5,11 +5,28 @@ import {Timestamp} from "firebase-admin/firestore";
 export const TOURNAMENTS_COLLECTION = "tournaments";
 export const ROOMS_COLLECTION = "rooms";
 
+// Private, server-only subcollection (per-tournament) used to hold duel
+// commit payloads between the two duelists' submissions. Nothing outside
+// Cloud Functions (running under the Admin SDK, which bypasses security
+// rules) may ever read this collection.
+//
+// IMPORTANT: this requires a matching Firestore security rule —
+// `match /tournaments/{id}/_duelCommits/{doc} { allow read, write: if false; }`
+// — which lives outside this file's scope (rules.rules file wasn't part of
+// the provided set) but MUST be added alongside this change, or the
+// commit-then-reveal guarantee `MINI_GAMES_LIBRARY.md §4.6` requires is
+// void.
+export const DUEL_COMMITS_SUBCOLLECTION = "_duelCommits";
+
 // ── Enum-like string literals ────────────────────────────────────────────────
 // NOTE: these MUST match `tournament_enums.dart` member-for-member, since
 // the Flutter side parses them with `EnumType.values.byName(...)`, which
 // throws on any mismatch. Update these (and the maps below) if your real
-// enum members differ.
+// enum members differ. Deliberately camelCase (not the snake_case ids used
+// in MINI_GAMES_LIBRARY.md's taxonomy table) to stay consistent with the
+// existing `TournamentStatus`/`RoundStatus` convention below — the
+// snake_case ids in the library doc are a documentation convention for the
+// spec, not a literal wire-format requirement.
 export type TournamentStatus =
   | "starting"
   | "inProgress"
@@ -18,6 +35,25 @@ export type TournamentStatus =
 export type RoundStatus = "pending" | "active" | "completed";
 export type TournamentPlayerStatus = "active" | "eliminated" | "winner";
 export type RoomStatus = "waiting" | "starting" | "inProgress" | "closed";
+
+/**
+ * Mirrors `MINI_GAMES_LIBRARY.md §1`'s elimination taxonomy. This is the
+ * single dimension the whole refactor pivots on: instead of the Tournament
+ * engine hardcoding one elimination formula, every round declares which of
+ * these six it uses, and `getEliminationStrategy()` (see
+ * `elimination/elimination_strategy_registry.ts`) picks the matching
+ * implementation. Adding a 7th type later means adding one enum member +
+ * one strategy file, never touching `tournament_round_closer.ts`.
+ */
+export type EliminationType =
+  | "rankCutoff"
+  | "binaryFail"
+  | "duelLoser"
+  | "survivalFail"
+  | "teamLoss"
+  | "compositeFinal";
+
+export type EliminationTargetKind = "count" | "percentage";
 
 export const TOURNAMENT_STATUS: Record<string, TournamentStatus> = {
   starting: "starting",
@@ -45,18 +81,102 @@ export const ROOM_STATUS: Record<string, RoomStatus> = {
   closed: "closed",
 };
 
+export const ELIMINATION_TYPE: Record<string, EliminationType> = {
+  rankCutoff: "rankCutoff",
+  binaryFail: "binaryFail",
+  duelLoser: "duelLoser",
+  survivalFail: "survivalFail",
+  teamLoss: "teamLoss",
+  compositeFinal: "compositeFinal",
+};
+
 // ── Room status strings ─────
 export const ROOM_STATUS_IN_PROGRESS = "inProgress";
 export const ROOM_STATUS_WAITING = "waiting";
 
 // ── Tunable gameplay constants ─────
 export const MIN_PLAYERS_TO_START = 2;
-export const DEFAULT_ROUND_DURATION_MS = 60_000; // 60s/round; tune freely
-export const ELIMINATION_FRACTION = 0.25; // cut the worst 25% of active
-// players each round.
+// Fallback only — used by `mini_game_catalog.ts` when Remote Config has no
+// entry for a game yet. Real round timing now comes from each round's own
+// `MiniGameConfig.roundDurationSec` (see §Gap 5 in ARCHITECTURE_ANALYSIS.md);
+// nothing in the round-closing path reads this constant directly anymore.
+export const FALLBACK_ROUND_DURATION_MS = 45_000;
+// Fallback elimination fraction for `rankCutoff` games with no catalog
+// entry. Same rationale as above — no longer a single global applied to
+// every round.
+export const FALLBACK_ELIMINATION_FRACTION = 0.35;
 export const MIN_SURVIVORS_PER_ROUND = 1; // never eliminate down to 0
 
 // ── Firestore document shapes (mirror the Dart models 1:1) ──────────────────
+
+export interface EliminationTargetDoc {
+  kind: EliminationTargetKind;
+  value: number; // count -> integer; percentage -> 0..1 fraction
+}
+
+/**
+ * Server-resolved, round-scoping configuration for one mini-game instance.
+ * Resolved once per round (see `mini_game_catalog.ts`) from Remote Config
+ * so game balance (duration, cut %) can be tuned without an app release —
+ * `PROJECT_OVERVIEW.md`'s "configuration-driven gameplay" requirement.
+ */
+export interface MiniGameConfig {
+  gameId: string;
+  roundDurationSec: number;
+  eliminationType: EliminationType;
+  // Not every elimination type needs this (binaryFail/survivalFail/
+  // duelLoser/compositeFinal are intrinsic — see each strategy's doc
+  // comment). rankCutoff always uses it; teamLoss uses it optionally to
+  // switch from "eliminate the whole losing team" to "eliminate its N
+  // weakest contributors".
+  eliminationTarget: EliminationTargetDoc | null;
+  difficultyModifier: number | null;
+}
+
+export interface RoundResultDoc {
+  uid: string;
+  // Meaningful for rankCutoff / teamLoss (higher = better, already
+  // normalized — see `mini_games/mini_game_definition.ts`). `null` for
+  // elimination types that resolve via `passed` instead.
+  score: number | null;
+  // Meaningful for binaryFail / survivalFail / duelLoser. `null` while a
+  // duel is still awaiting the opponent's commit, or simply unused by
+  // score-driven types.
+  passed: boolean | null;
+  // 1-based placement within the round. Populated once the round closes;
+  // its *scope* (global rank vs. within-duel vs. within-team) depends on
+  // the elimination type, purely for UI/analytics — never authoritative
+  // for elimination itself (`passed`/membership in `eliminatedUids` is).
+  rank: number | null;
+  eliminated: boolean;
+  submittedAt: Timestamp | null;
+  // Set by `start_tournament.ts` / `tournament_round_closer.ts` from
+  // `TournamentRoundDoc.groupAssignments` at submission time — which duel
+  // pair or team this result belongs to. `null` for ungrouped elimination
+  // types.
+  groupId: string | null;
+  // Game-specific, safe-to-reveal display data set only AFTER elimination
+  // is resolved (e.g. both duelists' choices, for the reveal animation).
+  // Deliberately untyped/opaque so adding a new mini-game never requires
+  // widening this doc's schema.
+  metadata: Record<string, unknown> | null;
+}
+
+export interface TournamentRoundDoc {
+  roundIndex: number;
+  // Full resolved config, not a bare id — see `MiniGameConfig` above. The
+  // gameId itself still lives at `miniGameConfig.gameId`.
+  miniGameConfig: MiniGameConfig;
+  status: RoundStatus;
+  startedAt: Timestamp | null;
+  endsAt: Timestamp | null;
+  results: RoundResultDoc[];
+  // uid -> groupId. Assigned by the elimination strategy's `prepareGroups`
+  // when the round is activated, so clients know their duel opponent / team
+  // before they have to act. `null` for ungrouped elimination types
+  // (rankCutoff, binaryFail, survivalFail, compositeFinal in its MVP form).
+  groupAssignments: Record<string, string> | null;
+}
 
 export interface TournamentPlayerDoc {
   displayName: string;
@@ -66,27 +186,15 @@ export interface TournamentPlayerDoc {
   finalPlacement: number | null;
 }
 
-export interface RoundResultDoc {
-  uid: string;
-  score: number | null;
-  rank: number | null;
-  eliminated: boolean;
-  submittedAt: Timestamp | null;
-}
-
-export interface TournamentRoundDoc {
-  roundIndex: number;
-  miniGameId: string;
-  status: RoundStatus;
-  startedAt: Timestamp | null;
-  endsAt: Timestamp | null;
-  results: RoundResultDoc[];
-}
-
 export interface TournamentDoc {
   roomId: string;
   hostUid: string;
   status: TournamentStatus;
+  // Still just ids — "which games, in what order" is a lighter-weight,
+  // index-level fact than a round's full config, and lobby-facing UI (e.g.
+  // showing upcoming game icons) shouldn't need a resolved config to do
+  // that. The authoritative per-round config lives on
+  // `TournamentRoundDoc.miniGameConfig`.
   miniGameRotation: string[];
   currentRoundIndex: number;
   rounds: TournamentRoundDoc[];

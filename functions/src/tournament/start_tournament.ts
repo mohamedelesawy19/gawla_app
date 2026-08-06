@@ -1,7 +1,10 @@
 import {FieldValue, getFirestore, Timestamp} from "firebase-admin/firestore";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {
-  DEFAULT_ROUND_DURATION_MS,
+  getEliminationStrategy,
+} from "./elimination/elimination_strategy_registry";
+import {getMiniGameConfig} from "./mini_game_catalog";
+import {
   MIN_PLAYERS_TO_START,
   PLAYER_STATUS,
   ROOMS_COLLECTION,
@@ -33,6 +36,12 @@ interface StartTournamentResponse {
  * verification, the player/rotation snapshot, and the room-status flip —
  * see `TournamentRemoteDataSource`'s doc comment on the Flutter side for
  * why (a Flutter client is inherently inspectable).
+ *
+ * Mini-game configs are resolved from the catalog (Remote Config-backed —
+ * see `mini_game_catalog.ts`) BEFORE the transaction, since Remote Config
+ * reads aren't transactional and there's nothing tournament-specific to
+ * race against here (the catalog is the same for every tournament, and its
+ * few-minute cache means back-to-back starts don't refetch anyway).
  */
 export const startTournament = onCall<StartTournamentRequest>(
   async (request): Promise<StartTournamentResponse> => {
@@ -51,6 +60,21 @@ export const startTournament = onCall<StartTournamentRequest>(
 
     const roomRef = db.collection(ROOMS_COLLECTION).doc(roomId);
     const tournamentRef = db.collection(TOURNAMENTS_COLLECTION).doc();
+
+    // Read outside the transaction: room membership/rotation are read
+    // again (and re-validated) from the transactional snapshot below, so
+    // this pre-read is only used to know WHICH game ids to resolve configs
+    // for — a stale read here just means we resolve configs for a
+    // rotation that turns out to be wrong, which the transaction's own
+    // re-read will catch anyway.
+    const preReadSnap = await roomRef.get();
+    const preReadData = preReadSnap.data();
+    const rotationIds = preReadData ?
+      parseRoomSnapshot(preReadData).miniGameRotation :
+      [];
+    const resolvedConfigs = await Promise.all(
+      rotationIds.map((gameId, index) => getMiniGameConfig(gameId, index)),
+    );
 
     await db.runTransaction(async (tx) => {
       const roomSnap = await tx.get(roomRef);
@@ -94,11 +118,17 @@ export const startTournament = onCall<StartTournamentRequest>(
           "Room has no mini-game rotation configured.",
         );
       }
+      if (room.miniGameRotation.join() !== rotationIds.join()) {
+        // Rotation changed between the pre-read and the transaction (e.g.
+        // the host edited settings mid-request) — fail closed rather than
+        // starting with a mismatched set of resolved configs.
+        throw new HttpsError(
+          "aborted",
+          "Room settings changed, please try again.",
+        );
+      }
 
       const now = Timestamp.now();
-      const firstRoundEndsAt = Timestamp.fromMillis(
-        now.toMillis() + DEFAULT_ROUND_DURATION_MS,
-      );
 
       const players: Record<string, TournamentPlayerDoc> = {};
       for (const p of room.players) {
@@ -110,15 +140,25 @@ export const startTournament = onCall<StartTournamentRequest>(
           finalPlacement: null,
         };
       }
+      const activeUids = room.players.map((p) => p.uid);
 
-      const rounds: TournamentRoundDoc[] = room.miniGameRotation.map(
-        (miniGameId, index) => ({
+      const firstConfig = resolvedConfigs[0];
+      const firstRoundEndsAt = Timestamp.fromMillis(
+        now.toMillis() + firstConfig.roundDurationSec * 1000,
+      );
+      const firstStrategy = getEliminationStrategy(firstConfig.eliminationType);
+
+      const rounds: TournamentRoundDoc[] = resolvedConfigs.map(
+        (miniGameConfig, index) => ({
           roundIndex: index,
-          miniGameId,
+          miniGameConfig,
           status: index === 0 ? ROUND_STATUS.active : ROUND_STATUS.pending,
           startedAt: index === 0 ? now : null,
           endsAt: index === 0 ? firstRoundEndsAt : null,
           results: [],
+          groupAssignments: index === 0 ?
+            firstStrategy.prepareGroups(activeUids, firstConfig) :
+            null,
         }),
       );
 
