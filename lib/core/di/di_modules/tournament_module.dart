@@ -6,6 +6,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import '/core/di/service_locator.dart';
 
 // Features imports:
+import '/features/room/domain/usecases/leave_room_usecase.dart';
 import '/features/tournament/data/datasources/tournament_remote_data_source.dart';
 import '/features/tournament/data/repositories/tournament_repository_impl.dart';
 import '/features/tournament/domain/repositories/tournament_repository.dart';
@@ -67,6 +68,7 @@ class TournamentModule {
       () => TournamentBloc(
         watchTournament: ServiceLocator.get<WatchTournamentUseCase>(),
         submitRoundResult: ServiceLocator.get<SubmitRoundResultUseCase>(),
+        leaveRoom: ServiceLocator.get<LeaveRoomUseCase>(),
       ),
     );
   }

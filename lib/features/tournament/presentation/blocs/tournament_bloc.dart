@@ -8,6 +8,7 @@ import '/core/errors/failures.dart';
 import '/core/usecases/usecase.dart';
 
 // Feature imports:
+import '/features/room/domain/usecases/leave_room_usecase.dart';
 import '/features/tournament/domain/entities/tournament_entity.dart';
 import '/features/tournament/domain/entities/tournament_round_entity.dart';
 import '/features/tournament/domain/usecases/submit_round_result_usecase.dart';
@@ -32,6 +33,7 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
   TournamentBloc({
     required this._watchTournament,
     required this._submitRoundResult,
+    required this._leaveRoom,
   }) : super(const TournamentState()) {
     // Restartable: a new watch request (including a "stop", i.e. `null`
     // tournamentId) must always supersede whatever was previously being
@@ -44,10 +46,12 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
       _onSubmitRoundResult,
       transformer: droppable(),
     );
+    on<TournamentLeaveEvent>(_onLeave, transformer: droppable());
   }
 
   final WatchTournamentUseCase _watchTournament;
   final SubmitRoundResultUseCase _submitRoundResult;
+  final LeaveRoomUseCase _leaveRoom;
 
   Future<void> _onWatch(
     TournamentWatchEvent event,
@@ -98,6 +102,35 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
     // No need to touch `tournament` here: the ongoing watch subscription
     // will deliver the scored result (and any resulting elimination) on
     // its own.
+    emit(
+      result.fold(
+        (failure) =>
+            state.copyWith(isPerformingAction: false, failure: failure),
+        (_) => state.copyWith(isPerformingAction: false),
+      ),
+    );
+  }
+
+  Future<void> _onLeave(
+    TournamentLeaveEvent event,
+    Emitter<TournamentState> emit,
+  ) async {
+    final roomId = state.tournament?.roomId;
+    if (roomId == null) {
+      return; // Already left or never joined a tournament in the first place.
+    }
+
+    emit(state.copyWith(isPerformingAction: true, clearFailure: true));
+
+    final result = await _leaveRoom(LeaveRoomParams(roomId: roomId));
+
+    // No manual navigation or state reset is needed after a successful leave.
+    // Removing the player's uid from `playerUids` is the very signal observed
+    // by `WatchRoomIdForUserUseCase` inside `SessionBloc`, which automatically
+    // transitions the session back to `authenticated`. `AppRouter` then
+    // redirect to the Home screen through the same reactive flow that brought
+    // the user into the tournament in the first place. `TournamentBloc` remains
+    // completely unaware of navigation by design.
     emit(
       result.fold(
         (failure) =>

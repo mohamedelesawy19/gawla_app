@@ -46,3 +46,7 @@ final class TournamentSubmitRoundResultEvent extends TournamentEvent {
   @override
   List<Object?> get props => [roundIndex, payload];
 }
+
+class TournamentLeaveEvent extends TournamentEvent {
+  const TournamentLeaveEvent();
+}
