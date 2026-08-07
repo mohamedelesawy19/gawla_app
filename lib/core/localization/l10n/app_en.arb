@@ -77,5 +77,20 @@
   "cancel": "Cancel",
   "waitingRoom": "Waiting Room",
   "players": "Players",
-  "tournamentStartingGetReady": "Tournament starting — get ready!"
+  "tournamentStartingGetReady": "Tournament starting — get ready!",
+  "startTournament": "Start Tournament",
+
+  "tournamentGetReady": "Get Ready!",
+  "tournamentRoundLabel": "Round {current} of {total}",
+  "tournamentPlayersRemaining": "{count} players remaining",
+  "tournamentEliminated": "Eliminated",
+  "tournamentRankLabel": "Rank #{rank}",
+  "tournamentRoundResultsTitle": "Round {round} Results",
+  "tournamentSpectating": "You are now spectating",
+  "tournamentCancelled": "Tournament Cancelled",
+  "tournamentVictoryTitle": "Victory!",
+  "tournamentEndedTitle": "Tournament Complete",
+  "tournamentFinalStandings" : "Final Standings",
+
+  "continueLabel": "Continue"
 }

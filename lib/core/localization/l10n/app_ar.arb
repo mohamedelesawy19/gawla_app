@@ -77,5 +77,20 @@
   "cancel": "إلغاء",
   "waitingRoom": "غرفة الانتظار",
   "players": "اللاعبون",
-  "tournamentStartingGetReady": "البطولة على وشك البدء — استعد!"
+  "tournamentStartingGetReady": "البطولة على وشك البدء — استعد!",
+  "startTournament": "ابدأ البطولة",
+
+  "tournamentGetReady": "استعد للجولة القادمة!",
+  "tournamentRoundLabel": "الجولة {current} من {total}",
+  "tournamentPlayersRemaining": "المتبقي {count} لاعب",
+  "tournamentEliminated": "تم إقصاؤك",
+  "tournamentRankLabel": "المركز #{rank}",
+  "tournamentRoundResultsTitle": "نتائج الجولة {round}",
+  "tournamentSpectating": "أنت الآن تشاهد البطولة",
+  "tournamentCancelled": "تم إلغاء البطولة",
+  "tournamentVictoryTitle": "لقد فزت!",
+  "tournamentEndedTitle": "انتهت البطولة",
+  "tournamentFinalStandings": "الترتيب النهائي",
+
+  "continueLabel": "متابعة"
 }

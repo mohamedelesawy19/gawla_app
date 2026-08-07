@@ -229,4 +229,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tournamentStartingGetReady => 'Tournament starting — get ready!';
+
+  @override
+  String get startTournament => 'Start Tournament';
+
+  @override
+  String get tournamentGetReady => 'Get Ready!';
+
+  @override
+  String tournamentRoundLabel(Object current, Object total) {
+    return 'Round $current of $total';
+  }
+
+  @override
+  String tournamentPlayersRemaining(Object count) {
+    return '$count players remaining';
+  }
+
+  @override
+  String get tournamentEliminated => 'Eliminated';
+
+  @override
+  String tournamentRankLabel(Object rank) {
+    return 'Rank #$rank';
+  }
+
+  @override
+  String tournamentRoundResultsTitle(Object round) {
+    return 'Round $round Results';
+  }
+
+  @override
+  String get tournamentSpectating => 'You are now spectating';
+
+  @override
+  String get tournamentCancelled => 'Tournament Cancelled';
+
+  @override
+  String get tournamentVictoryTitle => 'Victory!';
+
+  @override
+  String get tournamentEndedTitle => 'Tournament Complete';
+
+  @override
+  String get tournamentFinalStandings => 'Final Standings';
+
+  @override
+  String get continueLabel => 'Continue';
 }

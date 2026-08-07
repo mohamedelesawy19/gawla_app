@@ -8,6 +8,8 @@ import '/core/design_system/spacing.dart';
 import '/core/design_system/typography.dart';
 import '/core/extensions/media_query_extention.dart';
 import '/core/localization/localization_helpers.dart';
+import '/core/utils/string_utils.dart';
+import '/core/widgets/animations/fade_slide_in.dart';
 import '/core/widgets/buttons/primary_button.dart';
 import '/core/widgets/common/avatar_face.dart';
 
@@ -109,23 +111,15 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
                         end: AppSpacing.lg,
                         bottom: compact ? AppSpacing.md : AppSpacing.lg,
                       ),
-                      title: _FadeSlideIn(
+                      title: FadeSlideIn(
                         controller: _controller,
-                        interval: const Interval(
-                          0.15,
-                          0.6,
-                          curve: Curves.easeOut,
-                        ),
-                        slideDistance: 12,
+                        curve: const Interval(0.15, 0.6, curve: Curves.easeOut),
+                        offset: const Offset(0, 12),
                         child: Text(_resultTitle(context)),
                       ),
-                      background: _FadeSlideIn(
+                      background: FadeSlideIn(
                         controller: _controller,
-                        interval: const Interval(
-                          0.0,
-                          0.5,
-                          curve: Curves.easeOut,
-                        ),
+                        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
                         child: _ResultHero(
                           isWinner: _viewerIsWinner,
                           controller: _controller,
@@ -139,9 +133,9 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
                     sliver: SliverList(
                       delegate: SliverChildListDelegate([
                         if (hasPodium)
-                          _FadeSlideIn(
+                          FadeSlideIn(
                             controller: _controller,
-                            interval: const Interval(
+                            curve: const Interval(
                               0.25,
                               0.75,
                               curve: Curves.easeOut,
@@ -153,14 +147,14 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
                             ),
                           ),
                         if (hasPodium && rest.isNotEmpty)
-                          _FadeSlideIn(
+                          FadeSlideIn(
                             controller: _controller,
-                            interval: const Interval(
+                            curve: const Interval(
                               0.30,
                               0.60,
                               curve: Curves.easeOut,
                             ),
-                            slideDistance: 14,
+                            offset: const Offset(0, 14),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -180,13 +174,13 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
                           ),
                         for (var i = 0; i < rest.length; i++) ...[
                           if (i > 0) AppSpacing.verticalSpaceXs,
-                          _FadeSlideIn(
+                          FadeSlideIn(
                             controller: _controller,
-                            interval: _staggerInterval(
+                            curve: _staggerInterval(
                               index: i,
                               base: hasPodium ? 0.35 : 0.15,
                             ),
-                            slideDistance: 14,
+                            offset: const Offset(0, 14),
                             child: TournamentRankedRow(
                               rank: rest[i].finalPlacement,
                               uid: rest[i].uid,
@@ -211,10 +205,10 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
               ),
             ),
             AppSpacing.verticalSpaceLg,
-            _FadeSlideIn(
+            FadeSlideIn(
               controller: _controller,
-              interval: const Interval(0.7, 1.0, curve: Curves.easeOut),
-              slideDistance: 16,
+              curve: const Interval(0.7, 1.0, curve: Curves.easeOut),
+              offset: const Offset(0, 16),
               child: SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
@@ -234,39 +228,6 @@ class _TournamentWinnerViewState extends State<TournamentWinnerView>
     final start = (base + index * 0.05).clamp(0.0, 0.85);
     final end = (start + 0.3).clamp(0.0, 1.0);
     return Interval(start, end, curve: Curves.easeOut);
-  }
-}
-
-class _FadeSlideIn extends StatelessWidget {
-  const _FadeSlideIn({
-    required this.controller,
-    required this.interval,
-    required this.child,
-    this.slideDistance = 20,
-  });
-
-  final AnimationController controller;
-  final Interval interval;
-  final Widget child;
-  final double slideDistance;
-
-  @override
-  Widget build(BuildContext context) {
-    final curved = CurvedAnimation(parent: controller, curve: interval);
-    return AnimatedBuilder(
-      animation: curved,
-      builder: (context, child) {
-        final t = curved.value.clamp(0.0, 1.0);
-        return Opacity(
-          opacity: t,
-          child: Transform.translate(
-            offset: Offset(0, slideDistance * (1 - t)),
-            child: child,
-          ),
-        );
-      },
-      child: child,
-    );
   }
 }
 
@@ -478,7 +439,7 @@ class _PodiumColumn extends StatelessWidget {
                     width: avatarSize,
                     child: AvatarFace(
                       avatarUrl: player.avatarUrl,
-                      initials: player.displayName,
+                      initials: StringUtils.initials(player.displayName),
                     ),
                   ),
                 ),

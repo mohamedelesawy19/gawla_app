@@ -229,4 +229,51 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tournamentStartingGetReady => 'البطولة على وشك البدء — استعد!';
+
+  @override
+  String get startTournament => 'ابدأ البطولة';
+
+  @override
+  String get tournamentGetReady => 'استعد للجولة القادمة!';
+
+  @override
+  String tournamentRoundLabel(Object current, Object total) {
+    return 'الجولة $current من $total';
+  }
+
+  @override
+  String tournamentPlayersRemaining(Object count) {
+    return 'المتبقي $count لاعب';
+  }
+
+  @override
+  String get tournamentEliminated => 'تم إقصاؤك';
+
+  @override
+  String tournamentRankLabel(Object rank) {
+    return 'المركز #$rank';
+  }
+
+  @override
+  String tournamentRoundResultsTitle(Object round) {
+    return 'نتائج الجولة $round';
+  }
+
+  @override
+  String get tournamentSpectating => 'أنت الآن تشاهد البطولة';
+
+  @override
+  String get tournamentCancelled => 'تم إلغاء البطولة';
+
+  @override
+  String get tournamentVictoryTitle => 'لقد فزت!';
+
+  @override
+  String get tournamentEndedTitle => 'انتهت البطولة';
+
+  @override
+  String get tournamentFinalStandings => 'الترتيب النهائي';
+
+  @override
+  String get continueLabel => 'متابعة';
 }

@@ -493,6 +493,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tournament starting — get ready!'**
   String get tournamentStartingGetReady;
+
+  /// No description provided for @startTournament.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Tournament'**
+  String get startTournament;
+
+  /// No description provided for @tournamentGetReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Ready!'**
+  String get tournamentGetReady;
+
+  /// No description provided for @tournamentRoundLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {current} of {total}'**
+  String tournamentRoundLabel(Object current, Object total);
+
+  /// No description provided for @tournamentPlayersRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} players remaining'**
+  String tournamentPlayersRemaining(Object count);
+
+  /// No description provided for @tournamentEliminated.
+  ///
+  /// In en, this message translates to:
+  /// **'Eliminated'**
+  String get tournamentEliminated;
+
+  /// No description provided for @tournamentRankLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rank #{rank}'**
+  String tournamentRankLabel(Object rank);
+
+  /// No description provided for @tournamentRoundResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round} Results'**
+  String tournamentRoundResultsTitle(Object round);
+
+  /// No description provided for @tournamentSpectating.
+  ///
+  /// In en, this message translates to:
+  /// **'You are now spectating'**
+  String get tournamentSpectating;
+
+  /// No description provided for @tournamentCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Tournament Cancelled'**
+  String get tournamentCancelled;
+
+  /// No description provided for @tournamentVictoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Victory!'**
+  String get tournamentVictoryTitle;
+
+  /// No description provided for @tournamentEndedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tournament Complete'**
+  String get tournamentEndedTitle;
+
+  /// No description provided for @tournamentFinalStandings.
+  ///
+  /// In en, this message translates to:
+  /// **'Final Standings'**
+  String get tournamentFinalStandings;
+
+  /// No description provided for @continueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueLabel;
 }
 
 class _AppLocalizationsDelegate
