@@ -29,8 +29,8 @@ class JoinRoomScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: ServiceLocator.get<RoomBloc>(),
+    return BlocProvider(
+      create: (context) => ServiceLocator.get<RoomBloc>(),
       child: const _JoinRoomView(),
     );
   }

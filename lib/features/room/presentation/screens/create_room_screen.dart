@@ -34,12 +34,8 @@ class CreateRoomScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      // RoomBloc coordinates the room across three screens (create,
-      // join, waiting room) and must keep driving the room after this
-      // screen is popped by the router redirect — so it's provided as
-      // the shared instance from DI rather than created fresh here.
-      value: ServiceLocator.get<RoomBloc>(),
+    return BlocProvider(
+      create: (context) => ServiceLocator.get<RoomBloc>(),
       child: const _CreateRoomView(),
     );
   }

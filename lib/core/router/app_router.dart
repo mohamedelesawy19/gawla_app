@@ -8,6 +8,7 @@ import '/core/router/router_refresh_stream.dart';
 import '/core/router/routes/auth_routes.dart';
 import '/core/router/routes/main_routes.dart';
 import '/core/router/routes/room_routes.dart';
+import '/core/router/routes/tournament_routes.dart';
 import '/core/session/bloc/session_bloc.dart';
 
 class AppRouter {
@@ -19,7 +20,12 @@ class AppRouter {
     initialLocation: AppRoutes.splash,
     refreshListenable: GoRouterRefreshStream(_sessionBloc.stream),
     redirect: (context, state) => _redirect(_sessionBloc.state, state),
-    routes: [...MainRoutes.routes, ...AuthRoutes.routes, ...RoomRoutes.routes],
+    routes: [
+      ...MainRoutes.routes,
+      ...AuthRoutes.routes,
+      ...RoomRoutes.routes,
+      ...TournamentRoutes.routes,
+    ],
   );
 
   /// Maps [session] to the location it *requires*, then decides whether the
