@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '/core/widgets/feedback/loading_indicator.dart';
 
 // Feature imports:
+import '/features/mini_games/presentation/mini_game_host.dart';
 import '/features/tournament/domain/entities/tournament_entity.dart';
 import '/features/tournament/domain/entities/tournament_enums.dart';
 import '/features/tournament/domain/entities/tournament_round_entity.dart';
@@ -97,11 +98,25 @@ class _RoundStage extends StatelessWidget {
     // active-round view already renders a "get ready" placeholder for
     // both cases.
     if (round == null || round.status != RoundStatus.completed) {
+      final currentViewerUid = viewerUid;
       return TournamentActiveRoundView(
         tournament: tournament,
         round: round,
         viewerUid: viewerUid,
         isPerformingAction: isPerformingAction,
+        // Only wired once a viewer identity exists — a spectator with no
+        // session uid (shouldn't normally happen mid-tournament) falls
+        // back to the generic placeholder rather than crashing on a
+        // non-null assertion.
+        miniGameHost: currentViewerUid == null
+            ? null
+            : (context, activeRound) => MiniGameHost(
+                tournamentId: tournament.tournamentId,
+                round: activeRound,
+                viewerUid: currentViewerUid,
+                isPerformingAction: isPerformingAction,
+                onSubmit: onSubmit,
+              ),
       );
     }
 

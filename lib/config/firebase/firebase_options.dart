@@ -46,6 +46,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '869222114879',
     projectId: 'gawla-19',
     authDomain: 'gawla-19.firebaseapp.com',
+    databaseURL:
+        'https://gawla-19-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'gawla-19.firebasestorage.app',
     measurementId: 'G-H0JLHJHB0R',
   );
@@ -55,6 +57,8 @@ class DefaultFirebaseOptions {
     appId: '1:869222114879:android:25cc6465124c2dcf36ba8a',
     messagingSenderId: '869222114879',
     projectId: 'gawla-19',
+    databaseURL:
+        'https://gawla-19-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'gawla-19.firebasestorage.app',
   );
   static const FirebaseOptions ios = FirebaseOptions(
@@ -62,7 +66,13 @@ class DefaultFirebaseOptions {
     appId: '1:869222114879:ios:0dc9fb8d212924e336ba8a',
     messagingSenderId: '869222114879',
     projectId: 'gawla-19',
+    databaseURL:
+        'https://gawla-19-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'gawla-19.firebasestorage.app',
+    androidClientId:
+        '869222114879-982215uhsa4q89gg3ssvd8qctlu8g93o.apps.googleusercontent.com',
+    iosClientId:
+        '869222114879-p1gvs8kqjn72i13secn0s2sj2256as3o.apps.googleusercontent.com',
     iosBundleId: 'com.elesawy.gawlaApp',
   );
   static const FirebaseOptions macos = FirebaseOptions(
@@ -70,7 +80,13 @@ class DefaultFirebaseOptions {
     appId: '1:869222114879:ios:0dc9fb8d212924e336ba8a',
     messagingSenderId: '869222114879',
     projectId: 'gawla-19',
+    databaseURL:
+        'https://gawla-19-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'gawla-19.firebasestorage.app',
+    androidClientId:
+        '869222114879-982215uhsa4q89gg3ssvd8qctlu8g93o.apps.googleusercontent.com',
+    iosClientId:
+        '869222114879-p1gvs8kqjn72i13secn0s2sj2256as3o.apps.googleusercontent.com',
     iosBundleId: 'com.elesawy.gawlaApp',
   );
 
@@ -80,6 +96,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '869222114879',
     projectId: 'gawla-19',
     authDomain: 'gawla-19.firebaseapp.com',
+    databaseURL:
+        'https://gawla-19-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'gawla-19.firebasestorage.app',
     measurementId: 'G-MFKP302TFH',
   );

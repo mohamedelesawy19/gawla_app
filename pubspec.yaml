@@ -49,6 +49,9 @@ dependencies:
   flutter_spinkit: ^5.2.2
   pin_code_fields: ^9.4.0
 
+  # Utilities
+  meta: ^1.18.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
