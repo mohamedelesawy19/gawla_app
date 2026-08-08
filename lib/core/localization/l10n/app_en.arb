@@ -100,5 +100,14 @@
   "reactionTapTap": "TAP!",
 
   "bossRoundFinalWaitForGreen": "Final round — wait for green…",
-  "bossRoundTapNow": "TAP NOW!"
+  "bossRoundTapNow": "TAP NOW!",
+
+  "oddOneOutBye": "Bye — you advance automatically.",
+  "oddOneOutChooseMove": "Choose your move",
+  "oddOneOutRock": "Rock",
+  "oddOneOutPaper": "Paper",
+  "oddOneOutScissors": "Scissors",
+  "oddOneOutWaitingForOpponent": "Waiting for opponent…",
+  "oddOneOutWon": "You won! ({myChoice} beats {opponentChoice})",
+  "oddOneOutLost": "You lost. ({opponentChoice} beats {myChoice})"
 }

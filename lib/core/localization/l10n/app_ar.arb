@@ -100,5 +100,14 @@
   "reactionTapTap": "اضغط!",
 
   "bossRoundFinalWaitForGreen": "الجولة النهائية — انتظر اللون الأخضر…",
-  "bossRoundTapNow": "اضغط الآن!"
+  "bossRoundTapNow": "اضغط الآن!",
+
+  "oddOneOutBye": "تأهل تلقائي — ستنتقل للجولة التالية.",
+  "oddOneOutChooseMove": "اختر حركتك",
+  "oddOneOutRock": "حجر",
+  "oddOneOutPaper": "ورق",
+  "oddOneOutScissors": "مقص",
+  "oddOneOutWaitingForOpponent": "في انتظار الخصم…",
+  "oddOneOutWon": "لقد فزت! ({myChoice} يتغلب على {opponentChoice})",
+  "oddOneOutLost": "لقد خسرت. ({opponentChoice} يتغلب على {myChoice})"
 }

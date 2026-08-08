@@ -8,11 +8,12 @@ import '/core/di/service_locator.dart';
 import '/features/mini_games/data/firebase_realtime_game_channel.dart';
 import '/features/mini_games/domain/realtime_game_channel.dart';
 import '/features/mini_games/presentation/games/boss_round_game.dart';
+import '/features/mini_games/presentation/games/odd_one_out_game.dart';
 import '/features/mini_games/presentation/games/reaction_tap_game.dart';
 import '/features/mini_games/presentation/mini_game_registry.dart';
 
 class MiniGamesModule {
-  MiniGamesModule._();
+  const MiniGamesModule._();
 
   static void register() {
     ServiceLocator.registerLazySingleton<RealtimeGameChannel>(
@@ -22,6 +23,7 @@ class MiniGamesModule {
     ServiceLocator.registerLazySingleton<MiniGameRegistry>(
       () => MiniGameRegistry([
         const ReactionTapDefinition(),
+        const OddOneOutDefinition(),
         const BossRoundDefinition(),
         // Not yet ported — each falls through to
         // `MiniGameRegistry`'s "not available yet" placeholder until

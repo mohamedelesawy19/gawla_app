@@ -601,6 +601,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'TAP NOW!'**
   String get bossRoundTapNow;
+
+  /// No description provided for @oddOneOutBye.
+  ///
+  /// In en, this message translates to:
+  /// **'Bye — you advance automatically.'**
+  String get oddOneOutBye;
+
+  /// No description provided for @oddOneOutChooseMove.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your move'**
+  String get oddOneOutChooseMove;
+
+  /// No description provided for @oddOneOutRock.
+  ///
+  /// In en, this message translates to:
+  /// **'Rock'**
+  String get oddOneOutRock;
+
+  /// No description provided for @oddOneOutPaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Paper'**
+  String get oddOneOutPaper;
+
+  /// No description provided for @oddOneOutScissors.
+  ///
+  /// In en, this message translates to:
+  /// **'Scissors'**
+  String get oddOneOutScissors;
+
+  /// No description provided for @oddOneOutWaitingForOpponent.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for opponent…'**
+  String get oddOneOutWaitingForOpponent;
+
+  /// No description provided for @oddOneOutWon.
+  ///
+  /// In en, this message translates to:
+  /// **'You won! ({myChoice} beats {opponentChoice})'**
+  String oddOneOutWon(Object myChoice, Object opponentChoice);
+
+  /// No description provided for @oddOneOutLost.
+  ///
+  /// In en, this message translates to:
+  /// **'You lost. ({opponentChoice} beats {myChoice})'**
+  String oddOneOutLost(Object myChoice, Object opponentChoice);
 }
 
 class _AppLocalizationsDelegate

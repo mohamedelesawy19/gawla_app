@@ -291,4 +291,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bossRoundTapNow => 'TAP NOW!';
+
+  @override
+  String get oddOneOutBye => 'Bye — you advance automatically.';
+
+  @override
+  String get oddOneOutChooseMove => 'Choose your move';
+
+  @override
+  String get oddOneOutRock => 'Rock';
+
+  @override
+  String get oddOneOutPaper => 'Paper';
+
+  @override
+  String get oddOneOutScissors => 'Scissors';
+
+  @override
+  String get oddOneOutWaitingForOpponent => 'Waiting for opponent…';
+
+  @override
+  String oddOneOutWon(Object myChoice, Object opponentChoice) {
+    return 'You won! ($myChoice beats $opponentChoice)';
+  }
+
+  @override
+  String oddOneOutLost(Object myChoice, Object opponentChoice) {
+    return 'You lost. ($opponentChoice beats $myChoice)';
+  }
 }

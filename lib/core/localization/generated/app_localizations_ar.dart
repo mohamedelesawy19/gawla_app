@@ -292,4 +292,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bossRoundTapNow => 'اضغط الآن!';
+
+  @override
+  String get oddOneOutBye => 'تأهل تلقائي — ستنتقل للجولة التالية.';
+
+  @override
+  String get oddOneOutChooseMove => 'اختر حركتك';
+
+  @override
+  String get oddOneOutRock => 'حجر';
+
+  @override
+  String get oddOneOutPaper => 'ورق';
+
+  @override
+  String get oddOneOutScissors => 'مقص';
+
+  @override
+  String get oddOneOutWaitingForOpponent => 'في انتظار الخصم…';
+
+  @override
+  String oddOneOutWon(Object myChoice, Object opponentChoice) {
+    return 'لقد فزت! ($myChoice يتغلب على $opponentChoice)';
+  }
+
+  @override
+  String oddOneOutLost(Object myChoice, Object opponentChoice) {
+    return 'لقد خسرت. ($opponentChoice يتغلب على $myChoice)';
+  }
 }

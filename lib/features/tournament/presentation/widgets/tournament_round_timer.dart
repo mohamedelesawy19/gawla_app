@@ -106,13 +106,7 @@ class _TournamentRoundTimerState extends State<TournamentRoundTimer>
   }
 
   String get _label {
-    final seconds = _remaining.inSeconds.clamp(0, 5999);
-    if (seconds >= 60) {
-      final minutes = seconds ~/ 60;
-      final remSeconds = seconds % 60;
-      return '$minutes:${remSeconds.toString().padLeft(2, '0')}';
-    }
-    return '$seconds';
+    return _remaining.inSeconds.clamp(0, 999).toString();
   }
 
   @override
