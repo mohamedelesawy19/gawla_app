@@ -649,6 +649,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You lost. ({opponentChoice} beats {myChoice})'**
   String oddOneOutLost(Object myChoice, Object opponentChoice);
+
+  /// No description provided for @tugOfPowerTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Team: {team}'**
+  String tugOfPowerTeam(Object team);
+
+  /// No description provided for @tugOfPowerPull.
+  ///
+  /// In en, this message translates to:
+  /// **'PULL!'**
+  String get tugOfPowerPull;
 }
 
 class _AppLocalizationsDelegate

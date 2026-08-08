@@ -10,6 +10,7 @@ import '/features/mini_games/domain/realtime_game_channel.dart';
 import '/features/mini_games/presentation/games/boss_round_game.dart';
 import '/features/mini_games/presentation/games/odd_one_out_game.dart';
 import '/features/mini_games/presentation/games/reaction_tap_game.dart';
+import '/features/mini_games/presentation/games/tug_of_power_game.dart';
 import '/features/mini_games/presentation/mini_game_registry.dart';
 
 class MiniGamesModule {
@@ -25,6 +26,9 @@ class MiniGamesModule {
         const ReactionTapDefinition(),
         const OddOneOutDefinition(),
         const BossRoundDefinition(),
+        TugOfPowerDefinition(
+          channel: ServiceLocator.get<RealtimeGameChannel>(),
+        ),
         // Not yet ported — each falls through to
         // `MiniGameRegistry`'s "not available yet" placeholder until
         // built, rather than crashing a tournament that rotates one of

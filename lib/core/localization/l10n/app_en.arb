@@ -109,5 +109,8 @@
   "oddOneOutScissors": "Scissors",
   "oddOneOutWaitingForOpponent": "Waiting for opponent…",
   "oddOneOutWon": "You won! ({myChoice} beats {opponentChoice})",
-  "oddOneOutLost": "You lost. ({opponentChoice} beats {myChoice})"
+  "oddOneOutLost": "You lost. ({opponentChoice} beats {myChoice})",
+
+  "tugOfPowerTeam": "Team: {team}",
+  "tugOfPowerPull": "PULL!"
 }

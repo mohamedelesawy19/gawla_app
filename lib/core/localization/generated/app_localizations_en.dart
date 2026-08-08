@@ -319,4 +319,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String oddOneOutLost(Object myChoice, Object opponentChoice) {
     return 'You lost. ($opponentChoice beats $myChoice)';
   }
+
+  @override
+  String tugOfPowerTeam(Object team) {
+    return 'Team: $team';
+  }
+
+  @override
+  String get tugOfPowerPull => 'PULL!';
 }

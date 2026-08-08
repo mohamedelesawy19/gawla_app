@@ -109,5 +109,8 @@
   "oddOneOutScissors": "مقص",
   "oddOneOutWaitingForOpponent": "في انتظار الخصم…",
   "oddOneOutWon": "لقد فزت! ({myChoice} يتغلب على {opponentChoice})",
-  "oddOneOutLost": "لقد خسرت. ({opponentChoice} يتغلب على {myChoice})"
+  "oddOneOutLost": "لقد خسرت. ({opponentChoice} يتغلب على {myChoice})",
+
+  "tugOfPowerTeam": "الفريق: {team}",
+  "tugOfPowerPull": "اسحب!"
 }

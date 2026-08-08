@@ -84,10 +84,8 @@ class TournamentActiveRoundView extends StatelessWidget {
           timer: hasTimer
               ? TournamentRoundTimer(
                   key: ValueKey('timer-${currentRound!.roundIndex}'),
-                  // startedAt: currentRound.startedAt!,
-                  startedAt: DateTime.now(),
-                  // endsAt: currentRound.endsAt!,
-                  endsAt: DateTime.now().add(const Duration(seconds: 15)),
+                  startedAt: currentRound.startedAt!,
+                  endsAt: currentRound.endsAt!,
                 )
               : null,
           viewerIsEliminated: _viewerIsEliminated,

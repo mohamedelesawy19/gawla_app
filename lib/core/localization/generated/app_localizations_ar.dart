@@ -320,4 +320,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String oddOneOutLost(Object myChoice, Object opponentChoice) {
     return 'لقد خسرت. ($opponentChoice يتغلب على $myChoice)';
   }
+
+  @override
+  String tugOfPowerTeam(Object team) {
+    return 'الفريق: $team';
+  }
+
+  @override
+  String get tugOfPowerPull => 'اسحب!';
 }
