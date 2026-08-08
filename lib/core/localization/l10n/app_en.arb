@@ -92,5 +92,7 @@
   "tournamentEndedTitle": "Tournament Complete",
   "tournamentFinalStandings" : "Final Standings",
 
-  "continueLabel": "Continue"
+  "continueLabel": "Continue",
+
+  "live": "LIVE"
 }

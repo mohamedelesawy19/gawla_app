@@ -92,5 +92,7 @@
   "tournamentEndedTitle": "انتهت البطولة",
   "tournamentFinalStandings": "الترتيب النهائي",
 
-  "continueLabel": "متابعة"
+  "continueLabel": "متابعة",
+
+  "live": "جارية"
 }

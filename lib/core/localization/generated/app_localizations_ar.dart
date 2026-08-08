@@ -276,4 +276,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continueLabel => 'متابعة';
+
+  @override
+  String get live => 'جارية';
 }
