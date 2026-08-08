@@ -279,4 +279,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get live => 'جارية';
+
+  @override
+  String get reactionTapWaitForGreen => 'انتظر اللون الأخضر…';
+
+  @override
+  String get reactionTapTap => 'اضغط!';
+
+  @override
+  String get bossRoundFinalWaitForGreen =>
+      'الجولة النهائية — انتظر اللون الأخضر…';
+
+  @override
+  String get bossRoundTapNow => 'اضغط الآن!';
 }

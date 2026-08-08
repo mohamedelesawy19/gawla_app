@@ -279,4 +279,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get live => 'LIVE';
+
+  @override
+  String get reactionTapWaitForGreen => 'Wait for green…';
+
+  @override
+  String get reactionTapTap => 'TAP!';
+
+  @override
+  String get bossRoundFinalWaitForGreen => 'Final round — wait for green…';
+
+  @override
+  String get bossRoundTapNow => 'TAP NOW!';
 }

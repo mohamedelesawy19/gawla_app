@@ -94,5 +94,11 @@
 
   "continueLabel": "Continue",
 
-  "live": "LIVE"
+  "live": "LIVE",
+
+  "reactionTapWaitForGreen": "Wait for green…",
+  "reactionTapTap": "TAP!",
+
+  "bossRoundFinalWaitForGreen": "Final round — wait for green…",
+  "bossRoundTapNow": "TAP NOW!"
 }

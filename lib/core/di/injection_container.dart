@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import '/core/di/di_modules/auth_module.dart';
 import '/core/di/di_modules/core_module.dart';
 import '/core/di/di_modules/home_module.dart';
+import '/core/di/di_modules/mini_games_module.dart';
 import '/core/di/di_modules/profile_module.dart';
 import '/core/di/di_modules/room_module.dart';
 import '/core/di/di_modules/session_module.dart';
@@ -58,6 +59,8 @@ class InjectionContainer {
       RoomModule.register();
 
       TournamentModule.register();
+
+      MiniGamesModule.register();
 
       await ServiceLocator.allReady(timeout: const Duration(seconds: 30));
 

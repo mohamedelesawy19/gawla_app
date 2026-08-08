@@ -577,6 +577,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LIVE'**
   String get live;
+
+  /// No description provided for @reactionTapWaitForGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for green…'**
+  String get reactionTapWaitForGreen;
+
+  /// No description provided for @reactionTapTap.
+  ///
+  /// In en, this message translates to:
+  /// **'TAP!'**
+  String get reactionTapTap;
+
+  /// No description provided for @bossRoundFinalWaitForGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Final round — wait for green…'**
+  String get bossRoundFinalWaitForGreen;
+
+  /// No description provided for @bossRoundTapNow.
+  ///
+  /// In en, this message translates to:
+  /// **'TAP NOW!'**
+  String get bossRoundTapNow;
 }
 
 class _AppLocalizationsDelegate

@@ -94,5 +94,11 @@
 
   "continueLabel": "متابعة",
 
-  "live": "جارية"
+  "live": "جارية",
+
+  "reactionTapWaitForGreen": "انتظر اللون الأخضر…",
+  "reactionTapTap": "اضغط!",
+
+  "bossRoundFinalWaitForGreen": "الجولة النهائية — انتظر اللون الأخضر…",
+  "bossRoundTapNow": "اضغط الآن!"
 }
