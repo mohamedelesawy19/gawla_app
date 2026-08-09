@@ -18,3 +18,6 @@ export {
 export {
   driveTugOfPowerRound,
 } from "./tournament/mini_games/tug_of_power/drive_tug_of_power_round";
+export {
+  driveFreezeFrenzyRound,
+} from "./tournament/mini_games/freeze_frenzy/drive_freeze_frenzy_round";

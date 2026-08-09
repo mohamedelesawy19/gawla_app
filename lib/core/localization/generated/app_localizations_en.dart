@@ -327,4 +327,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tugOfPowerPull => 'PULL!';
+
+  @override
+  String get freezeFrenzyFreeze => 'FREEZE!';
+
+  @override
+  String get freezeFrenzyGo => 'GO!';
+
+  @override
+  String get freezeFrenzyHoldToMove => 'HOLD TO MOVE';
 }

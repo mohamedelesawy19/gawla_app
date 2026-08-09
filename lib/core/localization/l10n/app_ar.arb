@@ -112,5 +112,9 @@
   "oddOneOutLost": "لقد خسرت. ({opponentChoice} يتغلب على {myChoice})",
 
   "tugOfPowerTeam": "الفريق: {team}",
-  "tugOfPowerPull": "اسحب!"
+  "tugOfPowerPull": "اسحب!",
+
+  "freezeFrenzyFreeze": "تجمّد!",
+  "freezeFrenzyGo": "انطلق!",
+  "freezeFrenzyHoldToMove": "اضغط مطولًا للتحرك"
 }

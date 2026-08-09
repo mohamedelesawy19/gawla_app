@@ -328,4 +328,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tugOfPowerPull => 'اسحب!';
+
+  @override
+  String get freezeFrenzyFreeze => 'تجمّد!';
+
+  @override
+  String get freezeFrenzyGo => 'انطلق!';
+
+  @override
+  String get freezeFrenzyHoldToMove => 'اضغط مطولًا للتحرك';
 }

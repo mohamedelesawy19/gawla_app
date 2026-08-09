@@ -112,5 +112,9 @@
   "oddOneOutLost": "You lost. ({opponentChoice} beats {myChoice})",
 
   "tugOfPowerTeam": "Team: {team}",
-  "tugOfPowerPull": "PULL!"
+  "tugOfPowerPull": "PULL!",
+
+  "freezeFrenzyFreeze": "FREEZE!",
+  "freezeFrenzyGo": "GO!",
+  "freezeFrenzyHoldToMove": "HOLD TO MOVE"
 }

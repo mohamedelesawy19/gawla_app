@@ -661,6 +661,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PULL!'**
   String get tugOfPowerPull;
+
+  /// No description provided for @freezeFrenzyFreeze.
+  ///
+  /// In en, this message translates to:
+  /// **'FREEZE!'**
+  String get freezeFrenzyFreeze;
+
+  /// No description provided for @freezeFrenzyGo.
+  ///
+  /// In en, this message translates to:
+  /// **'GO!'**
+  String get freezeFrenzyGo;
+
+  /// No description provided for @freezeFrenzyHoldToMove.
+  ///
+  /// In en, this message translates to:
+  /// **'HOLD TO MOVE'**
+  String get freezeFrenzyHoldToMove;
 }
 
 class _AppLocalizationsDelegate

@@ -3,7 +3,9 @@ import 'dart:async';
 
 // Package imports:
 import 'package:flutter/material.dart';
-import 'package:gawla_app/core/localization/localization_helpers.dart';
+
+// Core imports:
+import '/core/localization/localization_helpers.dart';
 
 // Project imports:
 import '/features/mini_games/domain/mini_game_play_args.dart';
