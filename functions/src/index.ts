@@ -21,3 +21,6 @@ export {
 export {
   driveFreezeFrenzyRound,
 } from "./tournament/mini_games/freeze_frenzy/drive_freeze_frenzy_round";
+export {
+  fetchQuizPool,
+} from "./tournament/mini_games/quiz/fetch_quiz_pool";

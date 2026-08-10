@@ -18,6 +18,19 @@ export const ROOMS_COLLECTION = "rooms";
 // void.
 export const DUEL_COMMITS_SUBCOLLECTION = "_duelCommits";
 
+// Top-level, server-only collection holding the full Quick Trivia /
+// True-or-False question bank. Same rationale as `_duelCommits`: this must
+// never be directly readable by a client, or `MINI_GAMES_LIBRARY.md §3.2`'s
+// "never shipped in the client build" anti-cheat requirement is void —
+// `fetchQuizPool` (see `tournament/mini_games/quiz/fetch_quiz_pool.ts`) is
+// the ONLY sanctioned way a player's device ever sees a question from this
+// collection, and only a small per-round slice of it at a time.
+//
+// IMPORTANT: needs a matching Firestore security rule —
+// `match /quizQuestionPools/{doc} { allow read, write: if false; }` —
+// added alongside this change, same as the `_duelCommits` rule above.
+export const QUIZ_QUESTION_POOLS_COLLECTION = "quizQuestionPools";
+
 // ── Enum-like string literals ────────────────────────────────────────────────
 // NOTE: these MUST match `tournament_enums.dart` member-for-member, since
 // the Flutter side parses them with `EnumType.values.byName(...)`, which
@@ -211,6 +224,23 @@ export interface TournamentDoc {
   // every in-progress tournament's rounds array in memory.
   currentRoundEndsAt: Timestamp | null;
 }
+
+/**
+ * One question in a Quick Trivia / True-or-False pool, as stored in
+ * `QUIZ_QUESTION_POOLS_COLLECTION`. Only `fetchQuizPool` ever reads this
+ * collection — see that constant's doc comment for why it must stay
+ * server-only.
+ */
+export interface QuizQuestionDoc {
+  prompt: string;
+  options: string[];
+  correctIndex: number;
+  seasonId: string;
+}
+
+export const CONFIG_COLLECTION = "config";
+export const QUIZ_POOL_SEASONS_CONFIG_DOC = "quizPoolSeasons";
+export type QuizPoolSeasonsConfigDoc = Record<string, string>;
 
 // ── Room doc shape ────────────────────────────────────────────────────────
 // `players` on the real `RoomModel` is a Firestore map keyed by uid
