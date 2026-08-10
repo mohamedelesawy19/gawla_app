@@ -679,6 +679,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'HOLD TO MOVE'**
   String get freezeFrenzyHoldToMove;
+
+  /// No description provided for @answerSubmittedWaitingForRoundToClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer submitted — waiting for round to close…'**
+  String get answerSubmittedWaitingForRoundToClose;
 }
 
 class _AppLocalizationsDelegate

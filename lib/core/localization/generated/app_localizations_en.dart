@@ -336,4 +336,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get freezeFrenzyHoldToMove => 'HOLD TO MOVE';
+
+  @override
+  String get answerSubmittedWaitingForRoundToClose =>
+      'Answer submitted — waiting for round to close…';
 }

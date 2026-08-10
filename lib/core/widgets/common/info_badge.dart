@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:flutter/material.dart';
-import 'package:gawla_app/core/design_system/borders.dart';
+
+// Core imports:
+import '/core/design_system/borders.dart';
 
 class InfoBadge extends StatelessWidget {
   const InfoBadge({

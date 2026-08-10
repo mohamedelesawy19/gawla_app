@@ -116,5 +116,7 @@
 
   "freezeFrenzyFreeze": "تجمّد!",
   "freezeFrenzyGo": "انطلق!",
-  "freezeFrenzyHoldToMove": "اضغط مطولًا للتحرك"
+  "freezeFrenzyHoldToMove": "اضغط مطولًا للتحرك",
+
+  "answerSubmittedWaitingForRoundToClose": "تم إرسال الإجابة — في انتظار انتهاء الجولة…"
 }

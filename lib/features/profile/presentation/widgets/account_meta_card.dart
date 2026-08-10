@@ -1,13 +1,13 @@
 // Package imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gawla_app/core/localization/localization_helpers.dart';
 
 // Core imports:
 import '/core/design_system/borders.dart';
 import '/core/design_system/colors.dart';
 import '/core/design_system/spacing.dart';
 import '/core/design_system/typography.dart';
+import '/core/localization/localization_helpers.dart';
 import '/core/widgets/cards/app_card.dart';
 import '/core/widgets/feedback/snackbar.dart';
 

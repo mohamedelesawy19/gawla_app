@@ -116,5 +116,7 @@
 
   "freezeFrenzyFreeze": "FREEZE!",
   "freezeFrenzyGo": "GO!",
-  "freezeFrenzyHoldToMove": "HOLD TO MOVE"
+  "freezeFrenzyHoldToMove": "HOLD TO MOVE",
+
+  "answerSubmittedWaitingForRoundToClose": "Answer submitted — waiting for round to close…"
 }

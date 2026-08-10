@@ -6,10 +6,14 @@ import '/core/di/service_locator.dart';
 
 // Features imports:
 import '/features/mini_games/data/firebase_realtime_game_channel.dart';
+import '/features/mini_games/data/procedural_math_question_source.dart';
+import '/features/mini_games/data/remote_quiz_question_source.dart';
 import '/features/mini_games/domain/realtime_game_channel.dart';
 import '/features/mini_games/presentation/games/boss_round_game.dart';
 import '/features/mini_games/presentation/games/freeze_frenzy_game.dart';
+import '/features/mini_games/presentation/games/math_rush_game.dart';
 import '/features/mini_games/presentation/games/odd_one_out_game.dart';
+import '/features/mini_games/presentation/games/quick_trivia_game.dart';
 import '/features/mini_games/presentation/games/reaction_tap_game.dart';
 import '/features/mini_games/presentation/games/tug_of_power_game.dart';
 import '/features/mini_games/presentation/mini_game_registry.dart';
@@ -33,9 +37,13 @@ class MiniGamesModule {
         FreezeFrenzyDefinition(
           channel: ServiceLocator.get<RealtimeGameChannel>(),
         ),
-        // QuickTriviaDefinition(),
-        // TrueOrFalseDefinition(),
-        // const MathRushDefinition(),
+        QuickTriviaDefinition(
+          questionSource: RemoteQuizQuestionSource(poolId: 'quick_trivia'),
+        ),
+        TrueOrFalseDefinition(
+          questionSource: RemoteQuizQuestionSource(poolId: 'true_or_false'),
+        ),
+        MathRushDefinition(questionSource: ProceduralMathQuestionSource()),
         // Not yet ported — each falls through to
         // `MiniGameRegistry`'s "not available yet" placeholder until
         // built, rather than crashing a tournament that rotates one of

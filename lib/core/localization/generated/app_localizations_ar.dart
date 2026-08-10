@@ -337,4 +337,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get freezeFrenzyHoldToMove => 'اضغط مطولًا للتحرك';
+
+  @override
+  String get answerSubmittedWaitingForRoundToClose =>
+      'تم إرسال الإجابة — في انتظار انتهاء الجولة…';
 }

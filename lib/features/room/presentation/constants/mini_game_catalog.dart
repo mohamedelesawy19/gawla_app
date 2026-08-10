@@ -38,46 +38,46 @@ abstract final class MiniGameCatalog {
       label: 'Quick Trivia',
       icon: Icons.quiz_rounded,
     ),
-    MiniGameCatalogEntry(
-      id: 'memory_cards',
-      label: 'Memory Cards',
-      icon: Icons.grid_view_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'find_the_difference',
-      label: 'Find the Difference',
-      icon: Icons.search_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'color_challenge',
-      label: 'Color Challenge',
-      icon: Icons.palette_rounded,
-    ),
+    // MiniGameCatalogEntry(
+    //   id: 'memory_cards',
+    //   label: 'Memory Cards',
+    //   icon: Icons.grid_view_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'find_the_difference',
+    //   label: 'Find the Difference',
+    //   icon: Icons.search_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'color_challenge',
+    //   label: 'Color Challenge',
+    //   icon: Icons.palette_rounded,
+    // ),
     MiniGameCatalogEntry(
       id: 'math_rush',
       label: 'Math Rush',
       icon: Icons.calculate_rounded,
     ),
-    MiniGameCatalogEntry(
-      id: 'sequence_order',
-      label: 'Sequence Order',
-      icon: Icons.format_list_numbered_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'speed_typing',
-      label: 'Speed Typing',
-      icon: Icons.keyboard_rounded,
-    ),
+    // MiniGameCatalogEntry(
+    //   id: 'sequence_order',
+    //   label: 'Sequence Order',
+    //   icon: Icons.format_list_numbered_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'speed_typing',
+    //   label: 'Speed Typing',
+    //   icon: Icons.keyboard_rounded,
+    // ),
     MiniGameCatalogEntry(
       id: 'true_or_false',
       label: 'True or False',
       icon: Icons.rule_rounded,
     ),
-    MiniGameCatalogEntry(
-      id: 'hidden_object',
-      label: 'Hidden Object',
-      icon: Icons.visibility_rounded,
-    ),
+    // MiniGameCatalogEntry(
+    //   id: 'hidden_object',
+    //   label: 'Hidden Object',
+    //   icon: Icons.visibility_rounded,
+    // ),
 
     // ── Tier B ───────────────────────────────────────────────────────────
     MiniGameCatalogEntry(
@@ -85,26 +85,26 @@ abstract final class MiniGameCatalog {
       label: 'Freeze Frenzy',
       icon: Icons.ac_unit_rounded,
     ),
-    MiniGameCatalogEntry(
-      id: 'tile_trap',
-      label: 'Tile Trap',
-      icon: Icons.grid_on_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'musical_freeze',
-      label: 'Musical Freeze',
-      icon: Icons.music_note_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'steady_hands',
-      label: 'Steady Hands',
-      icon: Icons.pan_tool_rounded,
-    ),
-    MiniGameCatalogEntry(
-      id: 'trace_the_shape',
-      label: 'Trace the Shape',
-      icon: Icons.gesture_rounded,
-    ),
+    // MiniGameCatalogEntry(
+    //   id: 'tile_trap',
+    //   label: 'Tile Trap',
+    //   icon: Icons.grid_on_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'musical_freeze',
+    //   label: 'Musical Freeze',
+    //   icon: Icons.music_note_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'steady_hands',
+    //   label: 'Steady Hands',
+    //   icon: Icons.pan_tool_rounded,
+    // ),
+    // MiniGameCatalogEntry(
+    //   id: 'trace_the_shape',
+    //   label: 'Trace the Shape',
+    //   icon: Icons.gesture_rounded,
+    // ),
     MiniGameCatalogEntry(
       id: 'odd_one_out',
       label: 'Odd One Out',
