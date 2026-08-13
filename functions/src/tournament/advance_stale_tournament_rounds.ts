@@ -1,14 +1,13 @@
-import {getFirestore, Timestamp} from "firebase-admin/firestore";
+import {Timestamp} from "firebase-admin/firestore";
 import {onSchedule} from "firebase-functions/v2/scheduler";
 import {closeRound} from "./tournament_round_closer";
+import {db} from "../shared/firestore";
 import {
   ROUND_STATUS,
   TOURNAMENTS_COLLECTION,
   TOURNAMENT_STATUS,
   TournamentDoc,
 } from "./tournament_types";
-
-const db = getFirestore();
 
 /**
  * Safety net for rounds nobody explicitly closes: if every active player

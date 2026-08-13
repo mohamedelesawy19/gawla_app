@@ -1,4 +1,4 @@
-import {QuizQuestionDoc} from "../../tournament/tournament_types";
+import {QuizQuestionDoc} from "../../src/tournament/tournament_types";
 
 export const TRUE_OR_FALSE_QUESTIONS: QuizQuestionDoc[] = [
   {

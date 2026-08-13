@@ -8,8 +8,7 @@ setGlobalOptions({
   maxInstances: 10,
 });
 
-export {onUserCreated} from "./on_user_created";
-
+export {onUserCreated} from "./players/on_user_created";
 export {startTournament} from "./tournament/start_tournament";
 export {submitRoundResult} from "./tournament/submit_round_result";
 export {

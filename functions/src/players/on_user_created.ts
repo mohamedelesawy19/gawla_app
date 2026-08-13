@@ -1,7 +1,6 @@
 import * as functionsV1 from "firebase-functions/v1";
-import {getFirestore, FieldValue} from "firebase-admin/firestore";
-
-const db = getFirestore();
+import {FieldValue} from "firebase-admin/firestore";
+import {db} from "../shared/firestore";
 
 export const onUserCreated = functionsV1
   .region("europe-west6")

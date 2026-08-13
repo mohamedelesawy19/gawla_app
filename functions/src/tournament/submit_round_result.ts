@@ -1,7 +1,8 @@
-import {getFirestore, Timestamp} from "firebase-admin/firestore";
+import {Timestamp} from "firebase-admin/firestore";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {closeRound} from "./tournament_round_closer";
 import {getMiniGameDefinition} from "./mini_games/mini_game_registry";
+import {db} from "../shared/firestore";
 import {
   DUEL_COMMITS_SUBCOLLECTION,
   PLAYER_STATUS,
@@ -10,8 +11,6 @@ import {
   TOURNAMENT_STATUS,
   TournamentDoc,
   RoundResultDoc} from "./tournament_types";
-
-const db = getFirestore();
 
 interface SubmitRoundResultRequest {
   tournamentId: string;

@@ -1,5 +1,4 @@
 import {HttpsError, onCall} from "firebase-functions/v2/https";
-import {getFirestore} from "firebase-admin/firestore";
 import {
   CONFIG_COLLECTION,
   QUIZ_POOL_SEASONS_CONFIG_DOC,
@@ -7,8 +6,7 @@ import {
   QuizPoolSeasonsConfigDoc,
   QuizQuestionDoc,
 } from "../../tournament_types";
-
-const db = getFirestore();
+import {db} from "../../../shared/firestore";
 
 /**
  * Hard ceiling on how many questions a single call can return, independent

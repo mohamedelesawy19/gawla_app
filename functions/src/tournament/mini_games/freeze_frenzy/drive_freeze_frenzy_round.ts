@@ -1,6 +1,6 @@
 import {onDocumentWritten} from "firebase-functions/v2/firestore";
 import {logger} from "firebase-functions/v2";
-import {getDatabase, DataSnapshot} from "firebase-admin/database";
+import {DataSnapshot} from "firebase-admin/database";
 import {
   ROUND_STATUS,
   TOURNAMENTS_COLLECTION,
@@ -8,8 +8,7 @@ import {
   TournamentDoc,
   TournamentRoundDoc,
 } from "../../tournament_types";
-
-const rtdb = getDatabase();
+import {rtdb} from "../../../shared/rtdb";
 
 // ── Freeze Frenzy tunables (`MINI_GAMES_LIBRARY.md §4.1`) ───────────────────
 //

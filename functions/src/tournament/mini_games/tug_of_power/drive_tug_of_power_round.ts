@@ -1,7 +1,5 @@
 import {onValueCreated} from "firebase-functions/v2/database";
 import {logger} from "firebase-functions/v2";
-import {getDatabase} from "firebase-admin/database";
-import {getFirestore} from "firebase-admin/firestore";
 import {
   ROUND_STATUS,
   TOURNAMENTS_COLLECTION,
@@ -9,9 +7,8 @@ import {
   TournamentDoc,
 } from "../../tournament_types";
 import {MAX_TAPS_PER_SECOND} from "../team_games";
-
-const db = getFirestore();
-const rtdb = getDatabase();
+import {db} from "../../../shared/firestore";
+import {rtdb} from "../../../shared/rtdb";
 
 type TeamId = "teamA" | "teamB";
 

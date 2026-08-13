@@ -4,14 +4,14 @@ import {
   cert,
   ServiceAccount,
 } from "firebase-admin/app";
-import serviceAccount from "../../serviceAccountKey.json";
+import serviceAccount from "../serviceAccountKey.json";
 import {
   CONFIG_COLLECTION,
   QUIZ_POOL_SEASONS_CONFIG_DOC,
   QUIZ_QUESTION_POOLS_COLLECTION,
   QuizPoolSeasonsConfigDoc,
   QuizQuestionDoc,
-} from "../tournament/tournament_types";
+} from "../src/tournament/tournament_types";
 
 import {QUICK_TRIVIA_QUESTIONS} from "./data/quick_trivia_questions";
 import {TRUE_OR_FALSE_QUESTIONS} from "./data/true_or_false_questions";

@@ -14,7 +14,7 @@
 
 <br/>
 
-[Features](#-features) · [Mini-Games](#-mini-games) · [Getting Started](#-getting-started) · [Architecture](#-architecture) · [Anti-Cheat](#-anti-cheat--security) · [Contributing](#-contributing) · [License](#-license)
+[Features](#-features) · [Getting Started](#-getting-started) · [Architecture](#-architecture) · [Anti-Cheat](#-anti-cheat--security) · [License](#-license)
 
 </div>
 

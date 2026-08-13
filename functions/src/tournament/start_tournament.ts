@@ -1,9 +1,10 @@
-import {FieldValue, getFirestore, Timestamp} from "firebase-admin/firestore";
+import {FieldValue, Timestamp} from "firebase-admin/firestore";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {
   getEliminationStrategy,
 } from "./elimination/elimination_strategy_registry";
 import {getMiniGameConfig} from "./mini_game_catalog";
+import {db} from "../shared/firestore";
 import {
   MIN_PLAYERS_TO_START,
   PLAYER_STATUS,
@@ -18,8 +19,6 @@ import {
   TournamentRoundDoc,
   parseRoomSnapshot,
 } from "./tournament_types";
-
-const db = getFirestore();
 
 interface StartTournamentRequest {
   roomId: string;

@@ -1,4 +1,4 @@
-import {QuizQuestionDoc} from "../../tournament/tournament_types";
+import {QuizQuestionDoc} from "../../src/tournament/tournament_types";
 
 export const QUICK_TRIVIA_QUESTIONS: QuizQuestionDoc[] = [
   {
