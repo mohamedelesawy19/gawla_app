@@ -1,5 +1,6 @@
 import {FieldValue, Timestamp} from "firebase-admin/firestore";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
+import {isBotUid} from "../bots/bot_identity";
 import {
   getEliminationStrategy,
 } from "./elimination/elimination_strategy_registry";
@@ -137,6 +138,7 @@ export const startTournament = onCall<StartTournamentRequest>(
           status: PLAYER_STATUS.active,
           eliminatedAtRoundIndex: null,
           finalPlacement: null,
+          isBot: isBotUid(p.uid),
         };
       }
       const activeUids = room.players.map((p) => p.uid);

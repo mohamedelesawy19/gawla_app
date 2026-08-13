@@ -108,7 +108,19 @@ export const ROOM_STATUS_IN_PROGRESS = "inProgress";
 export const ROOM_STATUS_WAITING = "waiting";
 
 // ── Tunable gameplay constants ─────
+// Total room capacity — humans + bots combined. Must match
+// `RoomConstants.maxPlayersPerRoom` on the Flutter side (see
+// `room_constants.dart`), same as every enum in this file must match its
+// Dart mirror. Every *other* room-capacity check has historically lived
+// entirely in the Flutter client's own Firestore transaction
+// (`_joinRoomTransaction` in `room_remote_data_source.dart`), since only a
+// human ever added a player before bots existed; `fillRoomWithBot` (see
+// `../bots/fill_room_with_bot.ts`) is the first Cloud-Functions-side code
+// that needs this number, so it's defined once here rather than
+// hardcoded in the bots domain.
+export const MAX_PLAYERS_PER_ROOM = 64;
 export const MIN_PLAYERS_TO_START = 2;
+
 // Fallback only — used by `mini_game_catalog.ts` when Remote Config has no
 // entry for a game yet. Real round timing now comes from each round's own
 // `MiniGameConfig.roundDurationSec` (see §Gap 5 in ARCHITECTURE_ANALYSIS.md);
@@ -197,6 +209,14 @@ export interface TournamentPlayerDoc {
   status: TournamentPlayerStatus;
   eliminatedAtRoundIndex: number | null;
   finalPlacement: number | null;
+  // Denormalized from `isBotUid(uid)` at snapshot time (see
+  // `start_tournament.ts`), purely so reward/economy code and analytics
+  // can filter bots out with a plain field read instead of every caller
+  // needing to import `bots/bot_identity.ts` and re-derive it from the
+  // key. NOT authoritative — `isBotUid(uid)` is always the source of
+  // truth; this field exists only to make "was this participant a bot"
+  // cheap to query/aggregate without re-deriving it everywhere.
+  isBot: boolean;
 }
 
 export interface TournamentDoc {

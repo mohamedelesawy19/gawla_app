@@ -44,21 +44,40 @@ class RoomEntity extends Equatable {
 
   /// Business rule for what happens to the room when [uid] leaves
   /// (voluntarily or via kick):
-  /// - Returns `null` when the room should be closed/deleted — no
-  ///   players are left to keep it alive.
-  /// - Otherwise returns a new [RoomEntity] with [uid] removed and, if
-  ///   they were the host, the longest-waiting remaining player promoted
-  ///   to host.
   ///
-  /// Lives here (not in the data source) so it's a plain, testable
-  /// domain rule regardless of which backend persists it.
+  /// - Returns `null` when no human players remain — bots never keep
+  ///   the room alive on their own.
+  /// - Otherwise returns a new [RoomEntity] with [uid] removed.
+  /// - The host is always a human:
+  ///   - If the current host is still a human, keep them.
+  ///   - If the host left, or is somehow a bot, promote the longest-waiting
+  ///     remaining human (the first human in the existing player order).
+  ///
+  /// Lives here (not in the data source) so this business rule remains
+  /// backend-agnostic and independently testable.
   RoomEntity? withPlayerRemoved(String uid) {
     final remaining = players.where((player) => player.uid != uid).toList();
-    if (remaining.isEmpty) return null;
+
+    // Bots must never keep a room alive by themselves.
+    final remainingHumans = remaining
+        .where((player) => !_isBotUid(player.uid))
+        .toList();
+
+    // No human remains => close/delete the room.
+    if (remainingHumans.isEmpty) return null;
+
+    // Keep the current host only if they are still present AND human.
+    final currentHostIsHuman = remainingHumans.any(
+      (player) => player.uid == hostUid,
+    );
+
+    final nextHostUid = currentHostIsHuman
+        ? hostUid
+        : remainingHumans.first.uid;
 
     return RoomEntity(
       roomId: roomId,
-      hostUid: hostUid == uid ? remaining.first.uid : hostUid,
+      hostUid: nextHostUid,
       visibility: visibility,
       inviteCode: inviteCode,
       status: status,
@@ -67,6 +86,9 @@ class RoomEntity extends Equatable {
       createdAt: createdAt,
     );
   }
+
+  /// Must stay consistent with the backend's `BOT_UID_PREFIX`.
+  bool _isBotUid(String uid) => uid.startsWith('bot_');
 
   RoomEntity copyWith({
     RoomStatus? status,

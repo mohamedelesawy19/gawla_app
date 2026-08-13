@@ -23,3 +23,7 @@ export {
 export {
   fetchQuizPool,
 } from "./tournament/mini_games/quiz/fetch_quiz_pool";
+export {
+  scheduleBotFillOnRoomCreated,
+} from "./bots/schedule_bot_fill_on_room_created";
+export {fillRoomWithBot} from "./bots/fill_room_with_bot";
